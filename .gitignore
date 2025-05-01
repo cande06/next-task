@@ -1,3 +1,3 @@
 # ignore text stuff
 README.md
-*.json
+/writable/debugbar

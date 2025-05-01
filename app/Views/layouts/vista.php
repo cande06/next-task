@@ -1,4 +1,4 @@
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar bg-light navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
 
             <button class="navbar-toggler d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -43,10 +43,10 @@
     </nav>
 
     <!-- Body -->
-    <div class="container-fluid p-0 body-wrapper">
+    <div class="container-fluid ps-0 body-wrapper main">
         <div class="row">
             <!-- Sidebar Menu -->
-            <div class="col-3 p-0 d-none d-md-block">
+            <div class="col-3 ps-0 d-none d-md-block">
                 <div class="d-flex flex-column flex-shrink-0 p-3 bg-light vh-100"> <!-- style="width: 280px;" -->
                     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                         <svg class="bi me-2" width="40" height="32">
@@ -116,11 +116,42 @@
                 </div>
             </div>
 
-            <!-- Contenido -->
-            <div class="col-9 main">
-                <h1 class="page-header">Dashboard</h1>
+            <!-- Contenido: Home -->
+            <div class="col ">
+            <div class="d-flex justify-content-center">
+                <div class="row pt-3">
+                    
+                    <h3>Hoy DD/MM/AA</h3>
+                    <h5>En proceso</h5>
+                    <div class="row tasks">
+                        <div class="col-6">
+                            <div class="task p-2 m-2 bg-success rounded">
+                                tarea
+                            </div>
 
-                <h2 class="sub-header">Section title</h2>
+                            <div class="task p-2 m-2 bg-success rounded">
+                                tarea
+                            </div>
+                        </div>
+                    </div>
+                    <h5>Creadas</h5>
+                    <div class="row tasks">
+                        <div class="col-6">
+
+                            <div class="task d-flex justify-content-between p-2 m-2 bg-secondary rounded">
+                                <div class="justify-content-start">
+                                    <input type="checkbox" name="" id="">
+                                    tarea
+                                </div>
+                                <div class="hTaskButtons">
+                                    O  O  O
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    </div>
+                </div>
             </div>
 
             <!-- End of body -->
