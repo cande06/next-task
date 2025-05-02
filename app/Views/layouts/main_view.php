@@ -18,7 +18,7 @@
                     </div>
 
                     <div class="task d-flex justify-content-between p-2 m-2 bg-secondary rounded">
-                        <div class="justify-content-start">
+                        <div>
                             <input type="checkbox" name="" id="">
                             tarea
                         </div>
@@ -32,9 +32,8 @@
             <h5>Creadas</h5>
             <div class="row tasks">
                 <div class="col-7">
-
                     <div class="task d-flex justify-content-between p-2 m-2 bg-secondary rounded">
-                        <div class="justify-content-start">
+                        <div>
                             <input type="checkbox" name="" id="">
                             tarea
                         </div>
@@ -43,107 +42,7 @@
                         </div>
                     </div>
                     <div class="task d-flex justify-content-between p-2 m-2 bg-secondary rounded">
-                        <div class="justify-content-start">
-                            <input type="checkbox" name="" id="">
-                            tarea
-                        </div>
-                        <div class="hTaskButtons">
-                            O O O
-                        </div>
-                    </div>
-                    <div class="task d-flex justify-content-between p-2 m-2 bg-secondary rounded">
-                        <div class="justify-content-start">
-                            <input type="checkbox" name="" id="">
-                            tarea
-                        </div>
-                        <div class="hTaskButtons">
-                            O O O
-                        </div>
-                    </div>
-                    <div class="task d-flex justify-content-between p-2 m-2 bg-secondary rounded">
-                        <div class="justify-content-start">
-                            <input type="checkbox" name="" id="">
-                            tarea
-                        </div>
-                        <div class="hTaskButtons">
-                            O O O
-                        </div>
-                    </div>
-                    <div class="task d-flex justify-content-between p-2 m-2 bg-secondary rounded">
-                        <div class="justify-content-start">
-                            <input type="checkbox" name="" id="">
-                            tarea
-                        </div>
-                        <div class="hTaskButtons">
-                            O O O
-                        </div>
-                    </div>
-                    <div class="task d-flex justify-content-between p-2 m-2 bg-secondary rounded">
-                        <div class="justify-content-start">
-                            <input type="checkbox" name="" id="">
-                            tarea
-                        </div>
-                        <div class="hTaskButtons">
-                            O O O
-                        </div>
-                    </div>
-                    <div class="task d-flex justify-content-between p-2 m-2 bg-secondary rounded">
-                        <div class="justify-content-start">
-                            <input type="checkbox" name="" id="">
-                            tarea
-                        </div>
-                        <div class="hTaskButtons">
-                            O O O
-                        </div>
-                    </div>
-                    <div class="task d-flex justify-content-between p-2 m-2 bg-secondary rounded">
-                        <div class="justify-content-start">
-                            <input type="checkbox" name="" id="">
-                            tarea
-                        </div>
-                        <div class="hTaskButtons">
-                            O O O
-                        </div>
-                    </div>
-                    <div class="task d-flex justify-content-between p-2 m-2 bg-secondary rounded">
-                        <div class="justify-content-start">
-                            <input type="checkbox" name="" id="">
-                            tarea
-                        </div>
-                        <div class="hTaskButtons">
-                            O O O
-                        </div>
-                    </div>
-                    <div class="task d-flex justify-content-between p-2 m-2 bg-secondary rounded">
-                        <div class="justify-content-start">
-                            <input type="checkbox" name="" id="">
-                            tarea
-                        </div>
-                        <div class="hTaskButtons">
-                            O O O
-                        </div>
-                    </div>
-                    <div class="task d-flex justify-content-between p-2 m-2 bg-secondary rounded">
-                        <div class="justify-content-start">
-                            <input type="checkbox" name="" id="">
-                            tarea
-                        </div>
-                        <div class="hTaskButtons">
-                            O O O
-                        </div>
-                    </div>
-                    <div class="task d-flex justify-content-between p-2 m-2 bg-secondary rounded">
-                        <div class="justify-content-start">
-                            <input type="checkbox" name="" id="">
-                            tarea
-                        </div>
-                        <div class="hTaskButtons">
-                            O O O
-                        </div>
-                    </div>
-
-                    <div class="task d-flex justify-content-between p-2 m-2 bg-secondary rounded">
-                        <div class="justify-content-start">
+                        <div>
                             <input type="checkbox" name="" id="">
                             tarea
                         </div>
@@ -156,4 +55,7 @@
             </div>
         </div>
     </div>
+</div>
+
+<!-- End of body -->
 </div>

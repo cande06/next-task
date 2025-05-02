@@ -8,7 +8,6 @@ class Home extends BaseController{
                 . view('layouts/menu_view') 
                 . view('layouts/main_view') 
                 . view('layouts/footer_view');
-
     }
 
     function getLogin(){

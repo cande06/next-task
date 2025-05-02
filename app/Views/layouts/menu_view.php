@@ -43,9 +43,10 @@
         </div>
 </nav>
 
+<!-- Body -->
 <div class="row vw-100 overflow-hidden">
     <!-- Sidebar Menu -->
-    <div class="col-lg-2 col-md-3 h-auto p-0 d-none d-md-block">
+    <div class="col-lg-2 col-md-3 min-vh-100 h-auto p-0 d-none d-md-block">
         <div class="d-flex flex-column h-100 p-3 bg-light"> <!-- style="width: 280px;" -->
             <!-- <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
             <svg class="bi me-2" width="40" height="32">
