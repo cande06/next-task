@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="<?=base_url('assets/styles.css')?>">
 
     <!-- titulo dinamico ? -->
-    <title>Inicio</title> 
+    <title>Home</title>
+    
 </head>
 <body>
+    <!-- Body -->
+    <!-- <div class="container-fluid p-0 body-wrapper"> -->
+        
+        

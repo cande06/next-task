@@ -1,3 +1,7 @@
+<!-- End of body -->
+</div>
+    <!-- </div> -->
+
 <!-- JS -->
 <script src="<?=base_url('/assets/script.js')?>"></script>
 <!-- BOOTSTRAP script -->
