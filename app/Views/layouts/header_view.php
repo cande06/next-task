@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="<?=base_url('assets/styles.css')?>">
 
     <!-- titulo dinamico ? -->
-    <title>Home</title>
+    <title><?=$opt?></title>
     
 </head>
 <body>

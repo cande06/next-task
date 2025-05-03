@@ -11,8 +11,14 @@ class Home extends BaseController{
     }
 
     function getLogin(){
-        return view('layouts/header_view') . view('login') . view('layouts/footer_view');
+        $data = [ 'flag' => 1,
+                    'opt' => 'Iniciar sesion',];
+        return view('layouts/header_view', $data) . view('start', $data) . view('layouts/footer_view');
     }
-
+    function getSignup(){
+        $data = ['flag' => 0,
+                    'opt' => 'Registrarse',];
+        return view('layouts/header_view', $data) . view('start', $data) . view('layouts/footer_view');
+    }
 
 }

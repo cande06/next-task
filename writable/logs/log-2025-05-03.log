@@ -1,0 +1,56 @@
+CRITICAL - 2025-05-03 00:59:32 --> ErrorException: Undefined variable $data
+[Method: GET, Route: register]
+in APPPATH\Views\start.php on line 36.
+ 1 APPPATH\Views\start.php(36): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $data', 'C:\\xampp\\htdocs\\next-task\\app\\Views\\start.php', 36)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\next-task\\app\\Views\\start.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('start', [], true)
+ 5 APPPATH\Controllers\Home.php(18): view('start')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->getRegister()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-03 00:59:40 --> ErrorException: Undefined variable $data
+[Method: GET, Route: login]
+in APPPATH\Views\start.php on line 36.
+ 1 APPPATH\Views\start.php(36): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $data', 'C:\\xampp\\htdocs\\next-task\\app\\Views\\start.php', 36)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\next-task\\app\\Views\\start.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('start', [], true)
+ 5 APPPATH\Controllers\Home.php(15): view('start', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->getLogin()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-03 01:01:52 --> ErrorException: Undefined variable $opt
+[Method: GET, Route: register]
+in APPPATH\Views\start.php on line 36.
+ 1 APPPATH\Views\start.php(36): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $opt', 'C:\\xampp\\htdocs\\next-task\\app\\Views\\start.php', 36)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\next-task\\app\\Views\\start.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('start', [], true)
+ 5 APPPATH\Controllers\Home.php(19): view('start')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->getRegister()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-05-03 01:42:33 --> ErrorException: Undefined variable $s
+[Method: GET, Route: login]
+in APPPATH\Views\start.php on line 45.
+ 1 APPPATH\Views\start.php(45): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $s', 'C:\\xampp\\htdocs\\next-task\\app\\Views\\start.php', 45)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\next-task\\app\\Views\\start.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('start', [], true)
+ 5 APPPATH\Controllers\Home.php(16): view('start', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->getLogin()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
