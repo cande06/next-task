@@ -7,23 +7,34 @@
             <h5>En proceso</h5>
             <div class="row tasks">
                 <div class="col-7">
-                    <div class="task d-flex justify-content-between p-2 m-2 bg-secondary rounded">
-                        <div>
-                            <input type="checkbox" name="" id="">
-                            tarea
+                    <div class="task d-flex justify-content-between p-2 pe-0 m-2 bg-light rounded">
+                        <div class="row align-items-center">
+                            <div class="col-1">
+                                <label>
+                                <input type="checkbox" name="" id="">
+                                <!-- <span> </span> -->
+                                </label>
+                            </div>
+                            <div class="col" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+                                texto de tarea lalala lalala 
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia mollitia aut eum ex aliquid animi voluptates non, temporibus, quis laboriosam sit fugiat, autem optio quidem odit enim magni reprehenderit quas?
+                            </div>
+                            <div class="col-2 hTaskButtons">
+                                <i class="bi bi-pen"></i> 
+                                <i class="bi bi-trash"></i> 
+                                <i class="bi bi-archive"></i>
+                            </div>
                         </div>
-                        <div class="hTaskButtons">
-                            O O O
-                        </div>
+                        
                     </div>
 
-                    <div class="task d-flex justify-content-between p-2 m-2 bg-secondary rounded">
-                        <div>
-                            <input type="checkbox" name="" id="">
-                            tarea
+                    <div class="offcanvas offcanvas-end" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Titulo tarea</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                         </div>
-                        <div class="hTaskButtons">
-                            O O O
+                        <div class="offcanvas-body">
+                            <p>lalala</p>
                         </div>
                     </div>
 
@@ -32,22 +43,18 @@
             <h5>Creadas</h5>
             <div class="row tasks">
                 <div class="col-7">
-                    <div class="task d-flex justify-content-between p-2 m-2 bg-secondary rounded">
+
+                    <div class="task d-flex justify-content-between p-2 m-2 bg-light rounded">
                         <div>
-                            <input type="checkbox" name="" id="">
-                            tarea
+                            <label>
+                            <input type="checkbox">
+                            <!-- <span> </span> -->
+                            </label>
                         </div>
                         <div class="hTaskButtons">
-                            O O O
-                        </div>
-                    </div>
-                    <div class="task d-flex justify-content-between p-2 m-2 bg-secondary rounded">
-                        <div>
-                            <input type="checkbox" name="" id="">
-                            tarea
-                        </div>
-                        <div class="hTaskButtons">
-                            O O O
+                            <i class="bi bi-pen"></i>
+                            <i class="bi bi-trash"></i>
+                            <i class="bi bi-archive"></i>
                         </div>
                     </div>
 
