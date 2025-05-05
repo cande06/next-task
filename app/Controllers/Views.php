@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class Home extends BaseController{
+class Views extends BaseController{
     public function index(): string{
         return view('layouts/header_view')
                 . view('layouts/menu_view') 

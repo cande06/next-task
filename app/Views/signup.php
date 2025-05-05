@@ -18,67 +18,67 @@
         <div class="mb-3">
             <?= form_label(
                 'Apodo',
-                'signNickname',
+                'signupNickname',
                 array('class' => 'form-label')
             ); ?>
             <?= form_input(array(
-                'name' => 'signNickname',
-                'id' => 'signNickname',
+                'name' => 'signupNickname',
+                'id' => 'signupNickname',
                 'class' => 'form-control',
             )); ?>
-            <?php if (session('errors.signNickname')) {   ?>
-                <div style="height: 20px; color: red; font-size: small;"><?= session('errors.signNickname') ?></div>
+            <?php if (session('errors.signupNickname')) {   ?>
+                <div style="height: 20px; color: red; font-size: small;"><?= session('errors.signupNickname') ?></div>
             <?php } ?>
         </div>
 
         <div class="mb-3">
             <?= form_label(
                 'Correo',
-                'signEmail',
+                'signupEmail',
                 array('class' => 'form-label')
             ); ?>
             <?= form_input(array(
                 // 'type' => 'email',
-                'name' => 'signEmail',
-                'id' => 'signEmail',
+                'name' => 'signupEmail',
+                'id' => 'signupEmail',
                 'class' => 'form-control',
             )); ?>
-            <?php if (session('errors.signEmail')) {   ?>
-                <div style="height: 20px; color: red; font-size: small;"><?= session('errors.signEmail') ?></div>
+            <?php if (session('errors.signupEmail')) {   ?>
+                <div style="height: 20px; color: red; font-size: small;"><?= session('errors.signupEmail') ?></div>
             <?php } ?>
         </div>
 
         <div class="mb-3">
             <?= form_label(
                 'Contraseña',
-                'signPass',
+                'signupPass',
                 array('class' => 'form-label')
             ); ?>
             <?= form_input(array(
                 'type' => 'password',
-                'name' => 'signPass',
-                'id' => 'signPass',
+                'name' => 'signupPass',
+                'id' => 'signupPass',
                 'class' => 'form-control',
             )); ?>
-            <?php if (session('errors.signPass')) {   ?>
-                <div style="height: 20px; color: red; font-size: small;"><?= session('errors.signPass') ?></div>
+            <?php if (session('errors.signupPass')) {   ?>
+                <div style="height: 20px; color: red; font-size: small;"><?= session('errors.signupPass') ?></div>
             <?php } ?>
         </div>
 
         <div class="mb-3">
             <?= form_label(
                 'Repetir contraseña',
-                'signPass2',
+                'signupPass2',
                 array('class' => 'form-label')
             ); ?>
             <?= form_input(array(
                 'type' => 'password',
-                'name' => 'signPass2',
-                'id' => 'signPass2',
+                'name' => 'signupPass2',
+                'id' => 'signupPass2',
                 'class' => 'form-control',
             )); ?>
-            <?php if (session('errors.signPass2')) {   ?>
-                <div style="height: 20px; color: red; font-size: small;"><?= session('errors.signPass2') ?></div>
+            <?php if (session('errors.signupPass2')) {   ?>
+                <div style="height: 20px; color: red; font-size: small;"><?= session('errors.signupPass2') ?></div>
             <?php } ?>
         </div>
 

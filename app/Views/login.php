@@ -41,7 +41,7 @@
             <?= form_input(array(
                 'type' => 'password',
                 'name' => 'loginPass',
-                'id' => 'loginPass',
+                // 'id' => 'loginPass',
                 'class' => 'form-control',
             )); ?>
             <?php if (session('errors.loginPass')) {   ?>

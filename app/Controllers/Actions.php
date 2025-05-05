@@ -15,26 +15,27 @@ class Actions extends BaseController
         $validation = service('validation');
         $validation->setRules(
             [
-                'signNickname' => 'required|min_length[2]|max_length[10]', //alpha
-                'signEmail' => 'required|valid_email',
-                'signPass' => 'required|min_length[6]',
-                'signPass2' => 'matches[signPass]',
+                'signupNickname' => 'required|min_length[2]|max_length[10]', //alpha
+                'signupEmail' => 'required|valid_email|is_unique[user.email]',
+                'signupPass' => 'required|min_length[6]',
+                'signupPass2' => 'matches[signupPass]',
             ],
             [
-                'signNickname' => [
+                'signupNickname' => [
                     'required' => 'Este campo es obligatorio',
                     'min_length' => 'Debe tener mínimo 2 caracteres',
                     'max_length' => 'Debe tener máximo 10 caracteres'
                 ],
-                'signEmail' => [
+                'signupEmail' => [
                     'required' => 'Este campo es obligatorio',
-                    'valid_email' => 'El correo no es válido. Intentalo nuevamente.'
+                    'valid_email' => 'El correo no es válido. Intentalo nuevamente.',
+                    'is_unique' => 'Este correo ya se encuentra en uso'
                 ],
-                'signPass' => [
+                'signupPass' => [
                     'required' => 'Este campo es obligatorio',
                     'min_length' => 'Debe tener mínimo seis caracteres'
                 ],
-                'signPass2' => [
+                'signupPass2' => [
                     'required' => 'Este campo es obligatorio',
                     'matches' => 'Las contraseñas no coinciden'
                 ],
@@ -45,16 +46,24 @@ class Actions extends BaseController
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
 
-        // $data = array(
-        //     'email' => $this->request->getPost('email'),
-        //     'password' => $this->request->getPost('password')
-        // );
+        $data = array(
+            'nickname' => $this->request->getPost('signupNickname'),
+            'email' => $this->request->getPost('signupEmail'),
+            'password' => password_hash($this->request->getPost('signupPass'), PASSWORD_DEFAULT)
+        );
 
-        $data = ['title' => 'Tareas',];
-        return view('layouts/header_view', $data)
-            . view('layouts/menu_view')
-            . view('layouts/main_view')
-            . view('layouts/footer_view');
+        $model = new \App\Models\UserModel();
+        $model->insert($data);
+
+        // $vista = ['title' => 'Tareas',];
+        // return view('layouts/header_view', $vista)
+        //     . view('layouts/menu_view')
+        //     . view('layouts/main_view')
+        //     . view('layouts/footer_view');
+
+        redirect('login');
+        // $this->load->view('login');
+
     }
 
     public function login()
@@ -64,7 +73,7 @@ class Actions extends BaseController
         $validation->setRules(
             [
                 'loginEmail' => 'required|valid_email',
-                'loginPass' => 'required|min_length[6]',
+                'loginPass' => 'required', //|min_length[6]
             ],
             [
                 'loginEmail' => [
@@ -73,7 +82,7 @@ class Actions extends BaseController
                 ],
                 'loginPass' => [
                     'required' => 'Este campo es obligatorio',
-                    'min_length' => 'Mínimo seis caracteres'
+                    // 'min_length' => 'Mínimo seis caracteres'
                 ],
             ]
         );
@@ -82,17 +91,22 @@ class Actions extends BaseController
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
 
-        // $data = array(
-        //     'email' => $this->request->getPost('email'),
-        //     'password' => $this->request->getPost('password')
-        // );
+        $email = $this->request->getPost('loginEmail');
+        $password = $this->request->getPost('loginPass');
 
-        $data = ['title' => 'Tareas',];
-        return view('layouts/header_view', $data)
-            . view('layouts/menu_view')
-            . view('layouts/main_view')
-            . view('layouts/footer_view');
+        $model = new \App\Models\UserModel();
+        $user = $model->where('email', $email)->first();
+
+        if ($user && password_verify($password, $user['password'])) {
+            $session = session();
+            $session->set([
+                'id' => $user['id'],
+                'nick' => $user['nickname'],
+                'email' => $user['email'],
+                'logged' => true,
+            ]);
+        } else {
+            return redirect()->back()->with('errors', ['loginPass' => 'Correo o contrase;a no valido.']);
+        }
     }
-
-    
 }
