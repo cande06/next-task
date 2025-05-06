@@ -55,14 +55,7 @@ class Actions extends BaseController
         $model = new \App\Models\UserModel();
         $model->insert($data);
 
-        // $vista = ['title' => 'Tareas',];
-        // return view('layouts/header_view', $vista)
-        //     . view('layouts/menu_view')
-        //     . view('layouts/main_view')
-        //     . view('layouts/footer_view');
-
-        redirect('login');
-        // $this->load->view('login');
+        return redirect()->to('login');
 
     }
 
@@ -105,8 +98,10 @@ class Actions extends BaseController
                 'email' => $user['email'],
                 'logged' => true,
             ]);
+
+            return redirect()->to('home');
         } else {
-            return redirect()->back()->with('errors', ['loginPass' => 'Correo o contrase;a no valido.']);
+            return redirect()->back()->with('errors', ['loginPass' => 'Correo o contraseña no valido.']);
         }
     }
 }

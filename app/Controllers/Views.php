@@ -4,9 +4,10 @@ namespace App\Controllers;
 
 class Views extends BaseController{
     public function index(): string{
-        return view('layouts/header_view')
+        $data = [ 'title' => 'Inicio'];
+        return view('layouts/header_view', $data)
                 . view('layouts/menu_view') 
-                . view('layouts/main_view') 
+                . view('home') 
                 . view('layouts/footer_view');
     }
 

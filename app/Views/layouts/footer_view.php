@@ -1,5 +1,5 @@
 <!-- JS -->
-<!-- <script src="<?=base_url('/assets/script.js')?>"></script> -->
+<script src="<?=base_url('/assets/script.js')?>"></script>
 
 <!-- <script src="https://kit.fontawesome.com/0ce357c188.js" crossorigin="anonymous"></script> -->
 <!-- BOOTSTRAP script -->

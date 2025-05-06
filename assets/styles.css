@@ -14,7 +14,6 @@
 
 
   body {
-    background-color: #EFE8E2;
     min-height: -webkit-fill-available;
     overflow: hidden;
     /* min-height: 100vh; */
@@ -24,6 +23,13 @@
     height: -webkit-fill-available;
   }
   
+  .navColor{
+    background-color: #1A1D1B;
+  }
+
+  .menuColor, #offcanvasNavbar{
+    background-color: #EFE8E2;
+  }
   /* main {
     display: flex;
     flex-wrap: nowrap;
@@ -39,6 +45,29 @@
     pointer-events: none;
     fill: currentColor;
   }
+
+  .color-option input[type="radio"] {
+    display: none;
+}
+
+.color-option label {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.color-option input[type="radio"]:checked + label {
+    border-color: #0D0F0E;
+}
+
+.noColor{
+  background-color: #fff;
+  border: 1px dashed #ccc;
+}
   
   /* input[type="checkbox"] {
     appearance: none;

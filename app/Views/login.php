@@ -55,7 +55,7 @@
         <?= form_close() ?>
 
         <div class="form-text">
-                ¿No tienes una cuenta? <a href="<?= base_url('/signup') ?>"> Registrarse</a>
+                ¿No tienes una cuenta? <a href="<?= url_to('Views::getSignup') ?>"> Registrarse</a>
         </div>
 
 
