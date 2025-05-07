@@ -1,13 +1,13 @@
-/* global bootstrap: false */
-(function () {
-  'use strict'
-  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-  tooltipTriggerList.forEach(function (tooltipTriggerEl) {
-    new bootstrap.Tooltip(tooltipTriggerEl)
-  })
-})()
 
-document.querySelectorAll('input[name="color"]').forEach((input) => {
+// document.addEventListener('DOMContentLoaded', () => {
+//   const form = document.getElementById('myForm');
+
+//   form.addEventListener('submit', function(e) {
+//     e.preventDefault(); 
+//   })
+// });
+
+document.querySelectorAll('input[name="taskColor"]').forEach((input) => {
     input.addEventListener('change', function () {
         const modal = document.getElementById('modalContenido');
         modal.style.backgroundColor = this.value || '#ffffff';

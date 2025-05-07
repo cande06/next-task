@@ -4,14 +4,13 @@ namespace App\Controllers;
 
 class Actions extends BaseController
 {
-    public function __construct()
-    {
-        helper('form');
-    }
+    // public function __construct()
+    // {
+    //     helper('form');
+    // }
 
     public function signup()
     {
-        // valida los datos ingresados
         $validation = service('validation');
         $validation->setRules(
             [
@@ -61,7 +60,6 @@ class Actions extends BaseController
 
     public function login()
     {
-        // valida los datos ingresados
         $validation = service('validation');
         $validation->setRules(
             [
@@ -103,5 +101,57 @@ class Actions extends BaseController
         } else {
             return redirect()->back()->with('errors', ['loginPass' => 'Correo o contraseña no valido.']);
         }
+    }
+
+    public function createTask(){
+        $validation = service('validation');
+        $validation->setRules(
+            [
+                'taskTitle' => 'required', //|alpha_numeric_punct
+                'taskDesc' => 'required',
+                // 'taskCollab' => 'valid_email',
+                // 'taskReminder' => 'valid_date',
+            ],
+            [
+                'taskTitle' => [
+                    'required' => 'Este campo es obligatorio',
+                    // 'alpha_numeric_punct' => 'Sólo puedes utilizar estos caracteres: - _ ! # * $ % & + = : . ~ |',
+                ],
+                'taskDesc' => [
+                    'required' => 'Este campo es obligatorio',
+                    // 'alpha_numeric_punct' => 'Sólo puedes utilizar estos caracteres: - _ ! # * $ % & + = : . ~ |',
+                ],
+                // 'taskCollab' => [
+                //     'valid_email' => 'El correo no es válido',
+                // ],
+            ]
+        );
+
+        if (!$validation->withRequest($this->request)->run()) {
+            return redirect()->back()->withInput()->with('errors', $validation->getErrors());
+        }
+
+        $taskTitle = $this->request->getPost('taskTitle');
+        $taskDesc = $this->request->getPost('taskDesc');
+        $taskPriority = $this->request->getPost('taskPriority');
+        $taskDesc = $this->request->getPost('taskDate');
+        $taskDesc = $this->request->getPost('taskCollab');
+        $taskDesc = $this->request->getPost('taskReminder');
+        $taskDesc = $this->request->getPost('taskColor');
+
+        $data = array(
+            'title' => $this->request->getPost('taskTitle'),
+            'description' => $this->request->getPost('taskDesc'),
+            'priority' => $this->request->getPost('taskPriority'),
+            'exp_date' => $this->request->getPost('taskDate'),
+            'assigned' => $this->request->getPost('taskCollab'),
+            'reminder' => $this->request->getPost('taskReminder'),
+            'color' => $this->request->getPost('taskColor'),
+        );
+
+        $model = new \App\Models\TaskModel();
+        $model->insert($data);
+
+        return redirect()->to('Home/home');
     }
 }

@@ -1,3 +1,13 @@
+<?php if (session()->has('errors')) : ?>
+<script>
+    window.addEventListener('DOMContentLoaded', function () {
+        var modalElement = document.getElementById('staticBackdrop');
+        var modal = new bootstrap.Modal(modalElement);
+        modal.show();
+    });
+</script>
+<?php endif; ?>
+
 <!-- JS -->
 <script src="<?=base_url('/assets/script.js')?>"></script>
 

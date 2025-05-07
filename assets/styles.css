@@ -30,6 +30,24 @@
   .menuColor, #offcanvasNavbar{
     background-color: #EFE8E2;
   }
+
+  .btn-next {
+    background-color: #4E222E; 
+    color: white;
+    border: none;
+  }
+  
+  .btn-next:hover {
+    background-color: #058518;
+  }
+  
+  .btn-next:focus,
+  .btn-next:focus-visible {
+    outline: 3px solid #80bdff;
+    outline-offset: 2px;
+    background-color: #004085;
+  }
+
   /* main {
     display: flex;
     flex-wrap: nowrap;
