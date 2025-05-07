@@ -1,4 +1,6 @@
 <!-- Contenido: Home -->
+<?= view('Home/modal_newTask.php') ?>
+
 <div class="col vw-100 overflow-hidden">
     <div class="d-flex justify-content-center">
         <div class="row pt-3">

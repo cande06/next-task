@@ -1,8 +1,8 @@
 <!-- Navbar Menu -->
-<nav class="navbar navbar-inverse navbar-fixed-top navColor">
+<nav class="navbar navbar-inverse navbar-fixed-top d-md-none navColor">
     <div class="container-fluid">
 
-        <button class="navbar-toggler d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <!-- <a class="navbar-brand" href="#"> -->
@@ -80,149 +80,18 @@
                 Crear tarea
             </button>
             <hr>
-            <!-- Modal -->
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content" id="modalContenido">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Crear tarea</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row mb-3">
-                                <div class="col-12">
-                                    <?= form_open() ?>
-                                    <?= form_label(
-                                        'Titulo',
-                                        'taskTitle',
-                                        array('class' => 'form-label')
-                                    ); ?>
-                                    <?= form_input(array(
-                                        'name' => 'taskTitle',
-                                        'placeholder' => 'Iniciar proyecto de Técnicas',
-                                        'class' => 'form-control',
-                                    )); ?>
-                                    <!-- ERROR -->
-                                    <?= form_label(
-                                        'Descripción',
-                                        'taskDesc',
-                                        array('class' => 'form-label')
-                                    ); ?>
-                                    <?= form_textarea(array(
-                                        'name' => 'taskDesc',
-                                        'placeholder' => 'Aquí puedes incluir una descripción de tu tarea',
-                                        'class' => 'form-control',
-                                        'rows' => '3',
-                                    )); ?>
-                                    <!-- ERROR -->
-                                    <div class="row mb-3">
-                                        <div class="col-2 ">
-                                            <label for="priority-opt" class="form-label">Prioridad</label>
-                                        </div>
-                                        <div class="col ps-2">
-                                            <input type="radio" class="btn-check" name="priority-opt" id="-1" autocomplete="off">
-                                            <label class="btn btn-outline-secondary" for="-1">Baja</label>
-
-                                            <input type="radio" class="btn-check" name="priority-opt" id="0" autocomplete="off" checked>
-                                            <label class="btn btn-outline-secondary" for="0">Normal</label>
-
-                                            <input type="radio" class="btn-check" name="priority-opt" id="1" autocomplete="off">
-                                            <label class="btn btn-outline-secondary" for="1">Alta</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="row mb-3">
-                                        <div class="col-2 ">
-                                            <?= form_label(
-                                                'Asignar tarea',
-                                                'taskCollab',
-                                                array('class' => 'form-label')
-                                            ); ?>
-                                        </div>
-                                        <div class="col ps-2">
-                                            <?= form_input(array(
-                                                'name' => 'taskCollab',
-                                                'placeholder' => 'ejemplo@correo.com',
-                                                'class' => 'form-control',
-                                                'aria-label' => 'Asignar tarea',
-                                                'aria-describedby' => 'taskCollab',
-                                            )); ?>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col">
-                                            <input class="btn-check" type="radio" name="color" id="none" value="#ffffff" autocomplete="off" checked>
-                                            <label class="btn noColor" for="none"></label>
-
-                                            <input class="btn-check" type="radio" name="color" id="frut" value="#E5ADAE" autocomplete="off">
-                                            <label class="btn" for="frut" style="background-color: #E5ADAE;"></label>
-                                        
-                                            <input class="btn-check" type="radio" name="color" id="kiwi" value="#BFD5A9" autocomplete="off">
-                                            <label class="btn" for="kiwi" style="background-color: #BFD5A9;"></label>
-                                        
-                                            <input class="btn-check" type="radio" name="color" id="mand" value="#EABFA0" autocomplete="off">
-                                            <label class="btn" for="mand" style="background-color: #EABFA0;"></label>
-
-                                            <input class="btn-check" type="radio" name="color" id="uva" value="#D0AFCD" autocomplete="off">
-                                            <label class="btn" for="uva" style="background-color: #D0AFCD;"></label>
-
-                                            <input class="btn-check" type="radio" name="color" id="coco" value="#D8C9B4" autocomplete="off">
-                                            <label class="btn" for="coco" style="background-color: #D8C9B4;"></label>
-                                        </div>
-                                    </div>
-
-
-                                    <?= form_close() ?>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-outline-secondary">Understood</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <ul class="nav nav-pills flex-column">
                 <li class="nav-item">
                     <a href="#" class="nav-link active" aria-current="page">
-                        <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#home" />
-                        </svg>
-                        Home
+                        <i class="bi bi-house-door-fill pe-1"></i>
+                        Inicio
                     </a>
                 </li>
                 <li>
                     <a href="#" class="nav-link link-dark">
-                        <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#speedometer2" />
-                        </svg>
-                        Dashboard
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="nav-link link-dark">
-                        <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#table" />
-                        </svg>
-                        Orders
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="nav-link link-dark">
-                        <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#grid" />
-                        </svg>
-                        Products
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="nav-link link-dark">
-                        <svg class="bi me-2" width="16" height="16">
-                            <use xlink:href="#people-circle" />
-                        </svg>
-                        Customers
+                    <i class="bi bi-check-circle-fill pe-1"></i>
+                        Completadas
                     </a>
                 </li>
             </ul>

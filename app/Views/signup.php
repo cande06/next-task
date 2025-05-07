@@ -1,5 +1,5 @@
 <!-- Content -->
-<nav class="navbar navbar-fixed-top bg-body-tertiary">
+<nav class="navbar navbar-fixed-top navColor">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Bootstrap" width="30" height="24">
@@ -86,7 +86,7 @@
         <?= form_close() ?>
 
         <div class="form-text">
-                ¿Ya tienes una cuenta? <a href="<?= base_url('/login') ?>"> Iniciar sesión</a>
+                ¿Ya tienes una cuenta? <a href="<?= url_to('Views::getLogin') ?>"> Iniciar sesión</a>
         </div>
 
     </div>
