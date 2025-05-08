@@ -91,7 +91,7 @@ class Actions extends BaseController
         if ($user && password_verify($password, $user['password'])) {
             $session = session();
             $session->set([
-                'id' => $user['id'],
+                'idUser' => $user['id'],
                 'nick' => $user['nickname'],
                 'email' => $user['email'],
                 'logged' => true,
@@ -107,19 +107,19 @@ class Actions extends BaseController
         $validation = service('validation');
         $validation->setRules(
             [
-                'taskTitle' => 'required', //|alpha_numeric_punct
-                'taskDesc' => 'required',
+                'taskTitle' => 'required|alpha_numeric_punct',
+                'taskDesc' => 'required|alpha_numeric_punct',
                 // 'taskCollab' => 'valid_email',
                 // 'taskReminder' => 'valid_date',
             ],
             [
                 'taskTitle' => [
                     'required' => 'Este campo es obligatorio',
-                    // 'alpha_numeric_punct' => 'Sólo puedes utilizar estos caracteres: - _ ! # * $ % & + = : . ~ |',
+                    'alpha_numeric_punct' => 'Sólo puedes utilizar estos caracteres: - _ ! # * $ % & + = : . ~ |',
                 ],
                 'taskDesc' => [
                     'required' => 'Este campo es obligatorio',
-                    // 'alpha_numeric_punct' => 'Sólo puedes utilizar estos caracteres: - _ ! # * $ % & + = : . ~ |',
+                    'alpha_numeric_punct' => 'Sólo puedes utilizar estos caracteres: - _ ! # * $ % & + = : . ~ |',
                 ],
                 // 'taskCollab' => [
                 //     'valid_email' => 'El correo no es válido',
@@ -131,16 +131,10 @@ class Actions extends BaseController
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
 
-        $taskTitle = $this->request->getPost('taskTitle');
-        $taskDesc = $this->request->getPost('taskDesc');
-        $taskPriority = $this->request->getPost('taskPriority');
-        $taskDesc = $this->request->getPost('taskDate');
-        $taskDesc = $this->request->getPost('taskCollab');
-        $taskDesc = $this->request->getPost('taskReminder');
-        $taskDesc = $this->request->getPost('taskColor');
-
+        $session = session();
         $data = array(
             'title' => $this->request->getPost('taskTitle'),
+            'idUser' => $session['idUser'],
             'description' => $this->request->getPost('taskDesc'),
             'priority' => $this->request->getPost('taskPriority'),
             'exp_date' => $this->request->getPost('taskDate'),
@@ -152,6 +146,6 @@ class Actions extends BaseController
         $model = new \App\Models\TaskModel();
         $model->insert($data);
 
-        return redirect()->to('Home/home');
+        return redirect()->to('home');
     }
 }

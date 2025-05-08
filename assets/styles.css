@@ -48,6 +48,15 @@
     background-color: #004085;
   }
 
+  /* COLOR OPTIONS */
+  #frut{ background-color: #E5ADAE; }
+  #kiwi{ background-color: #BFD5A9; }
+  #mand{ background-color: #EABFA0; }
+  #coco{ background-color: #D8C9B4; }
+   #uva{ background-color: #D0AFCD; }
+
+
+
   /* main {
     display: flex;
     flex-wrap: nowrap;

@@ -14,7 +14,7 @@ document.querySelectorAll('input[name="taskColor"]').forEach((input) => {
     });
 
     // Establece el color inicial cuando se abre
-    if (input.checked) {
-        document.getElementById('modalContenido').style.backgroundColor = input.value;
-    }
+    // if (input.checked) {
+    //     document.getElementById('modalContenido').style.backgroundColor = input.value;
+    // }
 });
