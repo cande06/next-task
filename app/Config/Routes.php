@@ -13,3 +13,4 @@ $routes->get('/home', 'Views::index');
 $routes->post('form/signup', 'Actions::signup');
 $routes->post('form/login', 'Actions::login');
 $routes->post('form/create', 'Actions::createTask');
+$routes->post('form/subtask', 'Actions::addSubtask');

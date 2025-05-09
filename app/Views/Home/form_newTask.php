@@ -115,20 +115,20 @@
             <input class="btn-check" type="radio" name="taskColor" id="none" value="#ffffff" autocomplete="off" checked>
             <label class="btn noColor" for="none"></label>
 
-            <input class="btn-check" type="radio" name="taskColor" id="strawberry" value="#E5ADAE" autocomplete="off">
-            <label class="btn" id="frut" for="strawberry"></label>
+            <input class="btn-check" type="radio" name="taskColor" id="frut" value="#E5ADAE" autocomplete="off">
+            <label class="btn" id="frut" for="frut"></label>
 
-            <input class="btn-check" type="radio" name="taskColor" id="kkiwi" value="#BFD5A9" autocomplete="off">
-            <label class="btn" id="kiwi" for="kkiwi"></label>
+            <input class="btn-check" type="radio" name="taskColor" id="kiwi" value="#BFD5A9" autocomplete="off">
+            <label class="btn" id="kiwi" for="kiwi"></label>
 
-            <input class="btn-check" type="radio" name="taskColor" id="tangerine" value="#EABFA0" autocomplete="off">
-            <label class="btn" id="mand" for="tangerine"></label>
+            <input class="btn-check" type="radio" name="taskColor" id="mand" value="#EABFA0" autocomplete="off">
+            <label class="btn" id="mand" for="mand"></label>
 
-            <input class="btn-check" type="radio" name="taskColor" id="grape" value="#D0AFCD" autocomplete="off">
-            <label class="btn" id="uva" for="grape"></label>
+            <input class="btn-check" type="radio" name="taskColor" id="uva" value="#D0AFCD" autocomplete="off">
+            <label class="btn" id="uva" for="uva"></label>
 
-            <input class="btn-check" type="radio" name="taskColor" id="coconut" value="#D8C9B4" autocomplete="off">
-            <label class="btn" id="coco" for="coconut"></label>
+            <input class="btn-check" type="radio" name="taskColor" id="coco" value="#D8C9B4" autocomplete="off">
+            <label class="btn" id="coco" for="coco"></label>
         </div>
     </div>
 

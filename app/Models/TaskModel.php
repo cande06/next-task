@@ -9,7 +9,7 @@ class TaskModel extends Model{
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
-    protected $allowedFields = ['id', 'title', 'description', 'priority', 'status',
+    protected $allowedFields = ['id', 'idUser', 'title', 'description', 'priority', 'status',
                 'exp_date', 'reminder', 'color', 'assigned', 'checked', 'archived',];
     protected $useTimestamps = false; // Dates
     protected $dateFormat = 'datetime';

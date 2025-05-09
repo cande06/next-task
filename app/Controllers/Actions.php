@@ -99,7 +99,7 @@ class Actions extends BaseController
 
             return redirect()->to('home');
         } else {
-            return redirect()->back()->with('errors', ['loginPass' => 'Correo o contraseña no valido.']);
+            return redirect()->back()->with('errors', ['loginPass' => 'Correo o contraseña incorrectos.']);
         }
     }
 
@@ -134,7 +134,7 @@ class Actions extends BaseController
         $session = session();
         $data = array(
             'title' => $this->request->getPost('taskTitle'),
-            'idUser' => $session['idUser'],
+            // 'idUser' => $session->('idUser'),
             'description' => $this->request->getPost('taskDesc'),
             'priority' => $this->request->getPost('taskPriority'),
             'exp_date' => $this->request->getPost('taskDate'),
@@ -148,4 +148,22 @@ class Actions extends BaseController
 
         return redirect()->to('home');
     }
+
+    public function addSubtask()
+    {
+        $session = session();
+        $json = $this->request->getJSON();
+        $valor = trim($json->valor ?? '');
+
+        if ($valor !== '') {
+            $valores = $session->get('valores') ?? [];
+            $valores[] = $valor;
+            $session->set('valores', $valores);
+            return $this->response->setJSON(['success' => true]);
+        }
+
+        return $this->response->setJSON(['success' => false]);
+    }
+
+    
 }
