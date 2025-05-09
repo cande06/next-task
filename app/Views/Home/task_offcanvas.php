@@ -1,6 +1,7 @@
-<div class="offcanvas offcanvas-end" data-bs-backdrop="false" tabindex="-1" id="offcanvasTask<?= $task['id']?>" aria-labelledby="Label<?= $task['id']?>">
+<div class="offcanvas offcanvas-end addSubtask <?= $task['taskColorID'] ?>" data-bs-backdrop="false" tabindex="-1" id="offcanvasTask<?= $task['id'] ?>" aria-labelledby="Label<?= $task['id'] ?>">
     <div class="offcanvas-header pb-0">
-        <h5 class="offcanvas-title" id="Label<?= $task['id']?>"><?= $task['taskTitle'] ?></h5>
+        <input type="hidden" id="taskID" value="<?= $task['id'] ?>">
+        <h5 class="offcanvas-title" id="Label<?= $task['id'] ?>"><?= $task['taskTitle'] ?></h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body pt-1">
@@ -13,12 +14,16 @@
         <hr>
 
         <span class="taskSubtitle text-body-secondary">Subtareas</span> <br>
-        <ul id="valoresIngresados" class="list-group"></ul>
-        <div id="agregar" style="cursor: pointer; background: #eee; padding: 10px;">
+        <div id="subtasksFor<?= $task['id'] ?>"></div>
+        <div id="addFor<?= $task['id'] ?>" style="cursor: pointer; padding: 10px;">
             + Agregar subtarea
         </div>
+        
+        <div id="sbtaskInputFor<?= $task['id'] ?>"></div>
 
-        <div id="contenedor"></div>
+        <div id="completedSubtasksFor<?= $task['id'] ?>" class="mt-2">
+            <!-- Aquí se moverán las subtareas completadas -->
+        </div>
+
     </div>
-</div>
 </div>

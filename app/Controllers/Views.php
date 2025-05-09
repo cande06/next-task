@@ -68,7 +68,7 @@ class Views extends BaseController
                 'id' => $task['id'],
                 'taskTitle' => $task['title'],
                 'taskDesc' => $task['description'],
-                'taskPriority' => $task['description'],
+                'taskPriority' => $task['priority'],
                 'taskStatus' => $task['status'],
                 'taskDate' => $task['exp_date'],
                 'taskReminder' => $task['reminder'],

@@ -23,6 +23,7 @@ html {
   height: -webkit-fill-available;
 }
 
+/* ###################  NAV  ################### */
 .navColor {
   background-color: #557CA3;
 }
@@ -32,6 +33,7 @@ html {
   background-color: #EFE8E2;
 }
 
+/* ###################  TASK  ################### */
 .btn-next {
   background-color: #4E222E;
   color: white;
@@ -53,6 +55,11 @@ html {
   font-size: 15px;
   font-weight: 600;
   margin-bottom: 12px;
+}
+
+.taskBorder{
+  border-color: #4E222E;
+  border-width: 2px;
 }
 
 /* main {

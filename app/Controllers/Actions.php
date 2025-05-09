@@ -131,7 +131,7 @@ class Actions extends BaseController
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
 
-        $session = session();
+        // $session = session();
         $data = array(
             'title' => $this->request->getPost('taskTitle'),
             // 'idUser' => $session->('idUser'),
@@ -163,6 +163,21 @@ class Actions extends BaseController
         }
 
         return $this->response->setJSON(['success' => false]);
+
+        // $data = array(
+        //     'idTask' => $this->request->getPost('mainTaskID'),
+        //     //'idAuthor' => $session->('idUser'),
+        //     'title' => $this->request->getPost('subtaskInput'),
+        //     // 'description' => $this->request->getPost('taskDesc'),
+        //     // 'priority' => $this->request->getPost('taskPriority'),
+        //     // 'exp_date' => $this->request->getPost('taskDate'),
+        //     // 'assigned' => $this->request->getPost('taskCollab'),
+        // );
+
+        // $model = new \App\Models\SubtaskModel();
+        // $model->insert($data);
+
+        // return redirect()->to('home');
     }
 
     

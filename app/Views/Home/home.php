@@ -5,25 +5,42 @@
 
     <div class="row justify-content-center mt-4">
         <div class="col-9">
-            <h3>Hoy DD/MM/AA</h3>
-            <h5>En proceso</h5>
+            <h5>Hoy DD/MM/AA</h5>
 
-            <div class="row tasks">
-                <div class="col-10">
-                    <?php foreach ($tasks['created'] as $task) {
-                        $tarea = ['task' => $task];
-                        echo view('Home/task_card.php', $tarea);
-                        echo view('Home/task_offcanvas.php', $tarea);
-                    } ?>
+            <div class="mb-4">
+                <h4>En proceso</h4>
+                <div class="row tasks">
+                    <div id="in_progress" class="col-10">
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <h4>Creadas</h4>
+                <div class="row tasks">
+                    <div id="created" class="col-10">
+                        <?php foreach ($tasks['created'] as $task) {
+                            $tarea = ['task' => $task];
+                            echo view('Home/task_card.php', $tarea);
+                            echo view('Home/task_offcanvas.php', $tarea);
+                        } ?>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <h4>Finalizadas</h4>
+                <div class="row tasks">
+                    <div id="finished" class="col-10">
+                        
+                    </div>
                 </div>
             </div>
 
         </div>
     </div>
 </div>
-
-<!-- <input type="hidden" id="token" value="<?= csrf_token() ?>">
-<input type="hidden" id="hash" value="<?= csrf_hash() ?>"> -->
 
 <!-- End of body -->
 </div>

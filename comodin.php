@@ -86,14 +86,51 @@ document.getElementById('guardarEnBD').addEventListener('click', function () {
   });
 });
 
-<!-- FOREACH -->
-<?php
+<!-- subtasks -->
 
-foreach ($tareas['creadas'] as $tarea) {
-    echo "ID: " . $tarea['id'] . "<br>";
-    echo "Título: " . $tarea['titulo'] . "<br>";
-    echo "Descripción: " . $tarea['descripcion'] . "<br><br>";
-}
+const container = t.querySelector('#subtasksFor' + id);
+const completedContainer = t.querySelector('#completedSubtasksFor' + id);
 
-?>
+// Crear el contenedor de la subtarea tipo formulario
+const div = document.createElement('div');
+div.classList.add('form-check');
+
+// Crear el checkbox
+const checkbox = document.createElement('input');
+checkbox.classList.add('form-check-input');
+checkbox.type = 'checkbox';
+checkbox.id = 'subtask-' + Date.now(); // ID único
+
+// Crear la etiqueta del checkbox
+const label = document.createElement('label');
+label.classList.add('form-check-label');
+label.setAttribute('for', checkbox.id);
+label.textContent = valor;
+
+// Añadir checkbox y etiqueta al contenedor
+div.appendChild(checkbox);
+div.appendChild(label);
+
+// Añadir evento al checkbox
+checkbox.addEventListener('change', () => {
+  if (checkbox.checked) {
+    label.style.textDecoration = 'line-through';
+
+    // Mover el div a la sección de completadas
+    completedContainer.appendChild(div);
+  } else {
+    label.style.textDecoration = 'none';
+
+    // Mover de nuevo a la lista de activas
+    container.appendChild(div);
+  }
+});
+
+// Añadir el contenedor al div principal
+container.appendChild(div);
+
+// Limpiar el campo de entrada
+text.value = '';
+
+
 
