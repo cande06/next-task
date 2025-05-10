@@ -48,7 +48,7 @@
 <!-- Body -->
 <div class="row vw-100 overflow-hidden">
     <!-- Sidebar Menu -->
-    <div class="col-lg-2 col-md-3 min-vh-100 h-auto p-0 d-none d-md-block">
+    <div class="col-lg-3 col-md-3 min-vh-100 h-auto p-0 d-none d-md-block">
         <div class="d-flex flex-column h-100 p-3 menuColor"> <!-- style="width: 280px;" -->
             <!-- <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
             <svg class="bi me-2" width="40" height="32">
@@ -76,7 +76,7 @@
             <br>
 
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalNewTask">
                 Crear tarea
             </button>
             <hr>
@@ -92,6 +92,12 @@
                     <a href="#" class="nav-link link-dark">
                     <i class="bi bi-check-circle-fill pe-1"></i>
                         Completadas
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link link-dark">
+                    <i class="bi bi-archive-fill pe-1"></i>
+                        Archivadas
                     </a>
                 </li>
             </ul>

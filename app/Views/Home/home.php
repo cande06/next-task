@@ -1,7 +1,6 @@
 <!-- Contenido: Home -->
-<?= view('Home/modal_newTask.php') ?>
-
 <div class="col vw-100 overflow-hidden">
+    <?= view('Home/modal_newTask.php') ?>
 
     <div class="row justify-content-center mt-4">
         <div class="col-9">
@@ -23,7 +22,7 @@
                         <?php foreach ($tasks['created'] as $task) {
                             $tarea = ['task' => $task];
                             echo view('Home/task_card.php', $tarea);
-                            echo view('Home/task_offcanvas.php', $tarea);
+                            echo view('Home/modal_editTask.php', $tarea);
                         } ?>
                     </div>
                 </div>

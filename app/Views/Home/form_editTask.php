@@ -1,5 +1,5 @@
 <div class="col-12">
-    <?= form_open('/form/create') ?>
+    <?= form_open('/form/edit') ?>
     <div class="row mb-3">
         <?= form_label(
             'Titulo',
@@ -8,7 +8,7 @@
         ); ?>
         <?= form_input(array(
             'name' => 'taskTitle',
-            'placeholder' => 'Iniciar proyecto de Técnicas',
+            'value' => $task['taskTitle'],
             'class' => 'form-control',
         )); ?>
         <?php if (session('errors.taskTitle')) {   ?>
@@ -24,6 +24,7 @@
         ); ?>
         <?= form_textarea(array(
             'name' => 'taskDesc',
+            'value' => $task['taskDesc'],
             'class' => 'form-control',
             'rows' => '3',
         )); ?>
@@ -49,58 +50,14 @@
         </div>
         <div class="row mb-1">
             <div class="col-6">
-                <!-- <input type="radio" class="btn-check" name="taskPriority" id="-1" value="-1" autocomplete="off">
+                <input type="radio" class="btn-check" name="taskPriority" id="-1" value="-1" autocomplete="off">
                 <label class="btn btn-outline-secondary" for="-1">Baja</label>
 
                 <input type="radio" class="btn-check" name="taskPriority" id="0" value="0" autocomplete="off" checked>
                 <label class="btn btn-outline-secondary" for="0">Normal</label>
 
                 <input type="radio" class="btn-check" name="taskPriority" id="1" value="1" autocomplete="off">
-                <label class="btn btn-outline-secondary" for="1">Alta</label> -->
-
-                <?= form_label(
-                    'Baja',
-                    '-1',
-                    array('class' => 'btn btn-outline-secondary')
-                ); ?>
-                <?= form_input(array(
-                    'type' => 'radio',
-                    'class' => 'btn-check',
-                    'name' => 'taskPriority',
-                    'id' => '-1',
-                    'value' => '-1',
-                    'autocomplete' => 'off',
-                )); ?>
-
-                <?= form_label(
-                    'Normal',
-                    '0',
-                    array('class' => 'btn btn-outline-secondary')
-                ); ?>
-                <?= form_input(array(
-                    'type' => 'radio',
-                    'class' => 'btn-check',
-                    'name' => 'taskPriority',
-                    'id' => '0',
-                    'value' => '0',
-                    'autocomplete' => 'off',
-                    'checked',
-                )); ?>
-
-                <?= form_label(
-                    'Alta',
-                    '1',
-                    array('class' => 'btn btn-outline-secondary')
-                ); ?>
-                <?= form_input(array(
-                    'type' => 'radio',
-                    'class' => 'btn-check',
-                    'name' => 'taskPriority',
-                    'id' => '1',
-                    'value' => '1',
-                    'autocomplete' => 'off',
-                )); ?>
-
+                <label class="btn btn-outline-secondary" for="1">Alta</label>
             </div>
             <div class="col-6">
                 <?= form_input(array(

@@ -163,21 +163,24 @@ class Actions extends BaseController
         }
 
         return $this->response->setJSON(['success' => false]);
-
-        // $data = array(
-        //     'idTask' => $this->request->getPost('mainTaskID'),
-        //     //'idAuthor' => $session->('idUser'),
-        //     'title' => $this->request->getPost('subtaskInput'),
-        //     // 'description' => $this->request->getPost('taskDesc'),
-        //     // 'priority' => $this->request->getPost('taskPriority'),
-        //     // 'exp_date' => $this->request->getPost('taskDate'),
-        //     // 'assigned' => $this->request->getPost('taskCollab'),
-        // );
-
-        // $model = new \App\Models\SubtaskModel();
-        // $model->insert($data);
+        
 
         // return redirect()->to('home');
+    }
+
+    public function saveSubtask(){
+        $session = session();
+        $data = array(
+            'idTask' => $session->get('mainTaskID'),
+            //'idAuthor' => $session->('idUser'),
+            'title' => $session->get('subtaskInput'),
+            // 'description' => $this->request->getPost('taskDesc'),
+            // 'priority' => $this->request->getPost('taskPriority'),
+            // 'exp_date' => $this->request->getPost('taskDate'),
+            // 'assigned' => $this->request->getPost('taskCollab'),
+            );
+        $model = new \App\Models\SubtaskModel();
+        $model->insert($data);
     }
 
     

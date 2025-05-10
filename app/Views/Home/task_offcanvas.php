@@ -14,7 +14,22 @@
         <hr>
 
         <span class="taskSubtitle text-body-secondary">Subtareas</span> <br>
-        <div id="subtasksFor<?= $task['id'] ?>"></div>
+
+        <div id="subtasksFor<?= $task['id'] ?>">
+            <div class="d-flex justify-content-between bg-light">
+                <div>
+                    <input type="checkbox" name="" id="checkcito">
+                    <label for="checkcito">test</label>
+                    <br>
+                    domingo <br>
+                    # comentario xd
+                </div>
+                <div>
+                    <a href="#"><i class="bi bi-pen me-2"></i></a>
+                </div>
+            </div>
+        </div>
+
         <div id="addFor<?= $task['id'] ?>" style="cursor: pointer; padding: 10px;">
             + Agregar subtarea
         </div>
@@ -22,7 +37,7 @@
         <div id="sbtaskInputFor<?= $task['id'] ?>"></div>
 
         <div id="completedSubtasksFor<?= $task['id'] ?>" class="mt-2">
-            <!-- Aquí se moverán las subtareas completadas -->
+            
         </div>
 
     </div>

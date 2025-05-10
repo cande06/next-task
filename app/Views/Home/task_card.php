@@ -1,15 +1,14 @@
 <div class="card task mb-3 <?= $task['taskColorID'] ?> <?= ($task['taskPriority'] == 1) ? "taskBorder" : "" ?>">
-    <!-- <input type="hidden" id="taskID" value=""> -->
+    <input type="hidden" id="taskID" value="<?= $task['id']?>">
 
     <div class="card-body p-0">
 
         <div class="row align-items-center">
             <div class="col-11">
-                <div class="card-body p-3 pb-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTask<?= $task['id']?>" >
+                <div class="card-body p-3 pb-2" data-bs-toggle="modal" data-bs-target="#modalShowTask<?= $task['id'] ?>">
                     <span class="card-title fs-5 fw-semibold"><?= $task['taskTitle'] ?></span> 
                     <small class="text-body-secondary ps-1">0/2</small> <br>
-                    <p class="card-text text-truncate">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <!-- <span class="card-text"><small class="text-body-secondary">0/2</small></span> -->
+                    <!-- <p class="card-text text-truncate">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
                 </div>
             </div>
             <div class="col-1 ps-0" id="<?= $task['taskChecked'] ?>">
@@ -20,7 +19,24 @@
     </div>
 
     <div class="card-footer text-body-secondary text-end">
-        <i class="bi bi-pen me-2"></i>
+        <a href="#modalEditTask" data-bs-toggle="modal" data-bs-target="#modalEditTask<?= $task['id'] ?>"><i class="bi bi-pen me-2"></i></a>
         <i class="bi bi-trash"></i>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalShowTask<?= $task['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="showTaskLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" id="modalContenido">
+            <div class="modal-header">
+                <!-- <h1 class="modal-title fs-5" id="showTaskLabel">Crear tarea</h1> -->
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+               <h1 class="modal-title fs-5" id="showTaskLabel"><?= $task['taskTitle'] ?></h1> 
+                <p><?= $task['taskDesc'] ?></p>
+            .......
+            </div>
+        </div>
     </div>
 </div>

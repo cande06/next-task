@@ -1,7 +1,7 @@
 <?php if (session()->has('errors')) : ?>
 <script>
     window.addEventListener('DOMContentLoaded', function () {
-        var modalElement = document.getElementById('staticBackdrop');
+        var modalElement = document.getElementById('modalNewTask');
         var modal = new bootstrap.Modal(modalElement);
         modal.show();
     });
