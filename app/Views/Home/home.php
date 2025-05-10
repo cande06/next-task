@@ -20,11 +20,13 @@
                 <div class="row tasks">
                     <div id="created" class="col-10">
                         <?php foreach ($tasks['created'] as $task) {
-                            $tarea = ['task' => $task];
-                            echo view('Home/task_card.php', $tarea);
-                            echo view('Home/modal_showTask.php', $tarea);
-                            echo view('Home/modal_editTask.php', $tarea);
-                        } ?>
+                            $tarea = ['task' => $task]; ?>
+                            <a class="text-decoration-none" href="<?= base_url('/tarea/'. $task['id']) ?>">
+                                <?= view('Home/task_card.php', $tarea); ?>
+                            </a>
+                            <?= view('Home/modal_newTask.php') ?>
+                            <?= view('Home/modal_editTask.php', $task); ?>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

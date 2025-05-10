@@ -1,4 +1,4 @@
-<div class="card task mb-3 <?= $task['taskColorID'] ?> <?= ($task['taskPriority'] == 'alta') ? "taskBorder" : "" ?>">
+<div class="card task mb-3 <?= $task['taskColorID'] ?> <?= ($task['taskPriority'] == 'Alta') ? "taskBorder" : "" ?>">
     <input type="hidden" id="taskID" value="<?= $task['id']?>">
 
     <div class="card-body p-0">

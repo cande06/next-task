@@ -15,14 +15,14 @@
                         <p class="ps-1"><?= $task['taskDesc'] ?></p>
 
                         <span class="text-muted">Subtareas</span>
-                        <div>
-                            <span class="ms-0">Titulo <span class="badge text-bg-secondary ms-1">Priority</span></span>
-                            <span class="me-0">-/-/-</span> <br>
+                        <div class="subtask">
+                            <span>Titulo <span class="badge text-bg-secondary ms-1">Priority</span></span>
+                            <span>-/-/-</span> <br>
                             Lorem ipsum <br>
-                            # comment
+                            <span class="ps-1 small"> # comment </span>
                         </div>
                         <hr class="mt-1 mb-2">
-                        <div>
+                        <div class="subtask">
                             <span>Titulo <span class="badge text-bg-secondary ms-1">Priority</span></span>
                             <span>-/-/-</span> <br>
                             Lorem ipsum <br>

@@ -52,13 +52,13 @@
             <div class="col-6">
 
                 <select name="taskPriority" id="taskPriority" class="form-control">
-                    <option value="baja" <?= set_select('taskPriority', 'baja', ($task['taskPriority'] == 'baja') ? "true" : "") ?>>
+                    <option value="Baja" <?= set_select('taskPriority', 'Baja', ($task['taskPriority'] == 'Baja') ? "true" : "") ?>>
                         Baja
                     </option>
-                    <option value="normal" <?= set_select('taskPriority', 'normal', ($task['taskPriority'] == 'normal') ? "true" : "") ?>>
+                    <option value="Normal" <?= set_select('taskPriority', 'Normal', ($task['taskPriority'] == 'Normal') ? "true" : "") ?>>
                         Normal
                     </option>
-                    <option value="alta" <?= set_select('taskPriority', 'alta', ($task['taskPriority'] == 'alta') ? "true" : "") ?>>
+                    <option value="Alta" <?= set_select('taskPriority', 'Alta', ($task['taskPriority'] == 'Alta') ? "true" : "") ?>>
                         Alta
                     </option>
                 </select>
@@ -100,22 +100,28 @@
         </div>
         <div class="row mb-1">
             <div class="col-6">
-                <input class="btn-check" type="radio" name="taskColor" id="none" value="#ffffff" autocomplete="off">
+                <input class="btn-check" type="radio" name="taskColor" id="none" value="#FFFFFF" autocomplete="off"
+                <?= set_radio('taskColor', '#FFFFFF', ($task['taskColor'] == '#FFFFFF') ? "true" : "") ?>>
                 <label class="btn noColor" for="none"></label>
 
-                <input class="btn-check" type="radio" name="taskColor" id="frut" value="#E5ADAE" autocomplete="off">
+                <input class="btn-check" type="radio" name="taskColor" id="frut" value="#E5ADAE" autocomplete="off"
+                <?= set_radio('taskColor', '#E5ADAE', ($task['taskColor'] == '#E5ADAE') ? "true" : "") ?>>
                 <label class="btn" id="frut" for="frut"></label>
 
-                <input class="btn-check" type="radio" name="taskColor" id="kiwi" value="#BFD5A9" autocomplete="off">
+                <input class="btn-check" type="radio" name="taskColor" id="kiwi" value="#BFD5A9" autocomplete="off"
+                <?= set_radio('taskColor', '#BFD5A9', ($task['taskColor'] == '#BFD5A9') ? "true" : "") ?>>
                 <label class="btn" id="kiwi" for="kiwi"></label>
 
-                <input class="btn-check" type="radio" name="taskColor" id="mand" value="#EABFA0" autocomplete="off">
+                <input class="btn-check" type="radio" name="taskColor" id="mand" value="#EABFA0" autocomplete="off"
+                <?= set_radio('taskColor', '#EABFA0', ($task['taskColor'] == '#EABFA0') ? "true" : "") ?>>
                 <label class="btn" id="mand" for="mand"></label>
 
-                <input class="btn-check" type="radio" name="taskColor" id="uva" value="#D0AFCD" autocomplete="off">
+                <input class="btn-check" type="radio" name="taskColor" id="uva" value="#D0AFCD" autocomplete="off"
+                <?= set_radio('taskColor', '#D0AFCD', ($task['taskColor'] == '#D0AFCD') ? "true" : "") ?>>
                 <label class="btn" id="uva" for="uva"></label>
 
-                <input class="btn-check" type="radio" name="taskColor" id="coco" value="#D8C9B4" autocomplete="off">
+                <input class="btn-check" type="radio" name="taskColor" id="coco" value="#D8C9B4" autocomplete="off"
+                <?= set_radio('taskColor', '#D8C9B4', ($task['taskColor'] == '#D8C9B4') ? "true" : "") ?>>
                 <label class="btn" id="coco" for="coco"></label>
             </div>
             <div class="col-6">

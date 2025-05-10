@@ -30,7 +30,7 @@ class Views extends BaseController
     {
         $model = new \App\Models\TaskModel();
         // $session = session();
-        // $tareas = $model->where('idUser', $session->get('idUser'))->first();
+        // $tareas = $model->where('idUser', $session->get('idUser'))->findAll();
         $tareas = $model->where('idUser', 0)->findAll();
 
 
@@ -66,13 +66,13 @@ class Views extends BaseController
 
             switch ($task['priority']) {
                 case -1:
-                    $task['priority'] = 'baja';
+                    $task['priority'] = 'Baja';
                     break;
                 case 0:
-                    $task['priority'] = 'normal';
+                    $task['priority'] = 'Normal';
                     break;
                 case 1:
-                    $task['priority'] = 'alta';
+                    $task['priority'] = 'Alta';
                     break;
             }
 
@@ -84,7 +84,7 @@ class Views extends BaseController
                 'taskStatus' => $task['status'],
                 'taskDate' => $task['exp_date'],
                 'taskReminder' => $task['reminder'],
-                // 'taskColorHex' => $task['color'],
+                'taskColor' => $task['color'],
                 'taskColorID' => $colorID,
                 'taskChecked' => $task['checked'],
                 'taskArchived' => $task['archived'],
@@ -111,5 +111,48 @@ class Views extends BaseController
         }
 
         return $data;
+    }
+
+    public function getTask($id){
+         $model = new \App\Models\TaskModel();
+        $task = $model->find($id);
+
+        switch ($task['color']) {
+                case '#E5ADAE':
+                    $colorID = 'frut';
+                    break;
+                case '#BFD5A9':
+                    $colorID = 'kiwi';
+                    break;
+                case '#EABFA0':
+                    $colorID = 'mand';
+                    break;
+                case '#D0AFCD':
+                    $colorID = 'uva';
+                    break;
+                case '#D8C9B4':
+                    $colorID = 'coco';
+                    break;
+                case '#FFFFFF':
+                    $colorID = 'none';
+            }
+
+        $tarea = [
+                'id' => $task['id'],
+                'taskTitle' => $task['title'],
+                'taskDesc' => $task['description'],
+                'taskPriority' => $task['priority'],
+                'taskStatus' => $task['status'],
+                'taskDate' => $task['exp_date'],
+                'taskReminder' => $task['reminder'],
+                'taskColor' => $task['color'],
+                'taskColorID' => $colorID,
+                'taskChecked' => $task['checked'],
+                'taskArchived' => $task['archived'],
+            ];
+
+        $data = ['title' => $tarea['taskTitle'],
+                  'task' => $tarea ];
+        return view('Layouts/header', $data) . view('Layouts/menu', $data) . view('Task/task', $data) . view('Layouts/footer');
     }
 }

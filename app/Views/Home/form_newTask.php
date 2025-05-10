@@ -41,8 +41,8 @@
 
         <?= form_dropdown(
                     array('name' => 'taskPriority', 'id' => 'taskPriority', 'class' => 'form-control'),
-                    array('baja' => 'Baja', 'normal' => 'Normal', 'alta' => 'Alta',),
-                    'normal'
+                    array('Baja' => 'Baja', 'Normal' => 'Normal', 'Alta' => 'Alta',),
+                    'Normal'
         ); ?>
 
         <!-- <label for="taskPriority" class="form-label">Prioridad</label>
@@ -101,7 +101,7 @@
 
     <div class="row mb-3">
         <div class="col">
-            <input class="btn-check" type="radio" name="taskColor" id="none" value="#ffffff" autocomplete="off">
+            <input class="btn-check" type="radio" name="taskColor" id="none" value="#FFFFFF" autocomplete="off">
             <label class="btn noColor" for="none"></label>
 
             <input class="btn-check" type="radio" name="taskColor" id="frut" value="#E5ADAE" autocomplete="off">
