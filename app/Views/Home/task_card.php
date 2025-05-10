@@ -1,4 +1,4 @@
-<div class="card task mb-3 <?= $task['taskColorID'] ?> <?= ($task['taskPriority'] == 1) ? "taskBorder" : "" ?>">
+<div class="card task mb-3 <?= $task['taskColorID'] ?> <?= ($task['taskPriority'] == 'alta') ? "taskBorder" : "" ?>">
     <input type="hidden" id="taskID" value="<?= $task['id']?>">
 
     <div class="card-body p-0">
@@ -21,22 +21,5 @@
     <div class="card-footer text-body-secondary text-end">
         <a href="#modalEditTask" data-bs-toggle="modal" data-bs-target="#modalEditTask<?= $task['id'] ?>"><i class="bi bi-pen me-2"></i></a>
         <i class="bi bi-trash"></i>
-    </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="modalShowTask<?= $task['id'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="showTaskLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content" id="modalContenido">
-            <div class="modal-header">
-                <!-- <h1 class="modal-title fs-5" id="showTaskLabel">Crear tarea</h1> -->
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-               <h1 class="modal-title fs-5" id="showTaskLabel"><?= $task['taskTitle'] ?></h1> 
-                <p><?= $task['taskDesc'] ?></p>
-            .......
-            </div>
-        </div>
     </div>
 </div>

@@ -8,22 +8,22 @@ class Views extends BaseController
     {
         $data = ['title' => 'Inicio'];
         $tasks = ['tasks' => Views::getTasks()];
-        return view('Layouts/header_view', $data)
-            . view('Layouts/menu_view')
+        return view('Layouts/header', $data)
+            . view('Layouts/menu')
             . view('Home/home', $tasks)
-            . view('Layouts/footer_view');
+            . view('Layouts/footer');
     }
 
     function getLogin()
     {
         $data = ['title' => 'Iniciar sesion',];
-        return view('Layouts/header_view', $data) . view('login', $data) . view('Layouts/footer_view');
+        return view('Layouts/header', $data) . view('login', $data) . view('Layouts/footer');
     }
 
     function getSignup()
     {
         $data = ['title' => 'Registrarse'];
-        return view('Layouts/header_view', $data) . view('signup', $data) . view('Layouts/footer_view');
+        return view('Layouts/header', $data) . view('signup', $data) . view('Layouts/footer');
     }
 
     public function getTasks()
@@ -62,6 +62,18 @@ class Views extends BaseController
                     break;
                 case '#FFFFFF':
                     $colorID = 'none';
+            }
+
+            switch ($task['priority']) {
+                case -1:
+                    $task['priority'] = 'baja';
+                    break;
+                case 0:
+                    $task['priority'] = 'normal';
+                    break;
+                case 1:
+                    $task['priority'] = 'alta';
+                    break;
             }
 
             $newTask = [

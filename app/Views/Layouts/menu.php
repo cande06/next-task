@@ -50,15 +50,33 @@
     <!-- Sidebar Menu -->
     <div class="col-lg-3 col-md-3 min-vh-100 h-auto p-0 d-none d-md-block">
         <div class="d-flex flex-column h-100 p-3 menuColor"> <!-- style="width: 280px;" -->
-            <!-- <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-            <svg class="bi me-2" width="40" height="32">
-                <use xlink:href="#bootstrap" />
-            </svg>
-            <span class="fs-4">Titulou</span>
-        </a> 
-        <hr> -->
 
-            <div class="dropdown">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <a href="/" class="ps-2 mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                        <img src="<?= base_url('assets/img/logo-black.png') ?>" alt="next task logo" height="45">
+                    </a>
+                </div>
+                <div class="dropdown">
+                    <a href="#" class="d-flex align-items-center justify-content-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://github.com/mdo.png" alt="" width="42" height="42" class="rounded-circle me-2">
+                        <strong>mdo</strong>
+                    </a>
+                    <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                        <li><a class="dropdown-item" href="#">New project...</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr>
+
+            <!-- <div class="dropdown">
                 <a href="#" class="d-flex align-items-center justify-content-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="https://github.com/mdo.png" alt="" width="45" height="45" class="rounded-circle me-2">
                     <strong>mdo</strong>
@@ -73,7 +91,7 @@
                     <li><a class="dropdown-item" href="#">Sign out</a></li>
                 </ul>
             </div>
-            <br>
+            <br> -->
 
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalNewTask">
@@ -90,13 +108,13 @@
                 </li>
                 <li>
                     <a href="#" class="nav-link link-dark">
-                    <i class="bi bi-check-circle-fill pe-1"></i>
+                        <i class="bi bi-check-circle-fill pe-1"></i>
                         Completadas
                     </a>
                 </li>
                 <li>
                     <a href="#" class="nav-link link-dark">
-                    <i class="bi bi-archive-fill pe-1"></i>
+                        <i class="bi bi-archive-fill pe-1"></i>
                         Archivadas
                     </a>
                 </li>

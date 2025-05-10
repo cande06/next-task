@@ -12,18 +12,26 @@
   }
 }
 
+/* .noto-sans-<uniquifier> {
+  font-family: "Noto Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+} */
 
 body {
   min-height: -webkit-fill-available;
   overflow-x: hidden;
-  /* min-height: 100vh; */
+  font-family: "Noto Sans", sans-serif;
 }
 
 html {
   height: -webkit-fill-available;
 }
 
-/* ###################  NAV  ################### */
+/* #################  NAV - MENU  ################# */
 .navColor {
   background-color: #557CA3;
 }

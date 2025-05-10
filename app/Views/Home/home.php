@@ -22,6 +22,7 @@
                         <?php foreach ($tasks['created'] as $task) {
                             $tarea = ['task' => $task];
                             echo view('Home/task_card.php', $tarea);
+                            echo view('Home/modal_showTask.php', $tarea);
                             echo view('Home/modal_editTask.php', $tarea);
                         } ?>
                     </div>

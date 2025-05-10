@@ -50,14 +50,28 @@
         </div>
         <div class="row mb-1">
             <div class="col-6">
-                <input type="radio" class="btn-check" name="taskPriority" id="-1" value="-1" autocomplete="off">
+
+                <select name="taskPriority" id="taskPriority" class="form-control">
+                    <option value="baja" <?= set_select('taskPriority', 'baja', ($task['taskPriority'] == 'baja') ? "true" : "") ?>>
+                        Baja
+                    </option>
+                    <option value="normal" <?= set_select('taskPriority', 'normal', ($task['taskPriority'] == 'normal') ? "true" : "") ?>>
+                        Normal
+                    </option>
+                    <option value="alta" <?= set_select('taskPriority', 'alta', ($task['taskPriority'] == 'alta') ? "true" : "") ?>>
+                        Alta
+                    </option>
+                </select>
+
+
+                <!-- <input type="radio" class="btn-check" name="taskPriority" id="-1" value="-1" autocomplete="off" > 
                 <label class="btn btn-outline-secondary" for="-1">Baja</label>
 
-                <input type="radio" class="btn-check" name="taskPriority" id="0" value="0" autocomplete="off" checked>
+                <input type="radio" class="btn-check" name="taskPriority" id="0" value="0" autocomplete="off">
                 <label class="btn btn-outline-secondary" for="0">Normal</label>
 
-                <input type="radio" class="btn-check" name="taskPriority" id="1" value="1" autocomplete="off">
-                <label class="btn btn-outline-secondary" for="1">Alta</label>
+                <input type="radio" class="btn-check" name="taskPriority" id="1" value="1" autocomplete="off" >
+                <label class="btn btn-outline-secondary" for="1">Alta</label> -->
             </div>
             <div class="col-6">
                 <?= form_input(array(
@@ -86,7 +100,7 @@
         </div>
         <div class="row mb-1">
             <div class="col-6">
-                <input class="btn-check" type="radio" name="taskColor" id="none" value="#ffffff" autocomplete="off" >
+                <input class="btn-check" type="radio" name="taskColor" id="none" value="#ffffff" autocomplete="off">
                 <label class="btn noColor" for="none"></label>
 
                 <input class="btn-check" type="radio" name="taskColor" id="frut" value="#E5ADAE" autocomplete="off">
