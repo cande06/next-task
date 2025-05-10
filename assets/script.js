@@ -4,25 +4,7 @@ document.querySelectorAll('input[name="taskColor"]').forEach((input) => {
     modal.style.backgroundColor = this.value || '#FFFFFF';
   });
 
-  // Establece el color inicial cuando se abre
-  // if (input.checked) {
-  //     document.getElementById('modalContenido').style.backgroundColor = input.value;
-  // }
 });
-
-// function toggleTask(boton) {
-//     const tarea = boton.parentElement.id;
-//     console.log(tarea);
-
-//     const contenedorActual = tarea.parentElement.id;
-//     const strinc = contenedorActual === 0 ? "created" : "in_progress";
-//     const nuevoContenedor = strinc === "created" ? "in_progress" : "created";
-//     document.getElementById(nuevoContenedor).appendChild(tarea);
-//   }
-
-// document.querySelectorAll('input[name="taskCheck"]').forEach((input) => {
-//   input.addEventListener('change', toggleTask(this));
-// });
 
 var subtaskID = 0;
 document.querySelectorAll('.addSubtask').forEach((t) => {

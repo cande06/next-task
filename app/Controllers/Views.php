@@ -2,11 +2,23 @@
 
 namespace App\Controllers;
 
+use CodeIgniter\I18n\Time;
+
 class Views extends BaseController
 {
     public function index(): string
     {
-        $data = ['title' => 'Inicio'];
+        // Obtener la fecha actual
+        $fechaActual = Time::now();
+
+        $dia = $fechaActual->getDay();
+        $mes = $fechaActual->getMonth();
+        $anio = $fechaActual->getYear();
+
+        $fecha = $dia . '/' . $mes . '/' . $anio;
+
+        $data = ['title' => 'Inicio', 'date' => $fecha];
+        // $tasks = ['tasks' => Views::getTasks()];
         $tasks = ['tasks' => Views::getTasks()];
         return view('Layouts/header', $data)
             . view('Layouts/menu')
@@ -35,11 +47,7 @@ class Views extends BaseController
 
 
         $colorID = '';
-        $data = [
-            'created' => [],
-            'in_progress' => [],
-            'finished' => []
-        ];
+        $getTareas = [];
 
 
         foreach ($tareas as $task) {
@@ -64,6 +72,7 @@ class Views extends BaseController
                     $colorID = 'none';
             }
 
+            //format priority
             switch ($task['priority']) {
                 case -1:
                     $task['priority'] = 'Baja';
@@ -77,7 +86,7 @@ class Views extends BaseController
             }
 
             $newTask = [
-                'id' => $task['id'],
+                'taskID' => $task['id'],
                 'taskTitle' => $task['title'],
                 'taskDesc' => $task['description'],
                 'taskPriority' => $task['priority'],
@@ -90,69 +99,52 @@ class Views extends BaseController
                 'taskArchived' => $task['archived'],
             ];
 
-            // status
-            switch ($task['status']) {
-                case '0':
-                    $data['created'][] = $newTask;
-                    break;
-                case '1':
-                    $data['in_progress'][] = $newTask;
-                    break;
-                case '-1':
-                    $data['finished'][] = $newTask;
-                    break;
-
-                // más casos como 'mover', 'eliminar', etc.
-
-                default:
-                    echo "Acción no reconocida.";
-                    break;
-            }
+            $getTareas[] = $newTask;
         }
 
-        return $data;
+        return $getTareas;
     }
 
-    public function getTask($id){
-         $model = new \App\Models\TaskModel();
+    public function getTask($id)
+    {
+        $model = new \App\Models\TaskModel();
         $task = $model->find($id);
 
         switch ($task['color']) {
-                case '#E5ADAE':
-                    $colorID = 'frut';
-                    break;
-                case '#BFD5A9':
-                    $colorID = 'kiwi';
-                    break;
-                case '#EABFA0':
-                    $colorID = 'mand';
-                    break;
-                case '#D0AFCD':
-                    $colorID = 'uva';
-                    break;
-                case '#D8C9B4':
-                    $colorID = 'coco';
-                    break;
-                case '#FFFFFF':
-                    $colorID = 'none';
-            }
+            case '#E5ADAE':
+                $colorID = 'frut';
+                break;
+            case '#BFD5A9':
+                $colorID = 'kiwi';
+                break;
+            case '#EABFA0':
+                $colorID = 'mand';
+                break;
+            case '#D0AFCD':
+                $colorID = 'uva';
+                break;
+            case '#D8C9B4':
+                $colorID = 'coco';
+                break;
+            case '#FFFFFF':
+                $colorID = 'none';
+        }
 
         $tarea = [
-                'id' => $task['id'],
-                'taskTitle' => $task['title'],
-                'taskDesc' => $task['description'],
-                'taskPriority' => $task['priority'],
-                'taskStatus' => $task['status'],
-                'taskDate' => $task['exp_date'],
-                'taskReminder' => $task['reminder'],
-                'taskColor' => $task['color'],
-                'taskColorID' => $colorID,
-                'taskChecked' => $task['checked'],
-                'taskArchived' => $task['archived'],
-            ];
+            'id' => $task['id'],
+            'taskTitle' => $task['title'],
+            'taskDesc' => $task['description'],
+            'taskPriority' => $task['priority'],
+            'taskStatus' => $task['status'],
+            'taskDate' => $task['exp_date'],
+            'taskReminder' => $task['reminder'],
+            'taskColor' => $task['color'],
+            'taskColorID' => $colorID,
+            'taskChecked' => $task['checked'],
+            'taskArchived' => $task['archived'],
+        ];
 
-        $data = ['title' => $tarea['taskTitle'],
-                  'task' => $tarea ];
-        return view('Layouts/header', $data) . view('Layouts/menu', $data) . view('Task/task', $data) . view('Layouts/footer');
+        $data = ['title' => $tarea['taskTitle'],];
+        return view('Layouts/header', $data) . view('Layouts/menu') . view('Task/task', $tarea) . view('Layouts/footer');
     }
 }

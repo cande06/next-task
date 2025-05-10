@@ -128,7 +128,10 @@ class Actions extends BaseController
         );
 
         if (!$validation->withRequest($this->request)->run()) {
-            return redirect()->back()->withInput()->with('errors', $validation->getErrors());
+            return redirect()->back()
+                            ->withInput()
+                            ->with('modalTarget', 'modalNewTask')
+                            ->with('errors', $validation->getErrors());
         }
 
         // $session = session();
@@ -138,7 +141,6 @@ class Actions extends BaseController
             'description' => $this->request->getPost('taskDesc'),
             'priority' => $this->request->getPost('taskPriority'),
             'exp_date' => $this->request->getPost('taskDate'),
-            'assigned' => $this->request->getPost('taskCollab'),
             'reminder' => $this->request->getPost('taskReminder'),
             'color' => $this->request->getPost('taskColor'),
         );
@@ -147,6 +149,67 @@ class Actions extends BaseController
         $model->insert($data);
 
         return redirect()->to('home');
+    }
+
+    public function editTask(){
+        $validation = service('validation');
+        $validation->setRules(
+            [
+                'taskTitleEdit' => 'required|alpha_numeric_punct',
+                'taskDescEdit' => 'required|alpha_numeric_punct',
+                // 'taskReminder' => 'valid_date',
+            ],
+            [
+                'taskTitleEdit' => [
+                    'required' => 'Este campo es obligatorio',
+                    'alpha_numeric_punct' => 'Sólo puedes utilizar estos caracteres: - _ ! # * $ % & + = : . ~ |',
+                ],
+                'taskDescEdit' => [
+                    'required' => 'Este campo es obligatorio',
+                    'alpha_numeric_punct' => 'Sólo puedes utilizar estos caracteres: - _ ! # * $ % & + = : . ~ |',
+                ],
+            ]
+        );
+
+        $taskID = $this->request->getPost('taskID');
+
+        if (!$validation->withRequest($this->request)->run()) {
+            $target = 'modalEditTask' . $taskID; 
+            return redirect()->back()
+                            ->withInput()
+                            ->with('modalTarget', $target)
+                            ->with('errors', $validation->getErrors());
+        }
+
+        //format priority
+        switch ($this->request->getPost('taskPriorityEdit')) {
+            case 'Baja':
+                $pr = -1;
+                break;
+            case 'Normal':
+                $pr = 0;
+                break;
+            case 'Alta':
+                $pr = 1;
+                break;
+        }
+
+        // $session = session();
+        $data = array(
+            'title' => $this->request->getPost('taskTitleEdit'),
+            // 'idUser' => $session->('idUser'),
+            'description' => $this->request->getPost('taskDescEdit'),
+            'priority' => $pr ,
+            'exp_date' => $this->request->getPost('taskDateEdit'),
+            'reminder' => $this->request->getPost('taskReminderEdit'),
+            'color' => $this->request->getPost('taskColor'),
+        );
+
+        $model = new \App\Models\TaskModel();
+        $model->where('id', $taskID)->set($data)->update();
+
+        return redirect()->to('home');
+
     }
 
     public function addSubtask()

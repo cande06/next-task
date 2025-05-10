@@ -1,19 +1,19 @@
 <!-- Contenido: Task -->
-<div class="col vw-100 <?= $task['taskColorID'] ?>">
+<div class="col vw-100 <?= $taskColorID?>">
     <?= view('Home/modal_newTask.php') ?>
 
     <div class="row m-3 mt-5">
         <div class="row">
             <p class="h3">
-                <?= $task['taskTitle'] ?>
-                <small class="text-body-secondary">0/2</small>
+                <?= $taskTitle ?>
+                <!-- <small class="text-body-secondary">0/2</small> -->
             </p>
         </div>
         <div class="col-7">
 
             <div class="mb-2">
                 <span class="h6 mark">Descripción</span>
-                <p class="ps-1"><?= $task['taskDesc'] ?></p>
+                <p class="ps-1"><?= $taskDesc ?></p>
             </div>
 
             <div class="mb-2">

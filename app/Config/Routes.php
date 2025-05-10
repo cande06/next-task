@@ -14,4 +14,5 @@ $routes->get('/tarea/(:num)', 'Views::getTask/$1');
 $routes->post('form/signup', 'Actions::signup');
 $routes->post('form/login', 'Actions::login');
 $routes->post('form/create', 'Actions::createTask');
+$routes->post('form/edit', 'Actions::editTask');
 $routes->post('form/subtask', 'Actions::addSubtask');
