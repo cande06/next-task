@@ -220,39 +220,56 @@ class Actions extends BaseController
         return redirect()->to('home');
     }
 
-    public function addSubtask()
-    {
-        $session = session();
-        $json = $this->request->getJSON();
-        $valor = trim($json->valor ?? '');
+    public function createSubtask(){
+        $validation = service('validation');
+        $validation->setRules(
+            [
+                'subtaskTitle' => 'required|alpha_numeric_punct',
+                'subtaskDesc' => 'required|alpha_numeric_punct',
+                'subtaskResp' => 'required|valid_email',
+                // 'taskReminder' => 'valid_date',
+            ],
+            [
+                'subtaskTitle' => [
+                    'required' => 'Este campo es obligatorio',
+                    'alpha_numeric_punct' => 'Sólo puedes utilizar estos caracteres: - _ ! # * $ % & + = : . ~ |',
+                ],
+                'subtaskDesc' => [
+                    'required' => 'Este campo es obligatorio',
+                    'alpha_numeric_punct' => 'Sólo puedes utilizar estos caracteres: - _ ! # * $ % & + = : . ~ |',
+                ],
+                'subtaskResp' => [
+                    'required' => 'Este campo es obligatorio',
+                    'valid_email' => 'El correo no es válido',
+                ],
+            ]
+        );
 
-        if ($valor !== '') {
-            $valores = $session->get('valores') ?? [];
-            $valores[] = $valor;
-            $session->set('valores', $valores);
-            return $this->response->setJSON(['success' => true]);
+        if (!$validation->withRequest($this->request)->run()) {
+            return redirect()->back()
+                            ->withInput()
+                            ->with('modalTarget', 'modalNewSubtask')
+                            ->with('errors', $validation->getErrors());
         }
 
-        return $this->response->setJSON(['success' => false]);
-        
-
-        // return redirect()->to('home');
-    }
-
-    public function saveSubtask(){
-        $session = session();
+        // $session = session();
         $data = array(
-            'idTask' => $session->get('mainTaskID'),
-            //'idAuthor' => $session->('idUser'),
-            'title' => $session->get('subtaskInput'),
-            // 'description' => $this->request->getPost('taskDesc'),
-            // 'priority' => $this->request->getPost('taskPriority'),
-            // 'exp_date' => $this->request->getPost('taskDate'),
-            // 'assigned' => $this->request->getPost('taskCollab'),
-            );
+            'idTask' => $this->request->getPost('taskID'),
+            // 'idUser' => $session->('idUser'),
+            'title' => $this->request->getPost('subtaskTitle'),
+            'description' => $this->request->getPost('subtaskDesc'),
+            'priority' => $this->request->getPost('subtaskPriority'),
+            'exp_date' => $this->request->getPost('subtaskDate'),
+            'assigned' => $this->request->getPost('subtaskResp'),
+            'comment' => $this->request->getPost('subtaskComment'),
+        );
+
         $model = new \App\Models\SubtaskModel();
         $model->insert($data);
+
+        return redirect()->to('home');
     }
 
+ 
     
 }

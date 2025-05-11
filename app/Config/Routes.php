@@ -17,4 +17,4 @@ $routes->post('form/create', 'Actions::createTask');
 $routes->post('form/edit', 'Actions::editTask');
 $routes->post('form/deleteTask', 'Actions::deleteTask');
 
-$routes->post('form/subtask', 'Actions::addSubtask');
+$routes->post('form/newSubtask', 'Actions::createSubtask');

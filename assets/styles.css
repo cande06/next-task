@@ -87,6 +87,28 @@ a {
   color: #4E222E;
 }
 
+.highlight {
+  position: relative;
+  margin: 0em 0em;
+  padding: 0.1em 0.1em;
+  background: transparent;
+  color: currentColor;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+ 
+.highlight::after {
+  content: '';
+  position: absolute;
+  width: calc(100% + 0.5rem);
+  height: 60%;
+  left: -2px;
+  bottom: 0;
+  z-index: -1;
+  transform: rotate(-2deg);
+  background-color: #557CA3;
+}
+
 /* main {
   display: flex;
   flex-wrap: nowrap;
