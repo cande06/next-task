@@ -31,32 +31,49 @@ html {
   height: -webkit-fill-available;
 }
 
+a { 
+  color: #4E222E;
+  text-decoration: none;
+}
+
 /* #################  NAV - MENU  ################# */
-.navColor {
+.navColor{
   background-color: #557CA3;
 }
 
 .menuColor,
 #offcanvasNavbar {
-  background-color: #EFE8E2;
+  background-color: #f1eeeb;
 }
+
+.nav-link.active {
+  background-color: #557CA3 !important;
+  color: #f1eeeb  !important;
+}
+
 
 /* ###################  TASK  ################### */
 .btn-next {
-  background-color: #4E222E;
+  background-color: #557CA3;
   color: white;
   border: none;
 }
-
 .btn-next:hover {
-  background-color: #058518;
+  background-color: #4f7194;
 }
-
 .btn-next:focus,
 .btn-next:focus-visible {
-  outline: 3px solid #80bdff;
-  outline-offset: 2px;
-  background-color: #004085;
+  outline: 3px solid #4E222E;
+  /* outline-offset: 2px; */
+  background-color: #557CA3;
+}
+
+.form-check-input:checked {
+  background-color: #557CA3; /* Tu color personalizado */
+  border-color: #557CA3;
+}
+.form-check-input:checked::before {
+  background-color: #fff;
 }
 
 .taskSubtitle {
@@ -66,8 +83,8 @@ html {
 }
 
 .taskBorder{
-  border-color: #4E222E;
-  border-width: 2px;
+  /* border: 1px solid #4E222E; */
+  color: #4E222E;
 }
 
 /* main {

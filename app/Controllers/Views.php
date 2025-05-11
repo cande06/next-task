@@ -51,7 +51,7 @@ class Views extends BaseController
 
 
         foreach ($tareas as $task) {
-            // color
+            //format color
             switch ($task['color']) {
                 case '#E5ADAE':
                     $colorID = 'frut';
@@ -82,6 +82,19 @@ class Views extends BaseController
                     break;
                 case 1:
                     $task['priority'] = 'Alta';
+                    break;
+            }
+
+            //format priority
+            switch ($task['status']) {
+                case -1:
+                    $task['status'] = 'Finalizada';
+                    break;
+                case 0:
+                    $task['status'] = 'Creada';
+                    break;
+                case 1:
+                    $task['status'] = 'En Progreso';
                     break;
             }
 

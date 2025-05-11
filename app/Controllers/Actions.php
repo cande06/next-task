@@ -212,6 +212,14 @@ class Actions extends BaseController
 
     }
 
+    public function deleteTask(){
+        $taskID = $this->request->getPost('taskID');
+        $model = new \App\Models\TaskModel();
+        $model->where('id', $taskID)->delete();
+
+        return redirect()->to('home');
+    }
+
     public function addSubtask()
     {
         $session = session();

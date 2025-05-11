@@ -2,7 +2,10 @@
 <div class="col vw-100 <?= $taskColorID?>">
     <?= view('Home/modal_newTask.php') ?>
 
-    <div class="row m-3 mt-5">
+    <div class="row mx-1 mt-5 text-start">
+        <span class="fs-4"><a href=""><i class="bi bi-arrow-left"></i></a></span>
+    </div>
+    <div class="row mx-3 mt-2">
         <div class="row">
             <p class="h3">
                 <?= $taskTitle ?>

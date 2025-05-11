@@ -45,18 +45,6 @@
                     'Normal'
         ); ?>
 
-        <!-- <label for="taskPriority" class="form-label">Prioridad</label>
-        <div class="col">
-            <input type="radio" class="btn-check" name="taskPriority" id="-1" value="-1" autocomplete="off">
-            <label class="btn btn-outline-secondary" for="-1">Baja</label>
-
-            <input type="radio" class="btn-check" name="taskPriority" id="0" value="0" autocomplete="off" checked>
-            <label class="btn btn-outline-secondary" for="0">Normal</label>
-
-            <input type="radio" class="btn-check" name="taskPriority" id="1" value="1" autocomplete="off">
-            <label class="btn btn-outline-secondary" for="1">Alta</label>
-        </div> -->
-
     </div>
 
     <div class="row mb-3">

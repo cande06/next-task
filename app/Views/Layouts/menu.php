@@ -49,13 +49,13 @@
 <div class="row vw-100 overflow-hidden">
     <!-- Sidebar Menu -->
     <div class="col-lg-3 col-md-3 min-vh-100 h-auto p-0 d-none d-md-block">
-        <div class="d-flex flex-column h-100 p-3 menuColor"> <!-- style="width: 280px;" -->
+        <div class="d-flex flex-column h-100 p-3 menuColor"> <!--menuColor style="width: 280px;" -->
 
             <div class="d-flex justify-content-between">
                 <div>
-                    <a href="/" class="ps-2 mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                    <!-- <a href="/" class="ps-2 mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                         <img src="<?= base_url('assets/img/logo-black.png') ?>" alt="next task logo" height="45">
-                    </a>
+                    </a> -->
                 </div>
                 <div class="dropdown">
                     <a href="#" class="d-flex align-items-center justify-content-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
@@ -101,19 +101,19 @@
 
             <ul class="nav nav-pills flex-column">
                 <li class="nav-item">
-                    <a href="#" class="nav-link active" aria-current="page">
+                    <a href="<?= base_url('') ?>" class="nav-link active" aria-current="page">
                         <i class="bi bi-house-door-fill pe-1"></i>
                         Inicio
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link link-dark">
+                    <a href="<?= base_url('') ?>" class="nav-link link-dark">
                         <i class="bi bi-check-circle-fill pe-1"></i>
                         Completadas
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link link-dark">
+                    <a href="<?= base_url('') ?>" class="nav-link link-dark">
                         <i class="bi bi-archive-fill pe-1"></i>
                         Archivadas
                     </a>
