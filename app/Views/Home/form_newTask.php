@@ -1,4 +1,6 @@
 <div class="col-12">
+    <?php $errors = session('errors'); ?>
+
     <?= form_open('/form/create') ?>
     <div class="row mb-3">
         <?= form_label(
@@ -40,9 +42,9 @@
         ); ?>
 
         <?= form_dropdown(
-                    array('name' => 'taskPriority', 'id' => 'taskPriority', 'class' => 'form-control'),
-                    array('Baja' => 'Baja', 'Normal' => 'Normal', 'Alta' => 'Alta',),
-                    'Normal'
+            array('name' => 'taskPriority', 'id' => 'taskPriority', 'class' => 'form-control'),
+            array('Baja' => 'Baja', 'Normal' => 'Normal', 'Alta' => 'Alta',),
+            'Normal'
         ); ?>
 
     </div>
@@ -74,6 +76,9 @@
                     'aria-label' => 'Fecha de vencimiento',
                     'aria-describedby' => 'taskDate',
                 )); ?>
+                <?php if (isset($errors['taskDate'])) {   ?>
+                    <div><small class="text-danger"><?= $errors['taskDate'] ?></small></div>
+                <?php } ?>
             </div>
             <div class="col-6">
                 <?= form_input(array(
@@ -83,13 +88,16 @@
                     'aria-label' => 'Recordatorio para tarea',
                     'aria-describedby' => 'taskReminder',
                 )); ?>
+                <?php if (isset($errors['taskReminder'])) {   ?>
+                    <div><small class="text-danger"><?= $errors['taskReminder'] ?></small></div>
+                <?php } ?>
             </div>
         </div>
     </div>
 
     <div class="row mb-3">
         <div class="col">
-            <input class="btn-check" type="radio" name="taskColor" id="none" value="#FFFFFF" autocomplete="off">
+            <input class="btn-check" type="radio" name="taskColor" id="none" value="#FFFFFF" autocomplete="off" checked>
             <label class="btn noColor" for="none"></label>
 
             <input class="btn-check" type="radio" name="taskColor" id="frut" value="#E5ADAE" autocomplete="off">

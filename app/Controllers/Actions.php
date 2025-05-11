@@ -55,7 +55,6 @@ class Actions extends BaseController
         $model->insert($data);
 
         return redirect()->to('login');
-
     }
 
     public function login()
@@ -103,14 +102,15 @@ class Actions extends BaseController
         }
     }
 
-    public function createTask(){
+    public function createTask()
+    {
         $validation = service('validation');
         $validation->setRules(
             [
                 'taskTitle' => 'required|alpha_numeric_punct',
                 'taskDesc' => 'required|alpha_numeric_punct',
-                // 'taskCollab' => 'valid_email',
-                // 'taskReminder' => 'valid_date',
+                'taskDate' => 'permit_empty|valid_date[Y-m-d]',
+                'taskReminder' => 'permit_empty|valid_date[Y-m-d]',
             ],
             [
                 'taskTitle' => [
@@ -121,18 +121,51 @@ class Actions extends BaseController
                     'required' => 'Este campo es obligatorio',
                     'alpha_numeric_punct' => 'Sólo puedes utilizar estos caracteres: - _ ! # * $ % & + = : . ~ |',
                 ],
-                // 'taskCollab' => [
-                //     'valid_email' => 'El correo no es válido',
-                // ],
+                'taskDate' => [
+                    'valid_date' => 'Fecha no válida',
+                ],
+                'taskReminder' => [
+                    'valid_date' => 'Fecha no válida',
+                ],
             ]
         );
 
         if (!$validation->withRequest($this->request)->run()) {
             return redirect()->back()
-                            ->withInput()
-                            ->with('modalTarget', 'modalNewTask')
-                            ->with('errors', $validation->getErrors());
+                ->withInput()
+                ->with('modalTarget', 'modalNewTask')
+                ->with('errors', $validation->getErrors());
         }
+
+
+        $fechaVencimiento = $this->request->getPost('taskDate');
+        $fechaRecordatorio = $this->request->getPost('taskReminder');
+        $errors = [];
+
+        // Convertir fechas a objetos DateTime
+        $fv = $fechaVencimiento ? new \DateTime($fechaVencimiento) : null;
+        $fr = $fechaRecordatorio ? new \DateTime($fechaRecordatorio) : null;
+        $hoy = new \DateTime('today');
+
+        // Validar que recordatorio no sea después del vencimiento
+        if ($fv && $fr && $fr > $fv) {
+            $errors['taskReminder'] = 'El recordatorio no puede ser posterior al vencimiento.';
+        }
+        // Validar que ninguna fecha sea anterior a hoy
+        if ($fv && $fv < $hoy) {
+            $errors['taskDate'] = 'La fecha de vencimiento no puede ser anterior a hoy.';
+        }
+        if ($fr && $fr < $hoy) {
+            $errors['taskReminder'] = 'La fecha de recordatorio no puede ser anterior a hoy.';
+        }
+
+        if (!empty($errors)) {
+            return redirect()->back()
+                ->withInput()
+                ->with('modalTarget', 'modalNewTask')
+                ->with('errors', $errors);
+        }
+
 
         // $session = session();
         $data = array(
@@ -151,7 +184,8 @@ class Actions extends BaseController
         return redirect()->to('home');
     }
 
-    public function editTask(){
+    public function editTask()
+    {
         $validation = service('validation');
         $validation->setRules(
             [
@@ -174,11 +208,11 @@ class Actions extends BaseController
         $taskID = $this->request->getPost('taskID');
 
         if (!$validation->withRequest($this->request)->run()) {
-            $target = 'modalEditTask' . $taskID; 
+            $target = 'modalEditTask' . $taskID;
             return redirect()->back()
-                            ->withInput()
-                            ->with('modalTarget', $target)
-                            ->with('errors', $validation->getErrors());
+                ->withInput()
+                ->with('modalTarget', $target)
+                ->with('errors', $validation->getErrors());
         }
 
         //format priority
@@ -199,7 +233,7 @@ class Actions extends BaseController
             'title' => $this->request->getPost('taskTitleEdit'),
             // 'idUser' => $session->('idUser'),
             'description' => $this->request->getPost('taskDescEdit'),
-            'priority' => $pr ,
+            'priority' => $pr,
             'exp_date' => $this->request->getPost('taskDateEdit'),
             'reminder' => $this->request->getPost('taskReminderEdit'),
             'color' => $this->request->getPost('taskColor'),
@@ -209,10 +243,10 @@ class Actions extends BaseController
         $model->where('id', $taskID)->set($data)->update();
 
         return redirect()->to('home');
-
     }
 
-    public function deleteTask(){
+    public function deleteTask()
+    {
         $taskID = $this->request->getPost('taskID');
         $model = new \App\Models\TaskModel();
         $model->where('id', $taskID)->delete();
@@ -220,7 +254,40 @@ class Actions extends BaseController
         return redirect()->to('home');
     }
 
-    public function createSubtask(){
+    public function archiveTask($id){
+        
+        $model = new \App\Models\TaskModel();
+        $model->where('id', $id)->set(['archived'=> 1])->update();
+
+        return redirect()->to('home');
+    }
+
+    public function changeStatus()
+    {
+        $taskID = $this->request->getPost('taskID');
+        $status = $this->request->getPost('taskStatus');
+
+        //format status
+            switch ($status) {
+                case 'Completada':
+                    $status = -1;
+                    break;
+                case 'Creada':
+                    $status = 0;
+                    break;
+                case 'En Proceso':
+                    $status = 1;
+                    break;
+            }
+            
+        $model = new \App\Models\TaskModel();
+        $model->where('id', $taskID)->set(['status'=> $status])->update();
+
+        return redirect()->to('home');
+    }
+
+    public function createSubtask()
+    {
         $validation = service('validation');
         $validation->setRules(
             [
@@ -247,18 +314,32 @@ class Actions extends BaseController
 
         if (!$validation->withRequest($this->request)->run()) {
             return redirect()->back()
-                            ->withInput()
-                            ->with('modalTarget', 'modalNewSubtask')
-                            ->with('errors', $validation->getErrors());
+                ->withInput()
+                ->with('modalTarget', 'modalNewSubtask')
+                ->with('errors', $validation->getErrors());
         }
 
+        //format priority
+        switch ($this->request->getPost('subtaskPriority')) {
+            case 'Baja':
+                $pr = 1;
+                break;
+            case 'Normal':
+                $pr = 1;
+                break;
+            case 'Alta':
+                $pr = 2;
+                break;
+        }
+
+        $taskID = $this->request->getPost('taskID');
         // $session = session();
         $data = array(
-            'idTask' => $this->request->getPost('taskID'),
+            'idTask' => $taskID,
             // 'idUser' => $session->('idUser'),
             'title' => $this->request->getPost('subtaskTitle'),
             'description' => $this->request->getPost('subtaskDesc'),
-            'priority' => $this->request->getPost('subtaskPriority'),
+            'priority' => $pr,
             'exp_date' => $this->request->getPost('subtaskDate'),
             'assigned' => $this->request->getPost('subtaskResp'),
             'comment' => $this->request->getPost('subtaskComment'),
@@ -267,9 +348,6 @@ class Actions extends BaseController
         $model = new \App\Models\SubtaskModel();
         $model->insert($data);
 
-        return redirect()->to('home');
+        return redirect()->to('tarea/' . $taskID);
     }
-
- 
-    
 }

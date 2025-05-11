@@ -12,15 +12,6 @@
   }
 }
 
-/* .noto-sans-<uniquifier> {
-  font-family: "Noto Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: <weight>;
-  font-style: normal;
-  font-variation-settings:
-    "wdth" 100;
-} */
-
 body {
   min-height: -webkit-fill-available;
   overflow-x: hidden;
@@ -87,27 +78,32 @@ a {
   color: #4E222E;
 }
 
+/* .highlight {
+  background: linear-gradient(to top, rgba(33,37,41, 0.03) 60%, transparent 40%);
+} */
 .highlight {
-  position: relative;
-  margin: 0em 0em;
-  padding: 0.1em 0.1em;
-  background: transparent;
-  color: currentColor;
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
+  background-color: rgba(33, 37, 41, 0.062); 
+  padding: 0 4px;
+  border-radius: 2px;
 }
- 
-.highlight::after {
+
+.highlight-custom {
+  position: relative;
+  z-index: 1;
+}
+.highlight-custom::before {
   content: '';
   position: absolute;
-  width: calc(100% + 0.5rem);
-  height: 60%;
-  left: -2px;
-  bottom: 0;
+  left: 0;
+  bottom: 0.1em;
+  height: 0.6em;
+  width: 100%;
+  background: #ff0;
   z-index: -1;
-  transform: rotate(-2deg);
-  background-color: #557CA3;
+  transform: rotate(-1deg);
 }
+
+
 
 /* main {
   display: flex;
@@ -153,4 +149,9 @@ a {
 .noColor {
   background-color: #fff;
   border: 1px dashed #ccc;
+}
+
+::selection {
+  background: #557CA3;
+  color: black;
 }

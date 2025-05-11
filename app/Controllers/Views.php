@@ -18,7 +18,6 @@ class Views extends BaseController
         $fecha = $dia . '/' . $mes . '/' . $anio;
 
         $data = ['title' => 'Inicio', 'date' => $fecha];
-        // $tasks = ['tasks' => Views::getTasks()];
         $tasks = ['tasks' => Views::getTasks()];
         return view('Layouts/header', $data)
             . view('Layouts/menu')
@@ -85,16 +84,16 @@ class Views extends BaseController
                     break;
             }
 
-            //format priority
+            //format status
             switch ($task['status']) {
                 case -1:
-                    $task['status'] = 'Finalizada';
+                    $task['status'] = 'Completada';
                     break;
                 case 0:
                     $task['status'] = 'Creada';
                     break;
                 case 1:
-                    $task['status'] = 'En Progreso';
+                    $task['status'] = 'En Proceso';
                     break;
             }
 
@@ -123,6 +122,7 @@ class Views extends BaseController
         $model = new \App\Models\TaskModel();
         $task = $model->find($id);
 
+        // format color
         switch ($task['color']) {
             case '#E5ADAE':
                 $colorID = 'frut';
@@ -142,9 +142,22 @@ class Views extends BaseController
             case '#FFFFFF':
                 $colorID = 'none';
         }
+        //format status
+        switch ($task['status']) {
+            case -1:
+                $task['status'] = 'Completada';
+                break;
+            case 0:
+                $task['status'] = 'Creada';
+                break;
+            case 1:
+                $task['status'] = 'En Progreso';
+                break;
+        }
 
+        $subtareas = Views::getSubtasks($id);
         $tarea = [
-            'id' => $task['id'],
+            'taskID' => $task['id'],
             'taskTitle' => $task['title'],
             'taskDesc' => $task['description'],
             'taskPriority' => $task['priority'],
@@ -157,7 +170,71 @@ class Views extends BaseController
             'taskArchived' => $task['archived'],
         ];
 
+        $taskContent = [
+            'task' => $tarea,
+            'subtasks' => $subtareas,
+        ];
+
         $data = ['title' => $tarea['taskTitle'],];
-        return view('Layouts/header', $data) . view('Layouts/menu') . view('Task/task', $tarea) . view('Layouts/footer');
+
+        return view('Layouts/header', $data) .
+            view('Layouts/menu') .
+            view('Task/task', $taskContent) .
+            view('Layouts/footer');
+    }
+
+    public function getSubtasks($id)
+    {
+        $model = new \App\Models\SubtaskModel();
+        $tareas = $model->where('idTask', $id)->findAll();
+
+
+        $getSubTareas = [];
+
+        foreach ($tareas as $task) {
+            //format priority
+            switch ($task['priority']) {
+                case 1:
+                    $task['priority'] = 'Baja';
+                    break;
+                case 2:
+                    $task['priority'] = 'Normal';
+                    break;
+                case 3:
+                    $task['priority'] = 'Alta';
+                    break;
+                default:
+                    $task['priority'] = 'Sin Prioridad';
+            }
+
+            //format status
+            switch ($task['status']) {
+                case -1:
+                    $task['status'] = 'Finalizada';
+                    break;
+                case 0:
+                    $task['status'] = 'Creada';
+                    break;
+                case 1:
+                    $task['status'] = 'En Progreso';
+                    break;
+            }
+
+            $newTask = [
+                'subtaskID' => $task['id'],
+                'subtaskTitle' => $task['title'],
+                'subtaskDesc' => $task['description'],
+                'subtaskPriority' => $task['priority'],
+                'subtaskStatus' => $task['status'],
+                'subtaskDate' => $task['exp_date'],
+                'subtaskResp' => $task['assigned'],
+                'subtaskComment' => $task['comment'],
+                'subtaskChecked' => $task['checked'],
+            ];
+
+            $getSubTareas[] = $newTask;
+        }
+
+        return $getSubTareas;
     }
 }

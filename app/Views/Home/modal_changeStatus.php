@@ -7,46 +7,29 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div> -->
             <div class="modal-body">
-                <?= form_open('/') ?>
+                <?= form_open('/change/status') ?>
                 <?= form_hidden('taskID', $taskID); ?>
+
                 <div class="form-check">
-                    <?= form_label(
-                        'Creada',
-                        'taskStatusC',
-                        array('class' => 'form-label')
-                    ); ?>
-                    <?= form_radio(
-                        'taskStatusOpt',
-                        0,
-                        '',
-                        array('id' => 'taskStatusC', 'class' => 'form-check-input')
-                    ); ?>
+                    <input class="form-check-input" type="radio" name="taskStatus" id="taskStatusC" value="0"
+                    <?= set_radio('taskStatus', '0', ($taskStatus == 'Creada') ? "true" : "") ?>>
+                    <label class="form-check-label" for="taskStatusC">
+                        Creada
+                    </label>
                 </div>
                 <div class="form-check">
-                    <?= form_label(
-                        'En proceso',
-                        'taskStatusP',
-                        array('class' => 'form-label')
-                    ); ?>
-                    <?= form_radio(
-                        'taskStatusOpt',
-                        1,
-                        '',
-                        array('id' => 'taskStatusP', 'class' => 'form-check-input')
-                    ); ?>
+                    <input class="form-check-input" type="radio" name="taskStatus" id="taskStatusP" value="1"
+                    <?= set_radio('taskStatus', '1', ($taskStatus == 'En Proceso') ? "true" : "") ?>>
+                    <label class="form-check-label" for="taskStatusP">
+                        En Proceso
+                    </label>
                 </div>
                 <div class="form-check">
-                    <?= form_label(
-                        'Completada',
-                        'taskStatusF',
-                        array('class' => 'form-label')
-                    ); ?>
-                    <?= form_radio(
-                        'taskStatusOpt',
-                        -1,
-                        '',
-                        array('id' => 'taskStatusF', 'class' => 'form-check-input')
-                    ); ?>
+                    <input class="form-check-input" type="radio" name="taskStatus" id="taskStatusF" value="-1"
+                    <?= set_radio('taskStatus', '-1', ($taskStatus == 'Completada') ? "true" : "") ?>>
+                    <label class="form-check-label" for="taskStatusF">
+                        Completada
+                    </label>
                 </div>
 
 
