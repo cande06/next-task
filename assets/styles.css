@@ -98,7 +98,8 @@ a {
   bottom: 0.1em;
   height: 0.6em;
   width: 100%;
-  background: #ff0;
+  /* opacity: 50%; */
+  background: rgba(33, 37, 41, 0.062); 
   z-index: -1;
   transform: rotate(-1deg);
 }

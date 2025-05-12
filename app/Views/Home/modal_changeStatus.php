@@ -12,7 +12,7 @@
 
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="taskStatus" id="taskStatusC" value="0"
-                    <?= set_radio('taskStatus', '0', ($taskStatus == 'Creada') ? "true" : "") ?>>
+                    <?= set_radio('taskStatus', '0', ($taskStatus == 'Creada') ? "true" : "") ?> disabled>
                     <label class="form-check-label" for="taskStatusC">
                         Creada
                     </label>

@@ -22,3 +22,5 @@ $routes->post('form/deleteTask', 'Actions::deleteTask');
 $routes->post('change/status', 'Actions::changeStatus');
 
 $routes->post('form/newSubtask', 'Actions::createSubtask');
+$routes->post('form/editSubtask', 'Actions::editSubtask');
+$routes->post('form/deleteSubtask', 'Actions::deleteSubtask');

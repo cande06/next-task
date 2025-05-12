@@ -4,11 +4,6 @@ namespace App\Controllers;
 
 class Actions extends BaseController
 {
-    // public function __construct()
-    // {
-    //     helper('form');
-    // }
-
     public function signup()
     {
         $validation = service('validation');
@@ -283,7 +278,7 @@ class Actions extends BaseController
         $model = new \App\Models\TaskModel();
         $model->where('id', $taskID)->set(['status'=> $status])->update();
 
-        return redirect()->to('home');
+        return redirect()->back();
     }
 
     public function createSubtask()
@@ -292,7 +287,7 @@ class Actions extends BaseController
         $validation->setRules(
             [
                 'subtaskTitle' => 'required|alpha_numeric_punct',
-                'subtaskDesc' => 'required|alpha_numeric_punct',
+                'subtaskDesc' => 'required',
                 'subtaskResp' => 'required|valid_email',
                 // 'taskReminder' => 'valid_date',
             ],
@@ -303,7 +298,6 @@ class Actions extends BaseController
                 ],
                 'subtaskDesc' => [
                     'required' => 'Este campo es obligatorio',
-                    'alpha_numeric_punct' => 'Sólo puedes utilizar estos caracteres: - _ ! # * $ % & + = : . ~ |',
                 ],
                 'subtaskResp' => [
                     'required' => 'Este campo es obligatorio',
@@ -349,5 +343,77 @@ class Actions extends BaseController
         $model->insert($data);
 
         return redirect()->to('tarea/' . $taskID);
+    }
+
+    public function editSubtask()
+    {
+        $validation = service('validation');
+        $validation->setRules(
+            [
+                'subtaskTitleEdit' => 'required|alpha_numeric_punct',
+                'subtaskDescEdit' => 'required',
+                // 'taskReminder' => 'valid_date',
+            ],
+            [
+                'subtaskTitleEdit' => [
+                    'required' => 'Este campo es obligatorio',
+                    'alpha_numeric_punct' => 'Sólo puedes utilizar estos caracteres: - _ ! # * $ % & + = : . ~ |',
+                ],
+                'subtaskDescEdit' => [
+                    'required' => 'Este campo es obligatorio',
+                ],
+            ]
+        );
+
+        $id = $this->request->getPost('subtaskID');
+
+        if (!$validation->withRequest($this->request)->run()) {
+            $target = 'modalEditSubtask' . $id;
+            return redirect()->back()
+                ->withInput()
+                ->with('modalTarget', $target)
+                ->with('errors', $validation->getErrors());
+        }
+
+        //format priority
+        switch ($this->request->getPost('subtaskPriorityEdit')) {
+            case 'Baja':
+                $pr = 1;
+                break;
+            case 'Normal':
+                $pr = 2;
+                break;
+            case 'Alta':
+                $pr = 3;
+                break;
+            default: $pr = 0;
+        }
+
+        $taskID = $this->request->getPost('idTask');
+
+        $data = array(
+            'idTask' => $taskID,
+            // 'idAuthor' => $this->request->getPost('idAuthor'),
+            'title' => $this->request->getPost('subtaskTitleEdit'),
+            'description' => $this->request->getPost('subtaskDescEdit'),
+            'priority' => $pr,
+            'exp_date' => $this->request->getPost('subtaskDateEdit'),
+            'assigned' => $this->request->getPost('subtaskRespEdit'),
+            'comment' => $this->request->getPost('subtaskCommentEdit'),
+        );
+
+        $model = new \App\Models\SubtaskModel();
+        $model->where('id', $id)->set($data)->update();
+
+        return redirect()->to('tarea/' . $taskID);
+    }
+
+    public function deleteSubtask()
+    {
+        $id = $this->request->getPost('subtaskID');
+        $model = new \App\Models\SubtaskModel();
+        $model->where('id', $id)->delete();
+
+        return redirect()->back();
     }
 }

@@ -142,6 +142,18 @@ class Views extends BaseController
             case '#FFFFFF':
                 $colorID = 'none';
         }
+        //format priority
+        switch ($task['priority']) {
+            case -1:
+                $task['priority'] = 'Baja';
+                break;
+            case 0:
+                $task['priority'] = 'Normal';
+                break;
+            case 1:
+                $task['priority'] = 'Alta';
+                break;
+        }
         //format status
         switch ($task['status']) {
             case -1:
@@ -151,7 +163,7 @@ class Views extends BaseController
                 $task['status'] = 'Creada';
                 break;
             case 1:
-                $task['status'] = 'En Progreso';
+                $task['status'] = 'En Proceso';
                 break;
         }
 
@@ -175,7 +187,7 @@ class Views extends BaseController
             'subtasks' => $subtareas,
         ];
 
-        $data = ['title' => $tarea['taskTitle'],];
+        $data = ['title' => 'Tarea: ' . $tarea['taskTitle'],];
 
         return view('Layouts/header', $data) .
             view('Layouts/menu') .
@@ -204,7 +216,7 @@ class Views extends BaseController
                     $task['priority'] = 'Alta';
                     break;
                 default:
-                    $task['priority'] = 'Sin Prioridad';
+                    $task['priority'] = 0;
             }
 
             //format status
@@ -222,6 +234,8 @@ class Views extends BaseController
 
             $newTask = [
                 'subtaskID' => $task['id'],
+                'idTask' => $task['idTask'],
+                'idAuthor' => $task['idAuthor'],
                 'subtaskTitle' => $task['title'],
                 'subtaskDesc' => $task['description'],
                 'subtaskPriority' => $task['priority'],
