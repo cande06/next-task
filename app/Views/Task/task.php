@@ -1,11 +1,6 @@
 <!-- Contenido: Task -->
 <div class="col-lg-9 col vh-100 m-0 overflow-auto <?= $task['taskColorID'] ?>"> <!-- vw-100 -->
 
-    <?php
-        $userID = session()->get('idUser');
-        $isTaskAuthor = ($task['taskUserID'] === $userID) ? true : false;
-    ?>
-
     <div class="row mx-1 mt-5 text-start">
         <span class="fs-4"><a href=""><i class="bi bi-arrow-left"></i></a></span>
     </div>
@@ -29,19 +24,19 @@
             </div>
             <div class="col-5 ps-4">
                 <div>
-                    <?php if ($isTaskAuthor) { ?>
+                    <?php if ($task['isTaskOwner']) { ?>
                         <a href="#modalEditTask<?= $task['taskID']  ?>" class="link" data-bs-toggle="modal">
                             <i class="bi bi-pen me-2"></i>
                         </a>
                     <?php } ?>
 
-                    <?php if ($isTaskAuthor) { ?>
+                    <?php if ($task['isTaskOwner']) { ?>
                         <a href="#modalDelTask<?= $task['taskID']  ?>" class="link" data-bs-toggle="modal">
                             <i class="bi bi-trash me-2"></i>
                         </a>
                     <?php } ?>
 
-                    <?php if ($isTaskAuthor && $task['taskStatus'] == 'Completada') { ?>
+                    <?php if ($task['isTaskOwner'] && $task['taskStatus'] == 'Completada') { ?>
                         <a href="<?= base_url('/archive/' . $task['taskID']) ?>" class="link">
                             <i class="bi bi-archive"></i>
                         </a>
@@ -72,6 +67,7 @@
                         <?= view('Subtask/subtask.php', $sub); ?>
                         <?= view('Subtask/modal_editSubtask.php', $sub); ?>
                         <?= view('Subtask/modal_deleteSubtask.php', array('subtaskID' => $sub['subtaskID'])); ?>
+                        <?= view('Subtask/modal_changeSubStatus.php', $sub); ?>
 
                     <?php } ?>
                 </div>
@@ -113,10 +109,9 @@
 
     </div>
 
-    <?= view('Home/modal_changeStatus.php', 
-    array('taskID' => $task['taskID'], 'taskStatus' => $task['taskStatus'], 'isTaskAuthor' => $isTaskAuthor )); ?>
-    <?= view('Task/modal_newSubtask.php', array('taskID' => $task['taskID'])) ?>
+    <?= view('Home/modal_changeStatus.php', $task); ?>
     <?= view('Home/modal_editTask.php', $task); ?>
     <?= view('Home/modal_deleteTask.php', $task); ?>
+    <?= view('Task/modal_newSubtask.php', array('taskID' => $task['taskID'])) ?>
 
 </div>

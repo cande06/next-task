@@ -1,10 +1,4 @@
 <div class="card mb-3 rounded-1 <?= $taskColorID ?> ">
-    <!-- <input type="hidden" id="taskID" value="<?= $taskID ?>"> -->
-
-    <?php
-        $userID = session()->get('user_id');
-        $isAuthor = ($taskUserID === $userID) ? true : false;
-    ?>
 
     <div class="card-body p-0">
         <div class="card-body p-3 pb-2" data-bs-toggle="modal" data-bs-target="#modalShowTask<?= $taskID ?>">
@@ -31,6 +25,7 @@
 
     <div class="card-footer text-body-secondary py-1 px-3 border-0">
         <div class="d-flex justify-content-between">
+            <!-- STATUS -->
             <div>
                 <span>
                     <a href="#modalStatusTask<?= $taskID ?>" class="text-decoration-none" data-bs-toggle="modal">
@@ -44,16 +39,15 @@
                 </span>
             </div>
 
+            <!-- BUTTONS -->
             <div class="me-2">
                 <a href="#modalEditTask<?= $taskID ?>" class="text-decoration-none" data-bs-toggle="modal">
                     <i class="bi bi-pen me-2"></i>
                 </a>
 
-                <?php if ($isAuthor) { ?>
-                    <a href="#modalDelTask<?= $taskID ?>" class="link" data-bs-toggle="modal">
-                        <i class="bi bi-trash"></i>
-                    </a>
-                <?php } ?>
+                <a href="#modalDelTask<?= $taskID ?>" class="link" data-bs-toggle="modal">
+                    <i class="bi bi-trash"></i>
+                </a>
 
             </div>
         </div>

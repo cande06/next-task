@@ -171,6 +171,9 @@ class Views extends BaseController
                 break;
         }
 
+        $activeUser = session()->get('idUser');
+        $isOwner = ($activeUser == $task['idUser']) ? true : false;
+
         $subtareas = Views::getSubtasks($id);
         $tarea = [
             'taskID' => $task['id'],
@@ -184,6 +187,7 @@ class Views extends BaseController
             'taskColor' => $task['color'],
             'taskColorID' => $colorID,
             'taskArchived' => $task['archived'],
+            'isTaskOwner' => $isOwner,
         ];
 
         $taskContent = [
@@ -199,11 +203,10 @@ class Views extends BaseController
             view('Layouts/footer');
     }
 
-    public function getSubtasks($id)
+    public function getSubtasks($idTask)
     {
         $model = new \App\Models\SubtaskModel();
-        $tareas = $model->where('idTask', $id)->findAll();
-
+        $tareas = $model->where('idTask', $idTask)->findAll();
 
         $getSubTareas = [];
 
@@ -222,19 +225,21 @@ class Views extends BaseController
                 default:
                     $task['priority'] = 0;
             }
-
             //format status
             switch ($task['status']) {
                 case -1:
-                    $task['status'] = 'Finalizada';
+                    $task['status'] = 'Completada';
                     break;
                 case 0:
                     $task['status'] = 'Creada';
                     break;
                 case 1:
-                    $task['status'] = 'En Progreso';
+                    $task['status'] = 'En proceso';
                     break;
             }
+
+            $activeUser = session()->get('idUser');
+            $isOwner = ($activeUser == $task['idAuthor']) ? true : false;
 
             $newTask = [
                 'subtaskID' => $task['id'],
@@ -247,6 +252,7 @@ class Views extends BaseController
                 'subtaskDate' => $task['exp_date'],
                 'subtaskResp' => $task['assigned'],
                 'subtaskComment' => $task['comment'],
+                'isSubOwner' => $isOwner,
             ];
 
             $getSubTareas[] = $newTask;

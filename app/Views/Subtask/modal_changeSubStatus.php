@@ -1,28 +1,28 @@
 <!-- Modal -->
-<div class="modal fade" id="modalStatusTask<?= $taskID ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+<div class="modal fade" id="modalStatusSubtask<?= $subtaskID ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-sm">
         <div class="modal-content">
             <div class="modal-body">
-                <?= form_open('/update/task-status/'. $taskID ) ?>
+                <?= form_open('/update/sbtask-status/'. $subtaskID) ?>
 
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="taskStatus" id="taskStatusC" value="0"
-                    <?= set_radio('taskStatus', '0', ($taskStatus == 'Creada') ? "true" : "") ?> 
+                    <input class="form-check-input" type="radio" name="subtaskStatus" id="subtaskStatusC" value="0"
+                    <?= set_radio('subtaskStatus', '0', ($subtaskStatus == 'Creada') ? "true" : "") ?> 
                     >
-                    <label class="form-check-label" for="taskStatusC">
+                    <label class="form-check-label" for="subtaskStatusC">
                         Creada
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="taskStatus" id="taskStatusP" value="1"
-                    <?= set_radio('taskStatus', '1', ($taskStatus == 'En Proceso') ? "true" : "") ?>>
-                    <label class="form-check-label" for="taskStatusP">
+                    <input class="form-check-input" type="radio" name="subtaskStatus" id="subtaskStatusP" value="1"
+                    <?= set_radio('subtaskStatus', '1', ($subtaskStatus == 'En proceso') ? "true" : "") ?>>
+                    <label class="form-check-label" for="subtaskStatusP">
                         En Proceso
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="taskStatus" id="taskStatusF" value="-1"
-                    <?= set_radio('taskStatus', '-1', ($taskStatus == 'Completada') ? "true" : "") ?>>
+                    <input class="form-check-input" type="radio" name="subtaskStatus" id="subtaskStatusF" value="-1"
+                    <?= set_radio('subtaskStatus', '-1', ($subtaskStatus == 'Completada') ? "true" : "") ?>>
                     <label class="form-check-label" for="taskStatusF">
                         Completada
                     </label>

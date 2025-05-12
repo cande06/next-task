@@ -104,7 +104,7 @@ class Actions extends BaseController
 
         return redirect()->to('login');
     }
-    
+
     public function createTask()
     {
         $validation = service('validation');
@@ -262,9 +262,8 @@ class Actions extends BaseController
         return redirect()->to('home');
     }
 
-    public function changeStatus()
+    public function changeTaskStatus($idTask)
     {
-        $taskID = $this->request->getPost('taskID');
         $status = $this->request->getPost('taskStatus');
 
         //format status
@@ -281,7 +280,7 @@ class Actions extends BaseController
             }
             
         $model = new \App\Models\TaskModel();
-        $model->where('id', $taskID)->set(['status'=> $status])->update();
+        $model->where('id', $idTask)->set(['status'=> $status])->update();
 
         return redirect()->back();
     }
@@ -332,10 +331,11 @@ class Actions extends BaseController
         }
 
         $taskID = $this->request->getPost('taskID');
-        // $session = session();
+        $userID = session()->get('idUser');
+
         $data = array(
             'idTask' => $taskID,
-            // 'idUser' => $session->('idUser'),
+            'idAuthor' => $userID,
             'title' => $this->request->getPost('subtaskTitle'),
             'description' => $this->request->getPost('subtaskDesc'),
             'priority' => $pr,
@@ -418,6 +418,29 @@ class Actions extends BaseController
         $id = $this->request->getPost('subtaskID');
         $model = new \App\Models\SubtaskModel();
         $model->where('id', $id)->delete();
+
+        return redirect()->back();
+    }
+
+    public function changeSubtaskStatus($idSub)
+    {
+        $status = $this->request->getPost('subtaskStatus');
+
+        //format status
+            switch ($status) {
+                case 'Completada':
+                    $status = -1;
+                    break;
+                case 'Creada':
+                    $status = 0;
+                    break;
+                case 'En Proceso':
+                    $status = 1;
+                    break;
+            }
+            
+        $model = new \App\Models\SubtaskModel();
+        $model->where('id', $idSub)->set(['status'=> $status])->update();
 
         return redirect()->back();
     }
