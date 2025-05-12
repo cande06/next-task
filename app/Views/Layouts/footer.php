@@ -1,3 +1,5 @@
+<?= view('Home/modal_newTask.php') ?>
+
 <?php if (session()->has('errors')) : ?>
     <script>
         window.addEventListener('DOMContentLoaded', function() {

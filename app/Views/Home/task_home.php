@@ -1,10 +1,12 @@
 <div class="card mb-3 rounded-1 <?= $taskColorID ?> ">
-    <input type="hidden" id="taskID" value="<?= $taskID ?>">
+    <!-- <input type="hidden" id="taskID" value="<?= $taskID ?>"> -->
+
+    <?php
+        $userID = session()->get('user_id');
+        $isAuthor = ($taskUserID === $userID) ? true : false;
+    ?>
 
     <div class="card-body p-0">
-
-        <!-- <div class="row align-items-center"> -->
-        <!-- <div class="col"> -->
         <div class="card-body p-3 pb-2" data-bs-toggle="modal" data-bs-target="#modalShowTask<?= $taskID ?>">
             <div class="d-flex justify-content-between">
                 <div>
@@ -13,11 +15,10 @@
                         <a class="text-decoration-none stretched-link" href="<?= base_url('/tarea/' . $taskID) ?>">
                             <?= $taskTitle ?>
                         </a>
-
                     </p>
                 </div>
                 <div>
-
+                    <!-- aca habia un icono xd -->
                 </div>
             </div>
 
@@ -47,9 +48,13 @@
                 <a href="#modalEditTask<?= $taskID ?>" class="text-decoration-none" data-bs-toggle="modal">
                     <i class="bi bi-pen me-2"></i>
                 </a>
-                <a href="#modalDelTask<?= $taskID ?>" class="link" data-bs-toggle="modal">
-                    <i class="bi bi-trash"></i>
-                </a>
+
+                <?php if ($isAuthor) { ?>
+                    <a href="#modalDelTask<?= $taskID ?>" class="link" data-bs-toggle="modal">
+                        <i class="bi bi-trash"></i>
+                    </a>
+                <?php } ?>
+
             </div>
         </div>
     </div>

@@ -58,16 +58,16 @@ class Actions extends BaseController
         $validation->setRules(
             [
                 'loginEmail' => 'required|valid_email',
-                'loginPass' => 'required', //|min_length[6]
+                'loginPass' => 'required|min_length[6]',
             ],
             [
                 'loginEmail' => [
-                    'required' => 'Este campo es obligatorio',
-                    'valid_email' => 'El correo no es valido'
+                    'required' => 'Este campo es obligatorio.',
+                    'valid_email' => 'El correo no es valido.'
                 ],
                 'loginPass' => [
-                    'required' => 'Este campo es obligatorio',
-                    // 'min_length' => 'Mínimo seis caracteres'
+                    'required' => 'Este campo es obligatorio.',
+                    'min_length' => 'Contraseña inválida. Intentelo nuevamente.'
                 ],
             ]
         );
@@ -97,13 +97,21 @@ class Actions extends BaseController
         }
     }
 
+    public function signOut()
+    {
+        $session = session();
+        $session->destroy();
+
+        return redirect()->to('login');
+    }
+    
     public function createTask()
     {
         $validation = service('validation');
         $validation->setRules(
             [
                 'taskTitle' => 'required|alpha_numeric_punct',
-                'taskDesc' => 'required|alpha_numeric_punct',
+                'taskDesc' => 'required',
                 'taskDate' => 'permit_empty|valid_date[Y-m-d]',
                 'taskReminder' => 'permit_empty|valid_date[Y-m-d]',
             ],
@@ -114,7 +122,6 @@ class Actions extends BaseController
                 ],
                 'taskDesc' => [
                     'required' => 'Este campo es obligatorio',
-                    'alpha_numeric_punct' => 'Sólo puedes utilizar estos caracteres: - _ ! # * $ % & + = : . ~ |',
                 ],
                 'taskDate' => [
                     'valid_date' => 'Fecha no válida',
@@ -131,7 +138,6 @@ class Actions extends BaseController
                 ->with('modalTarget', 'modalNewTask')
                 ->with('errors', $validation->getErrors());
         }
-
 
         $fechaVencimiento = $this->request->getPost('taskDate');
         $fechaRecordatorio = $this->request->getPost('taskReminder');
@@ -162,10 +168,10 @@ class Actions extends BaseController
         }
 
 
-        // $session = session();
+        $session = session();
         $data = array(
             'title' => $this->request->getPost('taskTitle'),
-            // 'idUser' => $session->('idUser'),
+            'idUser' => $session->get('idUser'),
             'description' => $this->request->getPost('taskDesc'),
             'priority' => $this->request->getPost('taskPriority'),
             'exp_date' => $this->request->getPost('taskDate'),
@@ -209,7 +215,6 @@ class Actions extends BaseController
                 ->with('modalTarget', $target)
                 ->with('errors', $validation->getErrors());
         }
-
         //format priority
         switch ($this->request->getPost('taskPriorityEdit')) {
             case 'Baja':
@@ -237,7 +242,7 @@ class Actions extends BaseController
         $model = new \App\Models\TaskModel();
         $model->where('id', $taskID)->set($data)->update();
 
-        return redirect()->to('home');
+        return redirect()->to('tarea/' . $taskID);
     }
 
     public function deleteTask()

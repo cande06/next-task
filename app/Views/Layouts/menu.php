@@ -60,7 +60,7 @@
                 <div class="dropdown">
                     <a href="#" class="d-flex align-items-center justify-content-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="https://github.com/mdo.png" alt="" width="42" height="42" class="rounded-circle me-2">
-                        <strong>mdo</strong>
+                        <strong><?= session('nick') ?></strong>
                     </a>
                     <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
                         <li><a class="dropdown-item" href="#">New project...</a></li>
@@ -69,29 +69,12 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                        <li><a class="dropdown-item" href="<?= url_to('Actions::signOut') ?>">Sign out</a></li>
                     </ul>
                 </div>
             </div>
 
             <hr>
-
-            <!-- <div class="dropdown">
-                <a href="#" class="d-flex align-items-center justify-content-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://github.com/mdo.png" alt="" width="45" height="45" class="rounded-circle me-2">
-                    <strong>mdo</strong>
-                </a>
-                <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                    <li><a class="dropdown-item" href="#">New project...</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="#">Sign out</a></li>
-                </ul>
-            </div>
-            <br> -->
 
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalNewTask">

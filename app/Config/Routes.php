@@ -6,9 +6,11 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Views::index');
+$routes->get('/home', 'Views::index');
 $routes->get('/login', 'Views::getLogin');
 $routes->get('/signup', 'Views::getSignup');
-$routes->get('/home', 'Views::index');
+$routes->get('/signout', 'Actions::signOut');
+
 $routes->get('/tarea/(:num)', 'Views::getTask/$1');
 $routes->get('/archive/(:num)', 'Actions::archiveTask/$1');
 

@@ -69,7 +69,7 @@
     </div>
     <div class="row mb-3">
         <?= form_label(
-            'Responsable',
+            'Asignar un responsable',
             'subtaskResp',
             array('class' => 'form-label')
         ); ?>

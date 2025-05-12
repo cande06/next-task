@@ -2,17 +2,14 @@
 <div class="modal fade" id="modalStatusTask<?= $taskID ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-sm">
         <div class="modal-content">
-            <!-- <div class="modal-header">
-                <h1 class="modal-title fs-5">Eliminar tarea</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div> -->
             <div class="modal-body">
                 <?= form_open('/change/status') ?>
                 <?= form_hidden('taskID', $taskID); ?>
 
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="taskStatus" id="taskStatusC" value="0"
-                    <?= set_radio('taskStatus', '0', ($taskStatus == 'Creada') ? "true" : "") ?> disabled>
+                    <?= set_radio('taskStatus', '0', ($taskStatus == 'Creada') ? "true" : "") ?> 
+                    >
                     <label class="form-check-label" for="taskStatusC">
                         Creada
                     </label>

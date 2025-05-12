@@ -1,6 +1,10 @@
 <!-- Contenido: Task -->
 <div class="col-lg-9 col vh-100 m-0 overflow-auto <?= $task['taskColorID'] ?>"> <!-- vw-100 -->
-    <?= view('Home/modal_newTask.php') ?>
+
+    <?php
+        $userID = session()->get('idUser');
+        $isTaskAuthor = ($task['taskUserID'] === $userID) ? true : false;
+    ?>
 
     <div class="row mx-1 mt-5 text-start">
         <span class="fs-4"><a href=""><i class="bi bi-arrow-left"></i></a></span>
@@ -25,13 +29,19 @@
             </div>
             <div class="col-5 ps-4">
                 <div>
-                    <a href="#modalEditTask<?= $task['taskID']  ?>" class="link" data-bs-toggle="modal">
-                        <i class="bi bi-pen me-2"></i>
-                    </a>
-                    <a href="#modalDelTask<?= $task['taskID']  ?>" class="link" data-bs-toggle="modal">
-                        <i class="bi bi-trash me-2"></i>
-                    </a>
-                    <?php if ($task['taskStatus'] == 'Completada') { ?>
+                    <?php if ($isTaskAuthor) { ?>
+                        <a href="#modalEditTask<?= $task['taskID']  ?>" class="link" data-bs-toggle="modal">
+                            <i class="bi bi-pen me-2"></i>
+                        </a>
+                    <?php } ?>
+
+                    <?php if ($isTaskAuthor) { ?>
+                        <a href="#modalDelTask<?= $task['taskID']  ?>" class="link" data-bs-toggle="modal">
+                            <i class="bi bi-trash me-2"></i>
+                        </a>
+                    <?php } ?>
+
+                    <?php if ($isTaskAuthor && $task['taskStatus'] == 'Completada') { ?>
                         <a href="<?= base_url('/archive/' . $task['taskID']) ?>" class="link">
                             <i class="bi bi-archive"></i>
                         </a>
@@ -40,6 +50,7 @@
             </div>
         </div>
 
+        <!-- Columna Izquierda -->
         <div class="col-7">
             <div class="mb-3 rounded-end bg-dark bg-opacity-10">
                 <!-- <span class="text-decoration-underline link-offset-2">Descripción</span> -->
@@ -61,19 +72,20 @@
                         <?= view('Subtask/subtask.php', $sub); ?>
                         <?= view('Subtask/modal_editSubtask.php', $sub); ?>
                         <?= view('Subtask/modal_deleteSubtask.php', array('subtaskID' => $sub['subtaskID'])); ?>
-                        
+
                     <?php } ?>
                 </div>
 
             </div>
         </div>
 
+        <!-- Columna Derecha -->
         <div class="col-5">
 
-            <div class="mb-3">
+            <!-- <div class="mb-3">
                 <span class="text-decoration-underline link-offset-2">Responsable</span><br>
                 wooo
-            </div>
+            </div> -->
             <div class="mb-3">
                 <span class="text-decoration-underline link-offset-2">Vencimiento</span><br>
                 <?= $task['taskDate'] ?>
@@ -101,7 +113,8 @@
 
     </div>
 
-    <?= view('Home/modal_changeStatus.php', $task); ?>
+    <?= view('Home/modal_changeStatus.php', 
+    array('taskID' => $task['taskID'], 'taskStatus' => $task['taskStatus'], 'isTaskAuthor' => $isTaskAuthor )); ?>
     <?= view('Task/modal_newSubtask.php', array('taskID' => $task['taskID'])) ?>
     <?= view('Home/modal_editTask.php', $task); ?>
     <?= view('Home/modal_deleteTask.php', $task); ?>

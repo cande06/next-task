@@ -6,19 +6,27 @@ use CodeIgniter\I18n\Time;
 
 class Views extends BaseController
 {
-    public function index(): string
+    public function index()
     {
-        // Obtener la fecha actual
-        $fechaActual = Time::now();
+        // // Obtener la fecha actual
+        // $fechaActual = Time::now();
 
-        $dia = $fechaActual->getDay();
-        $mes = $fechaActual->getMonth();
-        $anio = $fechaActual->getYear();
+        // $dia = $fechaActual->getDay();
+        // $mes = $fechaActual->getMonth();
+        // $anio = $fechaActual->getYear();
 
-        $fecha = $dia . '/' . $mes . '/' . $anio;
+        // $fecha = $dia . '/' . $mes . '/' . $anio;
 
-        $data = ['title' => 'Inicio', 'date' => $fecha];
-        $tasks = ['tasks' => Views::getTasks()];
+        if(!session()->has('idUser')){
+            return redirect()->to('login');
+            //->with('error', 'No has iniciado sesion')
+        }
+
+        $userID = session()->get('idUser');
+
+        $data = ['title' => 'Inicio', ]; //'date' => $fecha
+        $tasks = ['tasks' => Views::getTasks($userID)];
+
         return view('Layouts/header', $data)
             . view('Layouts/menu')
             . view('Home/home', $tasks)
@@ -37,17 +45,15 @@ class Views extends BaseController
         return view('Layouts/header', $data) . view('signup', $data) . view('Layouts/footer');
     }
 
-    public function getTasks()
+    public function getTasks($iduser)
     {
         $model = new \App\Models\TaskModel();
-        // $session = session();
-        // $tareas = $model->where('idUser', $session->get('idUser'))->findAll();
-        $tareas = $model->where('idUser', 0)->findAll();
+        $tareas = $model->where('idUser', $iduser)->findAll();
+        // $tareas = $model->where('idUser', 0)->findAll();
 
 
         $colorID = '';
         $getTareas = [];
-
 
         foreach ($tareas as $task) {
             //format color
@@ -70,7 +76,6 @@ class Views extends BaseController
                 case '#FFFFFF':
                     $colorID = 'none';
             }
-
             //format priority
             switch ($task['priority']) {
                 case -1:
@@ -83,7 +88,6 @@ class Views extends BaseController
                     $task['priority'] = 'Alta';
                     break;
             }
-
             //format status
             switch ($task['status']) {
                 case -1:
@@ -99,6 +103,7 @@ class Views extends BaseController
 
             $newTask = [
                 'taskID' => $task['id'],
+                'taskUserID' => $task['idUser'],
                 'taskTitle' => $task['title'],
                 'taskDesc' => $task['description'],
                 'taskPriority' => $task['priority'],
@@ -107,7 +112,6 @@ class Views extends BaseController
                 'taskReminder' => $task['reminder'],
                 'taskColor' => $task['color'],
                 'taskColorID' => $colorID,
-                'taskChecked' => $task['checked'],
                 'taskArchived' => $task['archived'],
             ];
 
@@ -170,6 +174,7 @@ class Views extends BaseController
         $subtareas = Views::getSubtasks($id);
         $tarea = [
             'taskID' => $task['id'],
+            'taskUserID' => $task['idUser'],
             'taskTitle' => $task['title'],
             'taskDesc' => $task['description'],
             'taskPriority' => $task['priority'],
@@ -178,7 +183,6 @@ class Views extends BaseController
             'taskReminder' => $task['reminder'],
             'taskColor' => $task['color'],
             'taskColorID' => $colorID,
-            'taskChecked' => $task['checked'],
             'taskArchived' => $task['archived'],
         ];
 
@@ -243,7 +247,6 @@ class Views extends BaseController
                 'subtaskDate' => $task['exp_date'],
                 'subtaskResp' => $task['assigned'],
                 'subtaskComment' => $task['comment'],
-                'subtaskChecked' => $task['checked'],
             ];
 
             $getSubTareas[] = $newTask;

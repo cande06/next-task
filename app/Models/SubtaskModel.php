@@ -10,7 +10,7 @@ class SubtaskModel extends Model{
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
     protected $allowedFields = ['id', 'idTask', 'title', 'description', 'priority', 'status',
-                'exp_date', 'assigned', 'comment', 'checked',];
+                'exp_date', 'assigned', 'comment',];
     protected $useTimestamps = false; // Dates
     protected $dateFormat = 'datetime';
     protected $createdField = 'created_at';

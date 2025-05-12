@@ -11,7 +11,7 @@
 
     <div class="col-lg-7 col-md d-flex flex-column align-items-center justify-content-center">
         <a class="navbar-brand" href="#">
-            <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Bootstrap" width="30" height="24">
+            <img src="<?= base_url('/assets/img/logo-black.png') ?>" alt="Bootstrap" width="130" height="42">
         </a>
 
         <?= form_open('form/login', ['class' => 'mb-5']) ?>
