@@ -42,7 +42,7 @@
         ); ?>
 
         <?= form_dropdown(
-            array('name' => 'taskPriority', 'id' => 'taskPriority', 'class' => 'form-control'),
+            array('name' => 'taskPriority', 'id' => 'taskPriority', 'class' => 'form-select'),
             array('Baja' => 'Baja', 'Normal' => 'Normal', 'Alta' => 'Alta',),
             'Normal'
         ); ?>

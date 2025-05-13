@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Models\UserModel;
+
 class Actions extends BaseController
 {
     public function signup()
@@ -254,10 +256,11 @@ class Actions extends BaseController
         return redirect()->to('home');
     }
 
-    public function archiveTask($id){
-        
+    public function archiveTask($id)
+    {
+
         $model = new \App\Models\TaskModel();
-        $model->where('id', $id)->set(['archived'=> 1])->update();
+        $model->where('id', $id)->set(['archived' => 1])->update();
 
         return redirect()->to('home');
     }
@@ -267,20 +270,20 @@ class Actions extends BaseController
         $status = $this->request->getPost('taskStatus');
 
         //format status
-            switch ($status) {
-                case 'Completada':
-                    $status = -1;
-                    break;
-                case 'Creada':
-                    $status = 0;
-                    break;
-                case 'En Proceso':
-                    $status = 1;
-                    break;
-            }
-            
+        switch ($status) {
+            case 'Completada':
+                $status = -1;
+                break;
+            case 'Creada':
+                $status = 0;
+                break;
+            case 'En Proceso':
+                $status = 1;
+                break;
+        }
+
         $model = new \App\Models\TaskModel();
-        $model->where('id', $idTask)->set(['status'=> $status])->update();
+        $model->where('id', $idTask)->set(['status' => $status])->update();
 
         return redirect()->back();
     }
@@ -292,8 +295,8 @@ class Actions extends BaseController
             [
                 'subtaskTitle' => 'required|alpha_numeric_punct',
                 'subtaskDesc' => 'required',
-                'subtaskResp' => 'required|valid_email',
-                // 'taskReminder' => 'valid_date',
+                'subtaskResp' => 'permit_empty|valid_email',
+                'subtaskRespCheck' => 'permit_empty|required_without[subtaskResp]|in_list[1]',
             ],
             [
                 'subtaskTitle' => [
@@ -304,8 +307,11 @@ class Actions extends BaseController
                     'required' => 'Este campo es obligatorio',
                 ],
                 'subtaskResp' => [
-                    'required' => 'Este campo es obligatorio',
                     'valid_email' => 'El correo no es válido',
+                ],
+                'subtaskRespCheck' => [
+                    'required_without' => 'Debe asignar a un responsable',
+                    'in_list' => 'Debe asignar a un responsable',
                 ],
             ]
         );
@@ -316,6 +322,9 @@ class Actions extends BaseController
                 ->with('modalTarget', 'modalNewSubtask')
                 ->with('errors', $validation->getErrors());
         }
+
+        $taskID = $this->request->getPost('taskID');
+        $userID = session()->get('idUser');
 
         //format priority
         switch ($this->request->getPost('subtaskPriority')) {
@@ -328,10 +337,20 @@ class Actions extends BaseController
             case 'Alta':
                 $pr = 2;
                 break;
+            default:
+                $pr = 0;
         }
-
-        $taskID = $this->request->getPost('taskID');
-        $userID = session()->get('idUser');
+        // define email
+        $emailResp = $this->request->getPost('subtaskResp');
+        if ($emailResp != ''){
+            $email = $emailResp;
+        } else if ($emailResp == '' && $this->request->getPost('subtaskRespCheck') == 1) {
+            $uModel = new \App\Models\UserModel();
+            $user = $uModel->find($userID);
+            $email = $user['email'];
+        } else {
+            $email = 'error x_x';
+        }
 
         $data = array(
             'idTask' => $taskID,
@@ -340,7 +359,7 @@ class Actions extends BaseController
             'description' => $this->request->getPost('subtaskDesc'),
             'priority' => $pr,
             'exp_date' => $this->request->getPost('subtaskDate'),
-            'assigned' => $this->request->getPost('subtaskResp'),
+            'assigned' => $email,
             'comment' => $this->request->getPost('subtaskComment'),
         );
 
@@ -391,7 +410,8 @@ class Actions extends BaseController
             case 'Alta':
                 $pr = 3;
                 break;
-            default: $pr = 0;
+            default:
+                $pr = 0;
         }
 
         $taskID = $this->request->getPost('idTask');
@@ -427,20 +447,20 @@ class Actions extends BaseController
         $status = $this->request->getPost('subtaskStatus');
 
         //format status
-            switch ($status) {
-                case 'Completada':
-                    $status = -1;
-                    break;
-                case 'Creada':
-                    $status = 0;
-                    break;
-                case 'En Proceso':
-                    $status = 1;
-                    break;
-            }
-            
+        switch ($status) {
+            case 'Completada':
+                $status = -1;
+                break;
+            case 'Creada':
+                $status = 0;
+                break;
+            case 'En Proceso':
+                $status = 1;
+                break;
+        }
+
         $model = new \App\Models\SubtaskModel();
-        $model->where('id', $idSub)->set(['status'=> $status])->update();
+        $model->where('id', $idSub)->set(['status' => $status])->update();
 
         return redirect()->back();
     }

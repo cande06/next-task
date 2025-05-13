@@ -1,6 +1,6 @@
 <div class="col-12">
     <?= form_open('/form/newSubtask') ?>
-    <div class="row mb-3">
+    <div class="row mb-2">
         <?= form_label(
             'Titulo',
             'subtaskTitle',
@@ -8,7 +8,6 @@
         ); ?>
         <?= form_input(array(
             'name' => 'subtaskTitle',
-            // 'placeholder' => 'Iniciar proyecto de Técnicas',
             'class' => 'form-control',
         )); ?>
         <?php if (session('errors.subtaskTitle')) {   ?>
@@ -16,7 +15,7 @@
         <?php } ?>
     </div>
 
-    <div class="row mb-3">
+    <div class="row mb-2">
         <?= form_label(
             'Descripción',
             'subtaskDesc',
@@ -32,7 +31,7 @@
         <?php } ?>
     </div>
 
-    <div class="row mb-3">
+    <div class="row mb-2">
         <div class="row mb-1">
             <div class="col-6">
                 <?= form_label(
@@ -52,7 +51,7 @@
         <div class="row mb-1">
             <div class="col-6">
                 <?= form_dropdown(
-                    array('name' => 'subtaskPriority', 'id' => 'subtaskPriority', 'class' => 'form-control'),
+                    array('name' => 'subtaskPriority', 'id' => 'subtaskPriority', 'class' => 'form-select'),
                     array(0 => 'Sin prioridad', 'Baja' => 'Baja', 'Normal' => 'Normal', 'Alta' => 'Alta',)
                 ); ?>
             </div>
@@ -67,7 +66,7 @@
             </div>
         </div>
     </div>
-    <div class="row mb-3">
+    <div class="row mb-2">
         <?= form_label(
             'Asignar un responsable',
             'subtaskResp',
@@ -79,11 +78,27 @@
             'placeholder' => 'ejemplo@correo.com',
             'class' => 'form-control',
         )); ?>
+        <div class="form-check">
+            <?= form_checkbox(
+                'subtaskRespCheck',
+                1,
+                '',
+                array('id' => 'self_assign', 'class' => 'form-check-input',)
+            ); ?>
+            <?= form_label(
+                'Asignarme como responsable',
+                'self_assign',
+                array('class' => 'form-check-label')
+            ); ?>
+        </div>
         <?php if (session('errors.subtaskResp')) {   ?>
             <div><small class="text-danger"><?= session('errors.subtaskResp') ?></small></div>
         <?php } ?>
+        <?php if (session('errors.subtaskRespCheck')) {   ?>
+            <div><small class="text-danger"><?= session('errors.subtaskRespCheck') ?></small></div>
+        <?php } ?>
     </div>
-    <div class="row mb-3">
+    <div class="row mb-2">
         <?= form_label(
             'Comentario',
             'subtaskComment',

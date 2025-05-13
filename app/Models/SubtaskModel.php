@@ -9,7 +9,7 @@ class SubtaskModel extends Model{
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
-    protected $allowedFields = ['id', 'idTask', 'title', 'description', 'priority', 'status',
+    protected $allowedFields = ['id', 'idTask', 'idAuthor', 'title', 'description', 'priority', 'status',
                 'exp_date', 'assigned', 'comment',];
     protected $useTimestamps = false; // Dates
     protected $dateFormat = 'datetime';
