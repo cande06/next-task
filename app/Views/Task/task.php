@@ -2,7 +2,9 @@
 <div class="col-lg-9 col vh-100 m-0 overflow-auto <?= $task['taskColorID'] ?>"> <!-- vw-100 -->
 
     <div class="row mx-1 mt-5 text-start">
-        <span class="fs-4"><a href=""><i class="bi bi-arrow-left"></i></a></span>
+        <span class="fs-4">
+            <a href="<?= url_to('Views::index') ?>"><i class="bi bi-arrow-left"></i></a>
+        </span>
     </div>
 
     <div class="row mx-3 mt-2">
@@ -94,10 +96,17 @@
             <div class="mb-3">
                 <div class="d-flex- align-items-center">
                     <span class="text-decoration-underline link-offset-2">Colaboradores</span>
-                    <button class="btn btn-sm">
+
+                    <?php if ($task['isTaskOwner']) { ?>
+                        <a href="#modalCollabFor<?= $task['taskID'] ?>" class="btn btn-sm btn-task" data-bs-toggle="modal">
+                            <i class="bi bi-share"></i>
+                        </a>
+                    <?php } ?>
+
+                    <!-- <button class="btn btn-sm btn-task">
                         <i class="bi bi-share"></i>
                     </button>
-                    <br>
+                    <br> -->
                 </div>
                 <div class="ps-1">
                     <p class="text-body-secondary mb-1">example@</p>
@@ -113,5 +122,6 @@
     <?= view('Home/modal_editTask.php', $task); ?>
     <?= view('Home/modal_deleteTask.php', $task); ?>
     <?= view('Task/modal_newSubtask.php', array('taskID' => $task['taskID'])) ?>
+    <?= view('Task/m_collab.php', $task); ?>
 
 </div>

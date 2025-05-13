@@ -33,16 +33,20 @@ class Views extends BaseController
             . view('Layouts/footer');
     }
 
-    function getLogin()
+    public function getLogin()
     {
         $data = ['title' => 'Iniciar sesion',];
         return view('Layouts/header', $data) . view('login', $data) . view('Layouts/footer');
     }
 
-    function getSignup()
+    public function getSignup()
     {
         $data = ['title' => 'Registrarse'];
         return view('Layouts/header', $data) . view('signup', $data) . view('Layouts/footer');
+    }
+
+    public function goBack(){
+        return redirect()->back();
     }
 
     public function getTasks($iduser)

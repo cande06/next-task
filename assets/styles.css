@@ -54,10 +54,27 @@ a {
 }
 .btn-next:focus,
 .btn-next:focus-visible {
-  outline: 3px solid #4E222E;
+  outline: 3px solid #3a5978;
   /* outline-offset: 2px; */
   background-color: #557CA3;
 }
+
+.btn-task {
+  background-color: #4E222E;
+  color: #EFE8E2;
+  border: none;
+}
+.btn-next:hover {
+  background-color: #4f7194;
+  border: #4E222E;
+}
+.btn-next:focus,
+.btn-next:focus-visible {
+  outline: 3px solid #3b1821;
+  /* outline-offset: 2px; */
+  background-color: #557CA3;
+}
+
 
 .form-check-input:checked {
   background-color: #557CA3; /* Tu color personalizado */

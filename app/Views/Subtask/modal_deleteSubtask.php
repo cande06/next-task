@@ -13,7 +13,6 @@
                 <?= form_hidden('subtaskID', $subtaskID); ?>
 
                 <div class="d-flex justify-content-end">
-                    <button type="button" class="btn me-2 btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
                     <?= form_submit('Submit', 'Eliminar', ['class' => 'btn btn-danger']) ?>
                     <?= form_close() ?>
                 </div>
