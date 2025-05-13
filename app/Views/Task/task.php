@@ -64,12 +64,16 @@
                 </a>
 
                 <div class="subtareas-container mb-2">
-                    <?php foreach ($subtasks as $sub) { ?>
+                    <?php foreach ($subtasks as $sub) { 
+                        $d = array('subtaskID' => $sub['subtaskID'],
+                                    'subtaskStatus' => $sub['subtaskStatus'],
+                                    'taskID' => $task['taskID']);
+                    ?>
 
                         <?= view('Subtask/subtask.php', $sub); ?>
                         <?= view('Subtask/modal_editSubtask.php', $sub); ?>
                         <?= view('Subtask/modal_deleteSubtask.php', array('subtaskID' => $sub['subtaskID'])); ?>
-                        <?= view('Subtask/modal_changeSubStatus.php', $sub); ?>
+                        <?= view('Subtask/modal_changeSubStatus.php', $d); ?>
 
                     <?php } ?>
                 </div>

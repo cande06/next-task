@@ -442,7 +442,7 @@ class Actions extends BaseController
         return redirect()->back();
     }
 
-    public function changeSubtaskStatus($idSub)
+    public function changeSubtaskStatus($idSub, $idTask)
     {
         $status = $this->request->getPost('subtaskStatus');
 
@@ -459,9 +459,20 @@ class Actions extends BaseController
                 break;
         }
 
-        $model = new \App\Models\SubtaskModel();
-        $model->where('id', $idSub)->set(['status' => $status])->update();
+        $sModel = new \App\Models\SubtaskModel();
+        $sModel->where('id', $idSub)->set(['status' => $status])->update();
+
+        $tModel = new \App\Models\TaskModel();
+        $task = $tModel->find($idTask);
+
+        if ($task['status'] == 0){
+            $tModel->where('id', $idTask)->set(['status' => 1])->update();
+        }
 
         return redirect()->back();
+    }
+
+    public function subtaskCount(){
+        
     }
 }

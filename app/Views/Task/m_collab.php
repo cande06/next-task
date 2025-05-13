@@ -24,8 +24,8 @@
                                 'placeholder' => 'ejemplo@correo.com',
                                 'class' => 'form-control',
                             )); ?>
-                            <?php if (session('errors.taskTitle')) {   ?>
-                                <div><small class="text-danger"><?= session('errors.taskTitle') ?></small></div>
+                            <?php if (session('errors.collabMail')) {   ?>
+                                <div><small class="text-danger"><?= session('errors.collabMail') ?></small></div>
                             <?php } ?>
                         </div>
                         <div class="form-check form-check-inline">
@@ -58,6 +58,8 @@
                         <?php if (session('errors.collabOpt')) {   ?>
                             <div><small class="text-danger"><?= session('errors.collabOpt') ?></small></div>
                         <?php } ?>
+
+                        <div id="collabHelp" class="form-text mt-2">Revisa que todo esté bien</div>
                     </div>
                 </div>
                 <div class="d-flex justify-content-end">

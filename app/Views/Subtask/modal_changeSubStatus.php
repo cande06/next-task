@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered modal-sm">
         <div class="modal-content">
             <div class="modal-body">
-                <?= form_open('/update/sbtask-status/'. $subtaskID) ?>
+                <?= form_open('/update/sbtask-status/'. $subtaskID .'/'. $taskID) ?>
 
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="subtaskStatus" id="subtaskStatusC" value="0"
