@@ -56,7 +56,9 @@
             <div class="mb-3">
                 <p>
                     <span class="text-decoration-underline link-offset-2">Subtareas</span>
-                    <small class="text-body-secondary ms-2">0/2</small>
+                    <small class="text-body-secondary ms-2">
+                        <?= $subtaskData['finished'] ?>/<?= $subtaskData['total'] ?>
+                    </small>
                 </p>
 
                 <a class="icon-link text-decoration-none mb-3" href="#modalNewSubtask" data-bs-toggle="modal">
@@ -65,9 +67,10 @@
 
                 <div class="subtareas-container mb-2">
                     <?php foreach ($subtasks as $sub) { 
-                        $d = array('subtaskID' => $sub['subtaskID'],
+                        $d = array('taskID' => $task['taskID'],
+                                    'subtaskID' => $sub['subtaskID'],
                                     'subtaskStatus' => $sub['subtaskStatus'],
-                                    'taskID' => $task['taskID']);
+                                    'subtaskData' => $subtaskData);
                     ?>
 
                         <?= view('Subtask/subtask.php', $sub); ?>
@@ -84,10 +87,6 @@
         <!-- Columna Derecha -->
         <div class="col-5">
 
-            <!-- <div class="mb-3">
-                <span class="text-decoration-underline link-offset-2">Responsable</span><br>
-                wooo
-            </div> -->
             <div class="mb-3">
                 <span class="text-decoration-underline link-offset-2">Vencimiento</span><br>
                 <?= $task['taskDate'] ?>
@@ -107,10 +106,6 @@
                         </a>
                     <?php } ?>
 
-                    <!-- <button class="btn btn-sm btn-task">
-                        <i class="bi bi-share"></i>
-                    </button>
-                    <br> -->
                 </div>
                 <div class="ps-1">
                     <p class="text-body-secondary mb-1">example@</p>

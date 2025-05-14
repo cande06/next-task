@@ -17,7 +17,7 @@
             </div>
 
             <small class="text-body-secondary ps-1">
-                <i class="bi bi-list-task pe-1"></i>0/2
+                <i class="bi bi-list-task pe-1"></i><?= $subtaskData['finished'] ?>/<?= $subtaskData['total'] ?>
             </small>
 
         </div>

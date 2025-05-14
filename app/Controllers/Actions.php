@@ -272,7 +272,7 @@ class Actions extends BaseController
         //format status
         switch ($status) {
             case 'Completada':
-                $status = -1;
+                $status = 2;
                 break;
             case 'Creada':
                 $status = 0;
@@ -342,7 +342,7 @@ class Actions extends BaseController
         }
         // define email
         $emailResp = $this->request->getPost('subtaskResp');
-        if ($emailResp != ''){
+        if ($emailResp != '') {
             $email = $emailResp;
         } else if ($emailResp == '' && $this->request->getPost('subtaskRespCheck') == 1) {
             $uModel = new \App\Models\UserModel();
@@ -445,16 +445,16 @@ class Actions extends BaseController
     public function changeSubtaskStatus($idSub, $idTask)
     {
         $status = $this->request->getPost('subtaskStatus');
-
+        
         //format status
         switch ($status) {
             case 'Completada':
-                $status = -1;
+                $status = 2;
                 break;
             case 'Creada':
                 $status = 0;
                 break;
-            case 'En Proceso':
+            case 'En proceso':
                 $status = 1;
                 break;
         }
@@ -462,17 +462,29 @@ class Actions extends BaseController
         $sModel = new \App\Models\SubtaskModel();
         $sModel->where('id', $idSub)->set(['status' => $status])->update();
 
+        $finished = $sModel->where(['idTask' => $idTask, 'status'=> 2])->countAllResults();
+        $total =  $sModel->where('idTask', $idTask)->countAllResults();
+
         $tModel = new \App\Models\TaskModel();
         $task = $tModel->find($idTask);
 
-        if ($task['status'] == 0){
-            $tModel->where('id', $idTask)->set(['status' => 1])->update();
+        // all sbtks completadas
+        if ($finished == $total && $total > 0) { 
+            $tModel->where('id', $idTask)->set(['status' => 2])->update(); // = completada
+        } 
+        // 1 sbtk completada
+        if (($status == 2) && ($task['status'] == 0)) { 
+            $tModel->where('id', $idTask)->set(['status' => 1])->update(); // = en proceso
         }
+        
+        // esto va en crear sbt
+        // else if (($finished != $total) && ($task['status'] == 2)) {  //se agrega un sbt despues de terminar todos
+        //     $tModel->where('id', $idTask)->set(['status' => 1])->update(); // = en proceso
+        // }
+
+        // log_message('debug', "finished: {$finished}, total: {$total}");
+
 
         return redirect()->back();
-    }
-
-    public function subtaskCount(){
-        
     }
 }

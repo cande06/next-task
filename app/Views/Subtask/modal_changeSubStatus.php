@@ -3,26 +3,26 @@
     <div class="modal-dialog modal-dialog-centered modal-sm">
         <div class="modal-content">
             <div class="modal-body">
-                <?= form_open('/update/sbtask-status/'. $subtaskID .'/'. $taskID) ?>
+                <?= form_open('/update/sbtask-status/' . $subtaskID . '/' . $taskID ) ?>
+                
 
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="subtaskStatus" id="subtaskStatusC" value="0"
-                    <?= set_radio('subtaskStatus', '0', ($subtaskStatus == 'Creada') ? "true" : "") ?> 
-                    >
+                        <?= set_radio('subtaskStatus', '0', ($subtaskStatus == 'Creada') ? "true" : "") ?>>
                     <label class="form-check-label" for="subtaskStatusC">
                         Creada
                     </label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="subtaskStatus" id="subtaskStatusP" value="1"
-                    <?= set_radio('subtaskStatus', '1', ($subtaskStatus == 'En proceso') ? "true" : "") ?>>
+                        <?= set_radio('subtaskStatus', '1', ($subtaskStatus == 'En proceso') ? "true" : "") ?>>
                     <label class="form-check-label" for="subtaskStatusP">
-                        En Proceso
+                        En proceso
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="subtaskStatus" id="subtaskStatusF" value="-1"
-                    <?= set_radio('subtaskStatus', '-1', ($subtaskStatus == 'Completada') ? "true" : "") ?>>
+                    <input class="form-check-input" type="radio" name="subtaskStatus" id="subtaskStatusF" value="2"
+                        <?= set_radio('subtaskStatus', '2', ($subtaskStatus == 'Completada') ? "true" : "") ?>>
                     <label class="form-check-label" for="taskStatusF">
                         Completada
                     </label>

@@ -17,14 +17,14 @@ class Views extends BaseController
 
         // $fecha = $dia . '/' . $mes . '/' . $anio;
 
-        if(!session()->has('idUser')){
+        if (!session()->has('idUser')) {
             return redirect()->to('login');
             //->with('error', 'No has iniciado sesion')
         }
 
         $userID = session()->get('idUser');
 
-        $data = ['title' => 'Inicio', ]; //'date' => $fecha
+        $data = ['title' => 'Inicio',]; //'date' => $fecha
         $tasks = ['tasks' => Views::getTasks($userID)];
 
         return view('Layouts/header', $data)
@@ -45,18 +45,12 @@ class Views extends BaseController
         return view('Layouts/header', $data) . view('signup', $data) . view('Layouts/footer');
     }
 
-    public function goBack(){
-        return redirect()->back();
-    }
-
     public function getTasks($iduser)
     {
+
         $model = new \App\Models\TaskModel();
         $tareas = $model->where('idUser', $iduser)->findAll();
-        // $tareas = $model->where('idUser', 0)->findAll();
 
-
-        $colorID = '';
         $getTareas = [];
 
         foreach ($tareas as $task) {
@@ -94,16 +88,18 @@ class Views extends BaseController
             }
             //format status
             switch ($task['status']) {
-                case -1:
-                    $task['status'] = 'Completada';
-                    break;
                 case 0:
                     $task['status'] = 'Creada';
                     break;
                 case 1:
                     $task['status'] = 'En Proceso';
                     break;
+                case 2:
+                    $task['status'] = 'Completada';
+                    break;
             }
+
+            $data = Views::subtasksCount($task['id']);
 
             $newTask = [
                 'taskID' => $task['id'],
@@ -117,6 +113,8 @@ class Views extends BaseController
                 'taskColor' => $task['color'],
                 'taskColorID' => $colorID,
                 'taskArchived' => $task['archived'],
+
+                'subtaskData' => $data,
             ];
 
             $getTareas[] = $newTask;
@@ -164,14 +162,14 @@ class Views extends BaseController
         }
         //format status
         switch ($task['status']) {
-            case -1:
-                $task['status'] = 'Completada';
-                break;
             case 0:
                 $task['status'] = 'Creada';
                 break;
             case 1:
-                $task['status'] = 'En Proceso';
+                $task['status'] = 'En proceso';
+                break;
+            case 2:
+                $task['status'] = 'Completada';
                 break;
         }
 
@@ -179,6 +177,9 @@ class Views extends BaseController
         $isOwner = ($activeUser == $task['idUser']) ? true : false;
 
         $subtareas = Views::getSubtasks($id);
+        $data = Views::subtasksCount($id);
+
+
         $tarea = [
             'taskID' => $task['id'],
             'taskUserID' => $task['idUser'],
@@ -197,11 +198,12 @@ class Views extends BaseController
         $taskContent = [
             'task' => $tarea,
             'subtasks' => $subtareas,
+            'subtaskData' => $data,
         ];
 
-        $data = ['title' => 'Tarea: ' . $tarea['taskTitle'],];
+        $title = ['title' => 'Tarea: ' . $tarea['taskTitle'],];
 
-        return view('Layouts/header', $data) .
+        return view('Layouts/header', $title) .
             view('Layouts/menu') .
             view('Task/task', $taskContent) .
             view('Layouts/footer');
@@ -210,52 +212,53 @@ class Views extends BaseController
     public function getSubtasks($idTask)
     {
         $model = new \App\Models\SubtaskModel();
-        $tareas = $model->where('idTask', $idTask)->findAll();
+        $subtareas = $model->where('idTask', $idTask)->findAll();
 
         $getSubTareas = [];
 
-        foreach ($tareas as $task) {
+        foreach ($subtareas as $subtarea) {
             //format priority
-            switch ($task['priority']) {
+            switch ($subtarea['priority']) {
                 case 1:
-                    $task['priority'] = 'Baja';
+                    $subtarea['priority'] = 'Baja';
                     break;
                 case 2:
-                    $task['priority'] = 'Normal';
+                    $subtarea['priority'] = 'Normal';
                     break;
                 case 3:
-                    $task['priority'] = 'Alta';
+                    $subtarea['priority'] = 'Alta';
                     break;
                 default:
-                    $task['priority'] = 0;
+                    $subtarea['priority'] = 0;
             }
             //format status
-            switch ($task['status']) {
-                case -1:
-                    $task['status'] = 'Completada';
-                    break;
+            switch ($subtarea['status']) {
                 case 0:
-                    $task['status'] = 'Creada';
+                    $subtarea['status'] = 'Creada';
                     break;
                 case 1:
-                    $task['status'] = 'En proceso';
+                    $subtarea['status'] = 'En proceso';
+                    break;
+                case 2:
+                    $subtarea['status'] = 'Completada';
                     break;
             }
 
             $activeUser = session()->get('idUser');
-            $isOwner = ($activeUser == $task['idAuthor']) ? true : false;
+            $isOwner = ($activeUser == $subtarea['idAuthor']) ? true : false;
 
             $newTask = [
-                'subtaskID' => $task['id'],
-                'idTask' => $task['idTask'],
-                'idAuthor' => $task['idAuthor'],
-                'subtaskTitle' => $task['title'],
-                'subtaskDesc' => $task['description'],
-                'subtaskPriority' => $task['priority'],
-                'subtaskStatus' => $task['status'],
-                'subtaskDate' => $task['exp_date'],
-                'subtaskResp' => $task['assigned'],
-                'subtaskComment' => $task['comment'],
+                'subtaskID' => $subtarea['id'],
+                'idTask' => $subtarea['idTask'],
+                'idAuthor' => $subtarea['idAuthor'],
+                'subtaskTitle' => $subtarea['title'],
+                'subtaskDesc' => $subtarea['description'],
+                'subtaskPriority' => $subtarea['priority'],
+                'subtaskStatus' => $subtarea['status'],
+                'subtaskDate' => $subtarea['exp_date'],
+                'subtaskResp' => $subtarea['assigned'],
+                'subtaskComment' => $subtarea['comment'],
+
                 'isSubOwner' => $isOwner,
             ];
 
@@ -263,5 +266,25 @@ class Views extends BaseController
         }
 
         return $getSubTareas;
+    }
+
+    public function subtasksCount($idTask)
+    {
+        $model = new \App\Models\SubtaskModel();
+        // $subs = $model->where('idTask', $idTask)->findAll();
+
+        // $finished = 0;
+        // foreach ($subs as $subtarea) {
+        //     if ($subtarea['status'] == 2) {
+        //         $finished++;
+        //     }
+        // }
+
+        $finished = $model->where(['idTask' => $idTask, 'status'=> 2])->countAllResults();
+        $total =  $model->where('idTask', $idTask)->countAllResults();
+
+        $data = ['finished' => $finished, 'total' => $total];
+
+        return $data;
     }
 }
