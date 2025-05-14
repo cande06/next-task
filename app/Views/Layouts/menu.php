@@ -90,13 +90,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="<?= base_url('') ?>" class="nav-link link-dark">
+                    <a href="<?= base_url('completed') ?>" class="nav-link link-dark">
                         <i class="bi bi-check-circle-fill pe-1"></i>
                         Completadas
                     </a>
                 </li>
                 <li>
-                    <a href="<?= base_url('') ?>" class="nav-link link-dark">
+                    <a href="<?= base_url('archived/for/'. session('idUser')) ?>" class="nav-link link-dark">
                         <i class="bi bi-archive-fill pe-1"></i>
                         Archivadas
                     </a>

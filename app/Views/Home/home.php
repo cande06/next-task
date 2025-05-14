@@ -26,9 +26,8 @@
                 </div>
             </div>
         </div>
-
     </div>
-</div>
+
 </div>
 
 <!-- End of body -->

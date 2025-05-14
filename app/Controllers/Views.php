@@ -36,13 +36,13 @@ class Views extends BaseController
     public function getLogin()
     {
         $data = ['title' => 'Iniciar sesion',];
-        return view('Layouts/header', $data) . view('login', $data) . view('Layouts/footer');
+        return view('Layouts/header', $data) . view('login') . view('Layouts/footer');
     }
 
     public function getSignup()
     {
         $data = ['title' => 'Registrarse'];
-        return view('Layouts/header', $data) . view('signup', $data) . view('Layouts/footer');
+        return view('Layouts/header', $data) . view('signup') . view('Layouts/footer');
     }
 
     public function getTasks($iduser)
@@ -266,6 +266,89 @@ class Views extends BaseController
         }
 
         return $getSubTareas;
+    }
+
+    public function getArchived($iduser)
+    {
+        $model = new \App\Models\TaskModel();
+        $tareas = $model->where('idUser', $iduser)
+                ->where('archived', 1)
+                ->findAll();
+
+        $get = [];
+
+        foreach ($tareas as $task) {
+            //format color
+            switch ($task['color']) {
+                case '#E5ADAE':
+                    $colorID = 'frut';
+                    break;
+                case '#BFD5A9':
+                    $colorID = 'kiwi';
+                    break;
+                case '#EABFA0':
+                    $colorID = 'mand';
+                    break;
+                case '#D0AFCD':
+                    $colorID = 'uva';
+                    break;
+                case '#D8C9B4':
+                    $colorID = 'coco';
+                    break;
+                case '#FFFFFF':
+                    $colorID = 'none';
+            }
+            //format priority
+            switch ($task['priority']) {
+                case -1:
+                    $task['priority'] = 'Baja';
+                    break;
+                case 0:
+                    $task['priority'] = 'Normal';
+                    break;
+                case 1:
+                    $task['priority'] = 'Alta';
+                    break;
+            }
+            //format status
+            switch ($task['status']) {
+                case 0:
+                    $task['status'] = 'Creada';
+                    break;
+                case 1:
+                    $task['status'] = 'En Proceso';
+                    break;
+                case 2:
+                    $task['status'] = 'Completada';
+                    break;
+            }
+
+            $data = Views::subtasksCount($task['id']);
+
+            $newTask = [
+                'taskID' => $task['id'],
+                'taskUserID' => $task['idUser'],
+                'taskTitle' => $task['title'],
+                'taskDesc' => $task['description'],
+                'taskPriority' => $task['priority'],
+                'taskStatus' => $task['status'],
+                'taskDate' => $task['exp_date'],
+                'taskReminder' => $task['reminder'],
+                'taskColor' => $task['color'],
+                'taskColorID' => $colorID,
+                'taskArchived' => $task['archived'],
+
+                'subtaskData' => $data,
+            ];
+
+            $get[] = $newTask;
+        }
+
+
+        $data = ['title' => 'Tareas archivadas'];
+        $t = ['tasks' => $get];
+
+        return view('Layouts/header', $data) . view('Layouts/menu') . view('Archived/archived', $t) . view('Layouts/footer');
     }
 
     public function subtasksCount($idTask)

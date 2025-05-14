@@ -230,10 +230,9 @@ class Actions extends BaseController
                 break;
         }
 
-        // $session = session();
         $data = array(
             'title' => $this->request->getPost('taskTitleEdit'),
-            // 'idUser' => $session->('idUser'),
+            // 'idUser' => $session->get('idUser'),
             'description' => $this->request->getPost('taskDescEdit'),
             'priority' => $pr,
             'exp_date' => $this->request->getPost('taskDateEdit'),

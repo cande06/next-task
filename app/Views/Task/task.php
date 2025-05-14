@@ -124,3 +124,5 @@
     <?= view('Task/m_collab.php', $task); ?>
 
 </div>
+
+</div>
