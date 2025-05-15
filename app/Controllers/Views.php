@@ -354,15 +354,6 @@ class Views extends BaseController
     public function subtasksCount($idTask)
     {
         $model = new \App\Models\SubtaskModel();
-        // $subs = $model->where('idTask', $idTask)->findAll();
-
-        // $finished = 0;
-        // foreach ($subs as $subtarea) {
-        //     if ($subtarea['status'] == 2) {
-        //         $finished++;
-        //     }
-        // }
-
         $finished = $model->where(['idTask' => $idTask, 'status'=> 2])->countAllResults();
         $total =  $model->where('idTask', $idTask)->countAllResults();
 

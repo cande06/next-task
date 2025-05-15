@@ -444,7 +444,7 @@ class Actions extends BaseController
     public function changeSubtaskStatus($idSub, $idTask)
     {
         $status = $this->request->getPost('subtaskStatus');
-        
+
         //format status
         switch ($status) {
             case 'Completada':
@@ -461,21 +461,21 @@ class Actions extends BaseController
         $sModel = new \App\Models\SubtaskModel();
         $sModel->where('id', $idSub)->set(['status' => $status])->update();
 
-        $finished = $sModel->where(['idTask' => $idTask, 'status'=> 2])->countAllResults();
+        $finished = $sModel->where(['idTask' => $idTask, 'status' => 2])->countAllResults();
         $total =  $sModel->where('idTask', $idTask)->countAllResults();
 
         $tModel = new \App\Models\TaskModel();
         $task = $tModel->find($idTask);
 
         // all sbtks completadas
-        if ($finished == $total && $total > 0) { 
+        if ($finished == $total && $total > 0) {
             $tModel->where('id', $idTask)->set(['status' => 2])->update(); // = completada
-        } 
+        }
         // 1 sbtk completada
-        if (($status == 2) && ($task['status'] == 0)) { 
+        if (($status == 2) && ($task['status'] == 0)) {
             $tModel->where('id', $idTask)->set(['status' => 1])->update(); // = en proceso
         }
-        
+
         // esto va en crear sbt
         // else if (($finished != $total) && ($task['status'] == 2)) {  //se agrega un sbt despues de terminar todos
         //     $tModel->where('id', $idTask)->set(['status' => 1])->update(); // = en proceso
@@ -485,5 +485,26 @@ class Actions extends BaseController
 
 
         return redirect()->back();
+    }
+
+    public function sendCollab($idTask, $correo)
+    {
+        $email = \Config\Services::email();
+
+        $email->setFrom('nexttask.service@gmail.com', 'Next Task: Administrador de Tareas');
+        $email->setTo($correo);
+
+        $email->setSubject('Invitación a colaborar en una tarea');
+        // $body = '<h5>Name te ha invitado a colaborar en su tarea</h5>';
+        $body = '<p>Name te ha invitado a colaborar en su tarea </p>';
+        $body .= '<p><a href="">Aceptar invitacion</a></p>';
+
+        $email->setMessage($body);
+
+        if ($email->send()) {
+            return view('Home/home');
+        } else {
+            echo $email->printDebugger(['headers']);
+        }
     }
 }

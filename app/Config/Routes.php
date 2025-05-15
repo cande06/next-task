@@ -28,3 +28,5 @@ $routes->post('update/sbtask-status/(:num)/(:num)', 'Actions::changeSubtaskStatu
 $routes->post('form/newSubtask', 'Actions::createSubtask');
 $routes->post('form/editSubtask', 'Actions::editSubtask');
 $routes->post('form/deleteSubtask', 'Actions::deleteSubtask');
+
+$routes->post('form/new-collaboration', 'Actions::sendCollab');

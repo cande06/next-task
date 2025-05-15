@@ -18,7 +18,10 @@
         <div class="row pe-0">
             <div class="col">
                 <p>
-                    <span class="badge text-body-secondary ms-1 pe-1"><?= $task['taskPriority'] ?></span>
+                    <span class="badge text-body-secondary ms-1 pe-1">
+                        <i class="bi bi-exclamation-lg"></i>
+                        <?= $task['taskPriority'] ?>
+                    </span>
                     <a href="#modalStatusTask<?= $task['taskID']  ?>" class="text-decoration-none" data-bs-toggle="modal">
                         <span class="badge text-body-secondary"><?= $task['taskStatus'] ?></span>
                     </a>
@@ -68,6 +71,7 @@
                 <div class="subtareas-container mb-2">
                     <?php foreach ($subtasks as $sub) { 
                         $d = array('taskID' => $task['taskID'],
+                                    'isTaskOwner' => $task['isTaskOwner'],
                                     'subtaskID' => $sub['subtaskID'],
                                     'subtaskStatus' => $sub['subtaskStatus'],
                                     'subtaskData' => $subtaskData);

@@ -11,7 +11,7 @@
 
                 <div class="row d-flex justify-content-center">
                     <div class="col-10">
-                        <?= form_open('/form/') ?>
+                        <?= form_open('/form/collaboration/for/'. $taskID .'/'. ) ?>
 
                         <div class="row mb-3">
                             <?= form_label(
@@ -59,7 +59,7 @@
                             <div><small class="text-danger"><?= session('errors.collabOpt') ?></small></div>
                         <?php } ?>
 
-                        <div id="collabHelp" class="form-text mt-2">Revisa que todo esté bien</div>
+                        <div id="collabHelp" class="form-text mt-2">Revisa que todo esté en orden</div>
                     </div>
                 </div>
                 <div class="d-flex justify-content-end">

@@ -8,7 +8,8 @@
 
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="subtaskStatus" id="subtaskStatusC" value="0"
-                        <?= set_radio('subtaskStatus', '0', ($subtaskStatus == 'Creada') ? "true" : "") ?>>
+                        <?= set_radio('subtaskStatus', '0', ($subtaskStatus == 'Creada') ? "true" : "") ?>
+                        <?= (!$isTaskOwner) ? "disabled" : "" ?> >
                     <label class="form-check-label" for="subtaskStatusC">
                         Creada
                     </label>
