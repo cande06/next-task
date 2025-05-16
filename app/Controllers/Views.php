@@ -47,12 +47,14 @@ class Views extends BaseController
 
     public function getTasks($iduser)
     {
-
         $model = new \App\Models\TaskModel();
-        $tareas = $model->where('idUser', $iduser)->findAll();
+        $tareas = $model->where('idUser', $iduser)
+            ->where('archived !=', 1, false)
+            ->findAll();
 
         $colorID = '';
         $getTareas = [];
+        $activeUser = session()->get('idUser');
 
         foreach ($tareas as $task) {
             //format color
@@ -91,14 +93,19 @@ class Views extends BaseController
             switch ($task['status']) {
                 case 0:
                     $task['status'] = 'Creada';
+                    $statusIcon = '<i class="bi bi-clipboard2"></i>';
                     break;
                 case 1:
-                    $task['status'] = 'En Proceso';
+                    $task['status'] = 'En proceso';
+                    $statusIcon = '<i class="bi bi-hourglass-split"></i>';
                     break;
                 case 2:
                     $task['status'] = 'Completada';
+                    $statusIcon = '<i class="bi bi-check"></i></i>';
                     break;
             }
+
+            $isOwner = ($activeUser == $task['idUser']) ? true : false;
 
             $data = Views::subtasksCount($task['id']);
 
@@ -109,12 +116,14 @@ class Views extends BaseController
                 'taskDesc' => $task['description'],
                 'taskPriority' => $task['priority'],
                 'taskStatus' => $task['status'],
+                'statusIcon' => $statusIcon,
                 'taskDate' => $task['exp_date'],
                 'taskReminder' => $task['reminder'],
                 'taskColor' => $task['color'],
                 'taskColorID' => $colorID,
                 'taskArchived' => $task['archived'],
 
+                'isTaskOwner' => $isOwner,
                 'subtaskData' => $data,
             ];
 
@@ -166,12 +175,15 @@ class Views extends BaseController
         switch ($task['status']) {
             case 0:
                 $task['status'] = 'Creada';
+                $statusIcon = '<i class="bi bi-clipboard2"></i>';
                 break;
             case 1:
                 $task['status'] = 'En proceso';
+                $statusIcon = '<i class="bi bi-hourglass-split"></i>';
                 break;
             case 2:
                 $task['status'] = 'Completada';
+                $statusIcon = '<i class="bi bi-check"></i></i>';
                 break;
         }
 
@@ -213,6 +225,7 @@ class Views extends BaseController
             'taskDesc' => $task['description'],
             'taskPriority' => $task['priority'],
             'taskStatus' => $task['status'],
+            'statusIcon' => $statusIcon,
             'taskDate' => $task['exp_date'],
             'taskReminder' => $task['reminder'],
             'taskColor' => $task['color'],
@@ -304,6 +317,7 @@ class Views extends BaseController
             ->findAll();
 
         $get = [];
+        $activeUser = session()->get('idUser');
 
         foreach ($tareas as $task) {
             //format color
@@ -339,17 +353,22 @@ class Views extends BaseController
                     break;
             }
             //format status
-            switch ($task['status']) {
-                case 0:
-                    $task['status'] = 'Creada';
-                    break;
-                case 1:
-                    $task['status'] = 'En Proceso';
-                    break;
-                case 2:
-                    $task['status'] = 'Completada';
-                    break;
-            }
+            // switch ($task['status']) {
+            //     case 0:
+            //         $task['status'] = 'Creada';
+            //         $statusIcon = '<i class="bi bi-clipboard2"></i>';
+            //         break;
+            //     case 1:
+            //         $task['status'] = 'En proceso';
+            //         $statusIcon = '<i class="bi bi-hourglass-split"></i>';
+            //         break;
+            //     case 2:
+            $task['status'] = 'Completada';
+            $statusIcon = '<i class="bi bi-check"></i>';
+            //         break;
+            // }
+
+            $isOwner = ($activeUser == $task['idUser']) ? true : false;
 
             $data = Views::subtasksCount($task['id']);
 
@@ -360,14 +379,19 @@ class Views extends BaseController
                 'taskDesc' => $task['description'],
                 'taskPriority' => $task['priority'],
                 'taskStatus' => $task['status'],
+                'statusIcon' => $statusIcon,
                 'taskDate' => $task['exp_date'],
                 'taskReminder' => $task['reminder'],
                 'taskColor' => $task['color'],
                 'taskColorID' => $colorID,
                 'taskArchived' => $task['archived'],
 
+                'isTaskOwner' => $isOwner,
                 'subtaskData' => $data,
             ];
+
+            log_message('debug', "isTaskOwner: {$newTask['isTaskOwner']}, total: {$newTask['statusIcon']}");
+
 
             $get[] = $newTask;
         }
@@ -387,7 +411,7 @@ class Views extends BaseController
         $modelT = new \App\Models\TaskModel();
         $get = [];
 
-        foreach ($colab as $c){
+        foreach ($colab as $c) {
             $task = $modelT->where('id', $c['idTask'])->first();
 
             //format color
@@ -458,9 +482,9 @@ class Views extends BaseController
 
         $t = ['tasks' => $get];
 
-        return view('Layouts/header', ['title' => 'Tareas colaborativas']) 
-            . view('Layouts/menu') 
-            . view('Collab/collabs', $t) 
+        return view('Layouts/header', ['title' => 'Tareas colaborativas'])
+            . view('Layouts/menu')
+            . view('Collab/collabs', $t)
             . view('Layouts/footer');
     }
 

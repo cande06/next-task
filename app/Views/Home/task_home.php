@@ -28,10 +28,11 @@
             <!-- STATUS -->
             <div>
                 <span>
-                    <a href="#modalStatusTask<?= $taskID ?>" class="text-decoration-none" data-bs-toggle="modal">
+                    <!-- <a href="#modalStatusTask<?= $taskID ?>" class="text-decoration-none" data-bs-toggle="modal"> -->
                         <span class="badge text-body-secondary"><?= $taskStatus ?></span>
-                    </a>
-                    <?php if ($taskStatus == 'Completada') { ?>
+                    <!-- </a> -->
+
+                    <?php if ($taskStatus == 'Completada' && $isTaskOwner  && !$taskArchived) { ?>
                         <a href="<?= base_url('/archive/' . $taskID) ?>" class="link">
                             <i class="bi bi-archive"></i>
                         </a>

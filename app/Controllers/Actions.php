@@ -107,6 +107,8 @@ class Actions extends BaseController
         return redirect()->to('login');
     }
 
+
+
     public function createTask()
     {
         $validation = service('validation');
@@ -231,7 +233,6 @@ class Actions extends BaseController
 
         $data = array(
             'title' => $this->request->getPost('taskTitleEdit'),
-            // 'idUser' => $session->get('idUser'),
             'description' => $this->request->getPost('taskDescEdit'),
             'priority' => $pr,
             'exp_date' => $this->request->getPost('taskDateEdit'),
@@ -285,6 +286,8 @@ class Actions extends BaseController
 
         return redirect()->back();
     }
+
+
 
     public function createSubtask()
     {
@@ -345,7 +348,7 @@ class Actions extends BaseController
         } else if ($emailResp == '' && $this->request->getPost('subtaskRespCheck') == 1) {
             $uModel = new \App\Models\UserModel();
             $user = $uModel->find($userID);
-            
+
             $email = $user['email'];
         } else {
             $email = 'error x_x';
@@ -465,6 +468,8 @@ class Actions extends BaseController
         return redirect()->to('updT/'. $status . '/' . $idTask);
     }
 
+
+
     public function setCompletedTask($status, $idTask){
         
         $sModel = new \App\Models\SubtaskModel();
@@ -492,6 +497,8 @@ class Actions extends BaseController
         // log_message('debug', "finished: {$finished}, total: {$total}, check: {$check} ");
             return redirect()->to('tarea/' . $idTask);
     }
+
+
 
     public function sendCollab($idTask)
     {

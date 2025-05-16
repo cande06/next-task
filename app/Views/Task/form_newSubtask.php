@@ -8,6 +8,7 @@
         ); ?>
         <?= form_input(array(
             'name' => 'subtaskTitle',
+            'value' => old('subtaskTitle'),
             'class' => 'form-control',
         )); ?>
         <?php if (session('errors.subtaskTitle')) {   ?>
@@ -23,6 +24,7 @@
         ); ?>
         <?= form_textarea(array(
             'name' => 'subtaskDesc',
+            'value' => old('subtaskDesc'),
             'class' => 'form-control',
             'rows' => '2',
         )); ?>
@@ -51,7 +53,7 @@
         <div class="row mb-1">
             <div class="col-6">
                 <?= form_dropdown(
-                    array('name' => 'subtaskPriority', 'id' => 'subtaskPriority', 'class' => 'form-select'),
+                    array('name' => 'subtaskPriority', 'id' => 'subtaskPriority','value' => old('subtaskPriority'), 'class' => 'form-select'),
                     array(0 => 'Sin prioridad', 'Baja' => 'Baja', 'Normal' => 'Normal', 'Alta' => 'Alta',)
                 ); ?>
             </div>
@@ -59,6 +61,7 @@
                 <?= form_input(array(
                     'name' => 'subtaskDate',
                     'type' => 'date',
+                    'value' => old('subtaskDate'),
                     'class' => 'form-control',
                     'aria-label' => 'Fecha de vencimiento',
                     'aria-describedby' => 'taskDate',
@@ -75,6 +78,7 @@
         <?= form_input(array(
             'name' => 'subtaskResp',
             'type' => 'email',
+            'value' => old('subtaskResp'),
             'placeholder' => 'ejemplo@correo.com',
             'class' => 'form-control',
         )); ?>
@@ -83,7 +87,7 @@
                 'subtaskRespCheck',
                 1,
                 '',
-                array('id' => 'self_assign', 'class' => 'form-check-input',)
+                array('id' => 'self_assign','value' => old('subtaskRespCheck'), 'class' => 'form-check-input',)
             ); ?>
             <?= form_label(
                 'Asignarme como responsable',
@@ -106,6 +110,7 @@
         ); ?>
         <?= form_textarea(array(
             'name' => 'subtaskComment',
+            'value' => old('subtaskComment'),
             'class' => 'form-control',
             'rows' => '2',
         )); ?>

@@ -55,7 +55,7 @@
         <div class="row mb-1">
             <div class="col-6">
 
-                <select name="taskPriorityEdit" id="taskPriorityEdit" class="form-control">
+                <select name="taskPriorityEdit" id="taskPriorityEdit" class="form-select">
                     <option value="Baja"
                     <?= set_select('taskPriorityEdit', 'Baja', old('taskPriorityEdit') == 'Baja' || $taskPriority == 'Baja') ?>>
                         Baja

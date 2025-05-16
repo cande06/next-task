@@ -23,7 +23,8 @@
                         <?= $task['taskPriority'] ?>
                     </span>
                     <a href="#modalStatusTask<?= $task['taskID']  ?>" class="text-decoration-none" data-bs-toggle="modal">
-                        <span class="badge text-body-secondary"><?= $task['taskStatus'] ?></span>
+                        <!-- <span class="badge text-body-secondary"><?= $task['taskStatus'] ?></span> -->
+                        <span class="badge bdg text-body-secondary"><?= $task['statusIcon'] .' '. $task['taskStatus'] ?></span>
                     </a>
                 </p>
             </div>

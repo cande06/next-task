@@ -11,6 +11,7 @@
         <?= form_input(array(
             'name' => 'taskTitle',
             'placeholder' => 'Iniciar proyecto de Técnicas',
+            'value' => old('taskTitle'),
             'class' => 'form-control',
         )); ?>
         <?php if (session('errors.taskTitle')) {   ?>
@@ -26,6 +27,7 @@
         ); ?>
         <?= form_textarea(array(
             'name' => 'taskDesc',
+            'value' => old('taskDesc'),
             'class' => 'form-control',
             'rows' => '3',
         )); ?>
@@ -72,6 +74,7 @@
                 <?= form_input(array(
                     'name' => 'taskDate',
                     'type' => 'date',
+                    'value' => old('taskDate'),
                     'class' => 'form-control',
                     'aria-label' => 'Fecha de vencimiento',
                     'aria-describedby' => 'taskDate',
@@ -84,6 +87,7 @@
                 <?= form_input(array(
                     'name' => 'taskReminder',
                     'type' => 'date',
+                    'value' => old('taskReminder'),
                     'class' => 'form-control',
                     'aria-label' => 'Recordatorio para tarea',
                     'aria-describedby' => 'taskReminder',
