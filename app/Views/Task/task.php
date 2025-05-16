@@ -115,8 +115,6 @@
                     <?php foreach ($collabData['collaborators'] as $collaborator){ ?>
                         <p class="text-body-secondary mb-1"><?= $collaborator['email'] ?></p>
                     <?php } ?>
-                    
-                    <p class="text-body-secondary mb-1">example@</p>
                 </div>
             </div>
 

@@ -101,6 +101,12 @@
                         Archivadas
                     </a>
                 </li>
+                <li>
+                    <a href="<?= base_url('collabs/for/'. session('idUser')) ?>" class="nav-link link-dark">
+                        <i class="bi bi-people-fill pe-1"></i>
+                        Mis colaboraciones
+                    </a>
+                </li>
             </ul>
 
             <!-- <div class="dropdown">

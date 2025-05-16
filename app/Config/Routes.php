@@ -13,9 +13,12 @@ $routes->get('/signout', 'Actions::signOut');
 
 $routes->get('/updT/(:num)/(:num)', 'Actions::setCompletedTask/$1/$2');
 $routes->get('/archived/for/(:num)', 'Views::getArchived/$1');
+$routes->get('/collabs/for/(:num)', 'Views::getCollabs/$1');
 
 $routes->get('/tarea/(:num)', 'Views::getTask/$1');
 $routes->get('/archive/(:num)', 'Actions::archiveTask/$1');
+$routes->get('colaboracion/(:num)/(:any)', 'Actions::procesarCollab/$1/$2');
+
 
 $routes->post('form/signup', 'Actions::signup');
 $routes->post('form/login', 'Actions::login');
@@ -32,7 +35,6 @@ $routes->post('form/editSubtask', 'Actions::editSubtask');
 $routes->post('form/deleteSubtask', 'Actions::deleteSubtask');
 
 $routes->post('form/collaboration/for/(:num)', 'Actions::sendCollab/$1');
-$routes->get('colaboracion/(:num)/(:any)', 'Actions::procesarCollab/$1/$2');
 // $routes->get('colaboracion/1/read', 'Views::getTask/1/read');
 
 
