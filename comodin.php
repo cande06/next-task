@@ -40,3 +40,28 @@
         array('id' => 'taskStatusF', 'class' => 'form-check-input')
     ); ?>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<?= form_label(
+            'Asignar un responsable',
+            'subtaskResp',
+            array('class' => 'form-label')
+        ); ?>
+        <?= form_input(array(
+            'name' => 'subtaskResp',
+            'type' => 'email',
+            'value' => old('subtaskResp'),
+            'placeholder' => 'ejemplo@correo.com',
+            'class' => 'form-control',
+        )); ?>

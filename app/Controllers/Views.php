@@ -19,7 +19,6 @@ class Views extends BaseController
 
         if (!session()->has('idUser')) {
             return redirect()->to('login');
-            //->with('error', 'No has iniciado sesion')
         }
 
         $userID = session()->get('idUser');
@@ -38,7 +37,6 @@ class Views extends BaseController
         $data = ['title' => 'Iniciar sesion',];
         return view('Layouts/header', $data) . view('login') . view('Layouts/footer');
     }
-
     public function getSignup()
     {
         $data = ['title' => 'Registrarse'];
@@ -137,6 +135,11 @@ class Views extends BaseController
 
     public function getTask($id)
     {
+        if (!session()->has('idUser')) {
+            return redirect()->to('login');
+        }
+
+
         $model = new \App\Models\TaskModel();
         $task = $model->find($id);
 
@@ -214,10 +217,10 @@ class Views extends BaseController
                 $user = $uModel->where('id', $c['idUser'])->first();
                 $email = $user['email'];
 
-                $collabList[] = ['email' => $email];
+                $collabList[] = ['email' => $email,  'user' => $c['idUser']];
             }
         } else {
-            $collabList = [['email' => '']];
+            $collabList = [['email' => '', 'user' => '']];
         }
 
         $collab = [
@@ -406,7 +409,7 @@ class Views extends BaseController
                 'subtaskData' => $data,
             ];
 
-            log_message('debug', "isTaskOwner: {$newTask['isTaskOwner']}, total: {$newTask['statusIcon']}");
+            // log_message('debug', "isTaskOwner: {$newTask['isTaskOwner']}, total: {$newTask['statusIcon']}");
 
 
             $get[] = $newTask;

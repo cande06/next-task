@@ -53,7 +53,7 @@
         <div class="row mb-1">
             <div class="col-6">
                 <?= form_dropdown(
-                    array('name' => 'subtaskPriority', 'id' => 'subtaskPriority','value' => old('subtaskPriority'), 'class' => 'form-select'),
+                    array('name' => 'subtaskPriority', 'id' => 'subtaskPriority', 'value' => old('subtaskPriority'), 'class' => 'form-select'),
                     array(0 => 'Sin prioridad', 'Baja' => 'Baja', 'Normal' => 'Normal', 'Alta' => 'Alta',)
                 ); ?>
             </div>
@@ -69,25 +69,34 @@
             </div>
         </div>
     </div>
+
     <div class="row mb-2">
-        <?= form_label(
-            'Asignar un responsable',
-            'subtaskResp',
-            array('class' => 'form-label')
-        ); ?>
-        <?= form_input(array(
-            'name' => 'subtaskResp',
-            'type' => 'email',
-            'value' => old('subtaskResp'),
-            'placeholder' => 'ejemplo@correo.com',
-            'class' => 'form-control',
-        )); ?>
+        <div class="col-10">
+            <?php
+            echo form_label(
+                'Asignar un responsable',
+                'subtaskResp',
+                array('class' => 'form-label')
+            );
+
+            $opts = [];
+            foreach ($collabData['collaborators'] as $collaborator) {
+                $opts[$collaborator['user']] = $collaborator['email'];
+            }
+            echo form_dropdown
+            (
+                ['name' => 'subtaskResp', 'id' => 'subtaskResp', 'value' => old('subtaskResp'), 'class' => 'form-select'],
+                $opts
+            );
+            ?>
+        </div>
+
         <div class="form-check">
             <?= form_checkbox(
                 'subtaskRespCheck',
                 1,
                 '',
-                array('id' => 'self_assign','value' => old('subtaskRespCheck'), 'class' => 'form-check-input',)
+                array('id' => 'self_assign', 'value' => old('subtaskRespCheck'), 'class' => 'form-check-input',)
             ); ?>
             <?= form_label(
                 'Asignarme como responsable',
@@ -102,6 +111,7 @@
             <div><small class="text-danger"><?= session('errors.subtaskRespCheck') ?></small></div>
         <?php } ?>
     </div>
+
     <div class="row mb-2">
         <?= form_label(
             'Comentario',

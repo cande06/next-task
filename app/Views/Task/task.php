@@ -18,32 +18,44 @@
         <div class="row pe-0">
             <div class="col">
                 <p>
+                    <!-- prioridad -->
                     <span class="badge bdg text-body-secondary ms-1 pe-1">
                         <i class="bi bi-exclamation-lg"></i>
                         <?= $task['taskPriority'] ?>
                     </span>
+
+                    <!-- estado -->
                     <a href="#modalStatusTask<?= $task['taskID']  ?>" class="text-decoration-none" data-bs-toggle="modal">
-                        <!-- <span class="badge text-body-secondary"><?= $task['taskStatus'] ?></span> -->
                         <span class="badge bdg text-body-secondary">
                             <?= $task['statusIcon'] . ' ' . $task['taskStatus'] ?>
                         </span>
                     </a>
+
+                    <!-- info: archivado -->
+                    <?php if ($collabData['isCollaborator'] && $task['taskArchived'] == 1) { ?>
+                        <span class="badge bdg text-body-secondary ms-1 pe-1">
+                            <i class="bi bi-archive"></i> Archivada
+                        </span>
+                    <?php } ?>
                 </p>
             </div>
             <div class="col-5 ps-4">
                 <div>
-                    <?php if ($task['isTaskOwner']) { ?>
+                    <!-- editar -->
+                    <?php if ($collabData['isCollaborator'] && $task['taskArchived']  != 1) { ?>
                         <a href="#modalEditTask<?= $task['taskID']  ?>" class="link" data-bs-toggle="modal">
                             <i class="bi bi-pen me-2"></i>
                         </a>
                     <?php } ?>
 
+                    <!-- eliminar -->
                     <?php if ($task['isTaskOwner']) { ?>
                         <a href="#modalDelTask<?= $task['taskID']  ?>" class="link" data-bs-toggle="modal">
                             <i class="bi bi-trash me-2"></i>
                         </a>
                     <?php } ?>
 
+                    <!-- archivar -->
                     <?php if ($task['isTaskOwner'] && $task['taskStatus'] == 'Completada') { ?>
                         <a href="<?= base_url('/archive/' . $task['taskID']) ?>" class="link">
                             <i class="bi bi-archive"></i>
@@ -80,9 +92,14 @@
                             'subtaskStatus' => $sub['subtaskStatus'],
                             'subtaskData' => $subtaskData
                         );
+                        $s = array(
+                            'sub' => $sub, 
+                            'isTaskOwner' => $task['isTaskOwner'],
+                            'isArchived' =>  $task['taskArchived'],
+                        );
                     ?>
 
-                        <?= view('Subtask/subtask.php',['sub' => $sub, 'isTaskOwner' => $task['isTaskOwner']]); ?>
+                        <?= view('Subtask/subtask.php', $s);?>
                         <?= view('Subtask/modal_editSubtask.php', $sub); ?>
                         <?= view('Subtask/modal_deleteSubtask.php', array('subtaskID' => $sub['subtaskID'])); ?>
                         <?= view('Subtask/modal_changeSubStatus.php', $d); ?>
@@ -131,7 +148,7 @@
     <?= view('Home/modal_changeStatus.php', $task); ?>
     <?= view('Home/modal_editTask.php', $task); ?>
     <?= view('Home/modal_deleteTask.php', $task); ?>
-    <?= view('Task/modal_newSubtask.php', array('taskID' => $task['taskID'])) ?>
+    <?= view('Task/modal_newSubtask.php', array('taskID' => $task['taskID'], 'collabData' => $collabData)) ?>
     <?= view('Task/m_collab.php', $task); ?>
 
 </div>

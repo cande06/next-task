@@ -46,12 +46,13 @@
             </div>
 
             <div>
-                <?php if ($sub['isSubOwner']) { ?>
+                <!-- editar -->
+                <?php if ($sub['isSubOwner'] && $isArchived != 1) { ?>
                     <a href="#modalEditSubtask<?= $sub['subtaskID'] ?>" class="link" data-bs-toggle="modal">
                         <i class="bi bi-pen me-2"></i>
                     </a>
                 <?php } ?>
-
+                <!-- eliminar -->
                 <?php if ($isTaskOwner) { ?>
                     <a href="#modalDelSubtask<?= $sub['subtaskID'] ?>" class="link" data-bs-toggle="modal">
                         <i class="bi bi-trash"></i>
