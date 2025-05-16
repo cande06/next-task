@@ -193,7 +193,7 @@ class Actions extends BaseController
         $validation->setRules(
             [
                 'taskTitleEdit' => 'required|alpha_numeric_punct',
-                'taskDescEdit' => 'required|alpha_numeric_punct',
+                'taskDescEdit' => 'required',
                 // 'taskReminder' => 'valid_date',
             ],
             [
@@ -203,7 +203,6 @@ class Actions extends BaseController
                 ],
                 'taskDescEdit' => [
                     'required' => 'Este campo es obligatorio',
-                    'alpha_numeric_punct' => 'Sólo puedes utilizar estos caracteres: - _ ! # * $ % & + = : . ~ |',
                 ],
             ]
         );
@@ -331,10 +330,10 @@ class Actions extends BaseController
                 $pr = 1;
                 break;
             case 'Normal':
-                $pr = 1;
+                $pr = 2;
                 break;
             case 'Alta':
-                $pr = 2;
+                $pr = 3;
                 break;
             default:
                 $pr = 0;
@@ -461,15 +460,23 @@ class Actions extends BaseController
         $sModel = new \App\Models\SubtaskModel();
         $sModel->where('id', $idSub)->set(['status' => $status])->update();
 
+        
+        return redirect()->to('updT/'. $status . '/' . $idTask);
+    }
+
+    public function setCompletedTask($status, $idTask){
+        
+        $sModel = new \App\Models\SubtaskModel();
         $finished = $sModel->where(['idTask' => $idTask, 'status' => 2])->countAllResults();
         $total =  $sModel->where('idTask', $idTask)->countAllResults();
 
         $tModel = new \App\Models\TaskModel();
         $task = $tModel->find($idTask);
+        $check = '';
 
         // all sbtks completadas
-        if ($finished == $total && $total > 0) {
-            $tModel->where('id', $idTask)->set(['status' => 2])->update(); // = completada
+        if ($finished == $total) { // && $total > 0
+            $check = $tModel->where('id', $idTask)->set(['status' => 2])->update(); // = completada
         }
         // 1 sbtk completada
         if (($status == 2) && ($task['status'] == 0)) {
@@ -481,30 +488,58 @@ class Actions extends BaseController
         //     $tModel->where('id', $idTask)->set(['status' => 1])->update(); // = en proceso
         // }
 
-        // log_message('debug', "finished: {$finished}, total: {$total}");
-
-
-        return redirect()->back();
+        // log_message('debug', "finished: {$finished}, total: {$total}, check: {$check} ");
+            return redirect()->to('tarea/' . $idTask);
     }
 
-    public function sendCollab($idTask, $correo)
+    public function sendCollab($idTask)
     {
-        $email = \Config\Services::email();
+        $correo = $this->request->getPost('collabMail');
+        $opt = $this->request->getPost('collabOpt');
 
+        $opt = ($opt == 'm') ? 'full' : 'read';
+
+        $model = new \App\Models\TaskModel();
+        $task = $model->where('id', $idTask)->first();
+
+
+        $email = \Config\Services::email();
         $email->setFrom('nexttask.service@gmail.com', 'Next Task: Administrador de Tareas');
         $email->setTo($correo);
 
         $email->setSubject('Invitación a colaborar en una tarea');
-        // $body = '<h5>Name te ha invitado a colaborar en su tarea</h5>';
-        $body = '<p>Name te ha invitado a colaborar en su tarea </p>';
-        $body .= '<p><a href="">Aceptar invitacion</a></p>';
+        $body = '<h4> Has sido invitado a colaborar en una tarea:</h4>';
+        $body .= '<p>'. $task['title'] .'</p> ';
+        $body .= '<p><a href="' . base_url('colaboracion/' . $idTask . '/' . $opt) . '">Aceptar invitación</a></p>';
 
         $email->setMessage($body);
 
+
         if ($email->send()) {
-            return view('Home/home');
+            return redirect()->to('tarea/'. $idTask);
         } else {
-            echo $email->printDebugger(['headers']);
+            return redirect()->back()
+                ->withInput()
+                ->with('modalTarget', 'modalCollabFor'. $idTask)
+                ->with('errors', 'Ha ocurrido un error inesperado');
+        
+            // echo $email->printDebugger(['headers']);
         }
+    }
+
+    public function procesarCollab($idTask, $opt){
+        $userActive = session('idUser'); // esto va en la funcion que recibe
+
+        $model = new \App\Models\CollabModel();
+
+        $c = [ 
+            'idTask' => $idTask,
+            'idUser' => $userActive,
+            'allows' => $opt,
+        ];
+
+        $model->insert($c);
+
+        return redirect()->to('tarea/'. $idTask);
     }
 }

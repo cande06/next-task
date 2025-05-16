@@ -11,7 +11,7 @@
 
                 <div class="row d-flex justify-content-center">
                     <div class="col-10">
-                        <?= form_open('/form/collaboration/for/'. $taskID .'/'. ) ?>
+                        <?= form_open('/form/collaboration/for/'. $taskID) ?>
 
                         <div class="row mb-3">
                             <?= form_label(

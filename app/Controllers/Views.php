@@ -51,6 +51,7 @@ class Views extends BaseController
         $model = new \App\Models\TaskModel();
         $tareas = $model->where('idUser', $iduser)->findAll();
 
+        $colorID = '';
         $getTareas = [];
 
         foreach ($tareas as $task) {
