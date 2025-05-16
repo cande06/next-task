@@ -345,6 +345,7 @@ class Actions extends BaseController
         } else if ($emailResp == '' && $this->request->getPost('subtaskRespCheck') == 1) {
             $uModel = new \App\Models\UserModel();
             $user = $uModel->find($userID);
+            
             $email = $user['email'];
         } else {
             $email = 'error x_x';

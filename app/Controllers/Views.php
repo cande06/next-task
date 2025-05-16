@@ -124,6 +124,7 @@ class Views extends BaseController
         return $getTareas;
     }
 
+
     public function getTask($id)
     {
         $model = new \App\Models\TaskModel();
@@ -177,9 +178,33 @@ class Views extends BaseController
         $activeUser = session()->get('idUser');
         $isOwner = ($activeUser == $task['idUser']) ? true : false;
 
+        $modelC = new \App\Models\CollabModel();
+        $res = $modelC->where(['idTask' => $id, 'idUser' => $activeUser])->first();
+        $isCollaborator = $res != null ? 'true' : 'false';
+
+        $collabList = [];
+        $cList = $modelC->where('idTask', $id)->findAll();
+
+        if ($cList != null) {
+            $uModel = new \App\Models\UserModel();
+
+            foreach ($cList as $c) {
+                $user = $uModel->where('id', $c['idUser'])->first();
+                $email = $user['email'];
+
+                $collabList[] = ['email' => $email];
+            }
+        } else {
+            $collabList = [['email' => '']];
+        }
+
+        $collab = [
+            'collaborators' => $collabList,
+            'isCollaborator' => $isCollaborator,
+        ];
+
         $subtareas = Views::getSubtasks($id);
         $data = Views::subtasksCount($id);
-
 
         $tarea = [
             'taskID' => $task['id'],
@@ -193,6 +218,7 @@ class Views extends BaseController
             'taskColor' => $task['color'],
             'taskColorID' => $colorID,
             'taskArchived' => $task['archived'],
+
             'isTaskOwner' => $isOwner,
         ];
 
@@ -200,6 +226,7 @@ class Views extends BaseController
             'task' => $tarea,
             'subtasks' => $subtareas,
             'subtaskData' => $data,
+            'collabData' => $collab,
         ];
 
         $title = ['title' => 'Tarea: ' . $tarea['taskTitle'],];
@@ -273,8 +300,8 @@ class Views extends BaseController
     {
         $model = new \App\Models\TaskModel();
         $tareas = $model->where('idUser', $iduser)
-                ->where('archived', 1)
-                ->findAll();
+            ->where('archived', 1)
+            ->findAll();
 
         $get = [];
 
@@ -355,7 +382,7 @@ class Views extends BaseController
     public function subtasksCount($idTask)
     {
         $model = new \App\Models\SubtaskModel();
-        $finished = $model->where(['idTask' => $idTask, 'status'=> 2])->countAllResults();
+        $finished = $model->where(['idTask' => $idTask, 'status' => 2])->countAllResults();
         $total =  $model->where('idTask', $idTask)->countAllResults();
 
         $data = ['finished' => $finished, 'total' => $total];
