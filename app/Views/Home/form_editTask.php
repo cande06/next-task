@@ -78,6 +78,7 @@
                 <?= form_input(array(
                     'name' => 'taskDateEdit',
                     'type' => 'date',
+                    'value' => $taskDate,
                     'class' => 'form-control',
                     'aria-label' => 'Fecha de vencimiento',
                     'aria-describedby' => 'taskDateEdit',
@@ -129,6 +130,7 @@
                 <?= form_input(array(
                     'name' => 'taskReminderEdit',
                     'type' => 'date',
+                    'value' => $taskReminder,
                     'class' => 'form-control',
                     'aria-label' => 'Recordatorio para tarea',
                     'aria-describedby' => 'taskReminder',

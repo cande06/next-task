@@ -45,6 +45,8 @@ class Views extends BaseController
         return view('Layouts/header', $data) . view('signup') . view('Layouts/footer');
     }
 
+
+
     public function getTasks($iduser)
     {
         $model = new \App\Models\TaskModel();
@@ -133,7 +135,6 @@ class Views extends BaseController
         return $getTareas;
     }
 
-
     public function getTask($id)
     {
         $model = new \App\Models\TaskModel();
@@ -186,6 +187,15 @@ class Views extends BaseController
                 $statusIcon = '<i class="bi bi-check"></i></i>';
                 break;
         }
+        // format exp_date
+        if ($task['exp_date'] == null) {
+            $task['exp_date'] = 'No definido';
+        }
+        // format reminder
+        if ($task['reminder'] == null) {
+            $task['reminder'] = 'No definido';
+        }
+
 
         $activeUser = session()->get('idUser');
         $isOwner = ($activeUser == $task['idUser']) ? true : false;
@@ -249,6 +259,8 @@ class Views extends BaseController
             view('Task/task', $taskContent) .
             view('Layouts/footer');
     }
+
+
 
     public function getSubtasks($idTask)
     {

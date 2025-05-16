@@ -28,7 +28,7 @@ a {
 }
 
 .bdg{
-  font-size: medium;
+  font-size: small;
 }
 
 /* #################  NAV - MENU  ################# */
@@ -66,7 +66,6 @@ a {
 .btn-task {
   background-color: #4E222E;
   color: #EFE8E2;
-  border: none;
 }
 .btn-next:hover {
   background-color: #4f7194;

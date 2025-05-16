@@ -218,6 +218,7 @@ class Actions extends BaseController
                 ->with('modalTarget', $target)
                 ->with('errors', $validation->getErrors());
         }
+
         //format priority
         switch ($this->request->getPost('taskPriorityEdit')) {
             case 'Baja':
@@ -230,13 +231,22 @@ class Actions extends BaseController
                 $pr = 1;
                 break;
         }
+        //format dates
+        $expdate = $this->request->getPost('taskDateEdit');
+        if (empty($expdate)){
+            $expdate = null;
+        }
+        $rdate = $this->request->getPost('taskReminderEdit');
+        if (empty($rdate)){
+            $rdate = null;
+        }
 
         $data = array(
             'title' => $this->request->getPost('taskTitleEdit'),
             'description' => $this->request->getPost('taskDescEdit'),
             'priority' => $pr,
-            'exp_date' => $this->request->getPost('taskDateEdit'),
-            'reminder' => $this->request->getPost('taskReminderEdit'),
+            'exp_date' => $expdate,
+            'reminder' => $rdate,
             'color' => $this->request->getPost('taskColor'),
         );
 
@@ -415,6 +425,11 @@ class Actions extends BaseController
             default:
                 $pr = 0;
         }
+        //format dates
+        // $expdate = $this->request->getPost('subtaskDateEdit');
+        // if (is_string ($expdate)){
+        //     $expdate = null;
+        // }
 
         $taskID = $this->request->getPost('idTask');
 

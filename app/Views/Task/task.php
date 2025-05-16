@@ -18,13 +18,15 @@
         <div class="row pe-0">
             <div class="col">
                 <p>
-                    <span class="badge text-body-secondary ms-1 pe-1">
+                    <span class="badge bdg text-body-secondary ms-1 pe-1">
                         <i class="bi bi-exclamation-lg"></i>
                         <?= $task['taskPriority'] ?>
                     </span>
                     <a href="#modalStatusTask<?= $task['taskID']  ?>" class="text-decoration-none" data-bs-toggle="modal">
                         <!-- <span class="badge text-body-secondary"><?= $task['taskStatus'] ?></span> -->
-                        <span class="badge bdg text-body-secondary"><?= $task['statusIcon'] .' '. $task['taskStatus'] ?></span>
+                        <span class="badge bdg text-body-secondary">
+                            <?= $task['statusIcon'] . ' ' . $task['taskStatus'] ?>
+                        </span>
                     </a>
                 </p>
             </div>
@@ -70,12 +72,14 @@
                 </a>
 
                 <div class="subtareas-container mb-2">
-                    <?php foreach ($subtasks as $sub) { 
-                        $d = array('taskID' => $task['taskID'],
-                                    'isTaskOwner' => $task['isTaskOwner'],
-                                    'subtaskID' => $sub['subtaskID'],
-                                    'subtaskStatus' => $sub['subtaskStatus'],
-                                    'subtaskData' => $subtaskData);
+                    <?php foreach ($subtasks as $sub) {
+                        $d = array(
+                            'taskID' => $task['taskID'],
+                            'isTaskOwner' => $task['isTaskOwner'],
+                            'subtaskID' => $sub['subtaskID'],
+                            'subtaskStatus' => $sub['subtaskStatus'],
+                            'subtaskData' => $subtaskData
+                        );
                     ?>
 
                         <?= view('Subtask/subtask.php', $sub); ?>
@@ -94,11 +98,12 @@
 
             <div class="mb-3">
                 <span class="text-decoration-underline link-offset-2">Vencimiento</span><br>
-                <?= $task['taskDate'] ?>
+                <p><?= $task['taskDate'] ?></p>
             </div>
             <div class="mb-3">
                 <span class="text-decoration-underline link-offset-2">Recordatorio</span><br>
-                <?= $task['taskDate'] ?>
+                <p><?= $task['taskReminder'] ?></p>
+
             </div>
 
             <div class="mb-3">
@@ -113,7 +118,7 @@
 
                 </div>
                 <div class="ps-1">
-                    <?php foreach ($collabData['collaborators'] as $collaborator){ ?>
+                    <?php foreach ($collabData['collaborators'] as $collaborator) { ?>
                         <p class="text-body-secondary mb-1"><?= $collaborator['email'] ?></p>
                     <?php } ?>
                 </div>
