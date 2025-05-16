@@ -32,7 +32,7 @@
                         <span class="badge text-body-secondary"><?= $taskStatus ?></span>
                     <!-- </a> -->
 
-                    <?php if ($taskStatus == 'Completada' && $isTaskOwner  && !$taskArchived) { ?>
+                    <?php if ($taskStatus == 'Completada' && !$taskArchived) { ?>
                         <a href="<?= base_url('/archive/' . $taskID) ?>" class="link">
                             <i class="bi bi-archive"></i>
                         </a>

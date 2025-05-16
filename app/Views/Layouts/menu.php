@@ -89,12 +89,12 @@
                         Inicio
                     </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="<?= base_url('completed') ?>" class="nav-link link-dark">
                         <i class="bi bi-check-circle-fill pe-1"></i>
                         Completadas
                     </a>
-                </li>
+                </li> -->
                 <li>
                     <a href="<?= base_url('archived/for/'. session('idUser')) ?>" class="nav-link link-dark">
                         <i class="bi bi-archive-fill pe-1"></i>
@@ -104,7 +104,7 @@
                 <li>
                     <a href="<?= base_url('collabs/for/'. session('idUser')) ?>" class="nav-link link-dark">
                         <i class="bi bi-people-fill pe-1"></i>
-                        Mis colaboraciones
+                        Colaboraciones
                     </a>
                 </li>
             </ul>

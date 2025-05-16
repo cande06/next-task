@@ -82,7 +82,7 @@
                         );
                     ?>
 
-                        <?= view('Subtask/subtask.php', $sub); ?>
+                        <?= view('Subtask/subtask.php',['sub' => $sub, 'isTaskOwner' => $task['isTaskOwner']]); ?>
                         <?= view('Subtask/modal_editSubtask.php', $sub); ?>
                         <?= view('Subtask/modal_deleteSubtask.php', array('subtaskID' => $sub['subtaskID'])); ?>
                         <?= view('Subtask/modal_changeSubStatus.php', $d); ?>
@@ -117,7 +117,7 @@
                     <?php } ?>
 
                 </div>
-                <div class="ps-1">
+                <div class="ps-1 mt-2">
                     <?php foreach ($collabData['collaborators'] as $collaborator) { ?>
                         <p class="text-body-secondary mb-1"><?= $collaborator['email'] ?></p>
                     <?php } ?>

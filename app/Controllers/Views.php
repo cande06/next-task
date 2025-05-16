@@ -296,6 +296,10 @@ class Views extends BaseController
                     $subtarea['status'] = 'Completada';
                     break;
             }
+            // format exp_date
+            if ($subtarea['exp_date'] == null) {
+                $subtarea['exp_date'] = 'No definido';
+            }
 
             $activeUser = session()->get('idUser');
             $isOwner = ($activeUser == $subtarea['idAuthor']) ? true : false;

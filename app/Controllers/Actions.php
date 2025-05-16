@@ -426,10 +426,10 @@ class Actions extends BaseController
                 $pr = 0;
         }
         //format dates
-        // $expdate = $this->request->getPost('subtaskDateEdit');
-        // if (is_string ($expdate)){
-        //     $expdate = null;
-        // }
+        $expdate = $this->request->getPost('subtaskDateEdit');
+        if (empty($expdate)){
+            $expdate = null;
+        }
 
         $taskID = $this->request->getPost('idTask');
 
@@ -439,7 +439,7 @@ class Actions extends BaseController
             'title' => $this->request->getPost('subtaskTitleEdit'),
             'description' => $this->request->getPost('subtaskDescEdit'),
             'priority' => $pr,
-            'exp_date' => $this->request->getPost('subtaskDateEdit'),
+            'exp_date' => $expdate,
             'assigned' => $this->request->getPost('subtaskRespEdit'),
             'comment' => $this->request->getPost('subtaskCommentEdit'),
         );
