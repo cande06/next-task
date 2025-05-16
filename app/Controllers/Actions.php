@@ -233,11 +233,11 @@ class Actions extends BaseController
         }
         //format dates
         $expdate = $this->request->getPost('taskDateEdit');
-        if (empty($expdate)){
+        if (empty($expdate)) {
             $expdate = null;
         }
         $rdate = $this->request->getPost('taskReminderEdit');
-        if (empty($rdate)){
+        if (empty($rdate)) {
             $rdate = null;
         }
 
@@ -427,7 +427,7 @@ class Actions extends BaseController
         }
         //format dates
         $expdate = $this->request->getPost('subtaskDateEdit');
-        if (empty($expdate)){
+        if (empty($expdate)) {
             $expdate = null;
         }
 
@@ -479,14 +479,14 @@ class Actions extends BaseController
         $sModel = new \App\Models\SubtaskModel();
         $sModel->where('id', $idSub)->set(['status' => $status])->update();
 
-        
-        return redirect()->to('updT/'. $status . '/' . $idTask);
+
+        return redirect()->to('updT/' . $status . '/' . $idTask);
     }
 
 
+    public function setCompletedTask($status, $idTask)
+    {
 
-    public function setCompletedTask($status, $idTask){
-        
         $sModel = new \App\Models\SubtaskModel();
         $finished = $sModel->where(['idTask' => $idTask, 'status' => 2])->countAllResults();
         $total =  $sModel->where('idTask', $idTask)->countAllResults();
@@ -510,9 +510,8 @@ class Actions extends BaseController
         // }
 
         // log_message('debug', "finished: {$finished}, total: {$total}, check: {$check} ");
-            return redirect()->to('tarea/' . $idTask);
+        return redirect()->to('tarea/' . $idTask);
     }
-
 
 
     public function sendCollab($idTask)
@@ -532,30 +531,31 @@ class Actions extends BaseController
 
         $email->setSubject('Invitación a colaborar en una tarea');
         $body = '<h4> Has sido invitado a colaborar en una tarea:</h4>';
-        $body .= '<p>'. $task['title'] .'</p> ';
+        $body .= '<p>' . $task['title'] . '</p> ';
         $body .= '<p><a href="' . base_url('colaboracion/' . $idTask . '/' . $opt) . '">Aceptar invitación</a></p>';
 
         $email->setMessage($body);
 
 
         if ($email->send()) {
-            return redirect()->to('tarea/'. $idTask);
+            return redirect()->to('tarea/' . $idTask);
         } else {
             return redirect()->back()
                 ->withInput()
-                ->with('modalTarget', 'modalCollabFor'. $idTask)
+                ->with('modalTarget', 'modalCollabFor' . $idTask)
                 ->with('errors', 'Ha ocurrido un error inesperado');
-        
+
             // echo $email->printDebugger(['headers']);
         }
     }
 
-    public function procesarCollab($idTask, $opt){
+    public function procesarCollab($idTask, $opt)
+    {
         $userActive = session('idUser'); // esto va en la funcion que recibe
 
         $model = new \App\Models\CollabModel();
 
-        $c = [ 
+        $c = [
             'idTask' => $idTask,
             'idUser' => $userActive,
             'allows' => $opt,
@@ -563,6 +563,6 @@ class Actions extends BaseController
 
         $model->insert($c);
 
-        return redirect()->to('tarea/'. $idTask);
+        return redirect()->to('tarea/' . $idTask);
     }
 }

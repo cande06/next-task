@@ -84,7 +84,7 @@
 
             <ul class="nav nav-pills flex-column">
                 <li class="nav-item">
-                    <a href="<?= base_url('') ?>" class="nav-link active" aria-current="page">
+                    <a href="<?= base_url('') ?>" class="nav-link link-dark" aria-current="page">
                         <i class="bi bi-house-door-fill pe-1"></i>
                         Inicio
                     </a>

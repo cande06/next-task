@@ -39,10 +39,13 @@
     <div class="card-footer text-body-secondary text-end py-1 px-3 border-0">
         <div class="d-flex justify-content-between">
             <div>
-                <a href="#modalStatusSubtask<?= $sub['subtaskID']  ?>" class="text-decoration-none" data-bs-toggle="modal">
+                <?php if ($sub['isSubOwner']) { ?>
+                    <a href="#modalStatusSubtask<?= $sub['subtaskID']  ?>" class="text-decoration-none" data-bs-toggle="modal">
+                        <span class="badge text-body-secondary"><?= $sub['subtaskStatus'] ?></span>
+                    </a>
+                <?php } else {  ?>
                     <span class="badge text-body-secondary"><?= $sub['subtaskStatus'] ?></span><br>
-                </a>
-
+                <?php } ?>
             </div>
 
             <div>

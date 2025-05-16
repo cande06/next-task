@@ -23,6 +23,9 @@ $routes->get('colaboracion/(:num)/(:any)', 'Actions::procesarCollab/$1/$2');
 $routes->post('form/signup', 'Actions::signup');
 $routes->post('form/login', 'Actions::login');
 
+$routes->post('form/filter/(:any)', 'Views::filter/$1');
+
+
 $routes->post('form/create', 'Actions::createTask');
 $routes->post('form/edit', 'Actions::editTask');
 $routes->post('form/deleteTask', 'Actions::deleteTask');

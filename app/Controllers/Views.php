@@ -44,6 +44,103 @@ class Views extends BaseController
     }
 
 
+    public function filter($opt)
+    {
+        if ($opt == 'p') {
+            $value = $this->request->getPost('prioridad');
+            
+            $model = new \App\Models\TaskModel();
+            $tareas = $model->where('priority', $value)
+                ->where('archived !=', 1, false)
+                ->findAll();
+
+            $colorID = '';
+            $getTareas = [];
+            $activeUser = session()->get('idUser');
+
+            foreach ($tareas as $task) {
+                //format color
+                switch ($task['color']) {
+                    case '#E5ADAE':
+                        $colorID = 'frut';
+                        break;
+                    case '#BFD5A9':
+                        $colorID = 'kiwi';
+                        break;
+                    case '#EABFA0':
+                        $colorID = 'mand';
+                        break;
+                    case '#D0AFCD':
+                        $colorID = 'uva';
+                        break;
+                    case '#D8C9B4':
+                        $colorID = 'coco';
+                        break;
+                    case '#FFFFFF':
+                        $colorID = 'none';
+                }
+                //format priority
+                switch ($task['priority']) {
+                    case -1:
+                        $task['priority'] = 'Baja';
+                        break;
+                    case 0:
+                        $task['priority'] = 'Normal';
+                        break;
+                    case 1:
+                        $task['priority'] = 'Alta';
+                        break;
+                }
+                //format status
+                switch ($task['status']) {
+                    case 0:
+                        $task['status'] = 'Creada';
+                        $statusIcon = '<i class="bi bi-clipboard2"></i>';
+                        break;
+                    case 1:
+                        $task['status'] = 'En proceso';
+                        $statusIcon = '<i class="bi bi-hourglass-split"></i>';
+                        break;
+                    case 2:
+                        $task['status'] = 'Completada';
+                        $statusIcon = '<i class="bi bi-check"></i></i>';
+                        break;
+                }
+
+                $isOwner = ($activeUser == $task['idUser']) ? true : false;
+
+                $data = Views::subtasksCount($task['id']);
+
+                $newTask = [
+                    'taskID' => $task['id'],
+                    'taskUserID' => $task['idUser'],
+                    'taskTitle' => $task['title'],
+                    'taskDesc' => $task['description'],
+                    'taskPriority' => $task['priority'],
+                    'taskStatus' => $task['status'],
+                    'statusIcon' => $statusIcon,
+                    'taskDate' => $task['exp_date'],
+                    'taskReminder' => $task['reminder'],
+                    'taskColor' => $task['color'],
+                    'taskColorID' => $colorID,
+                    'taskArchived' => $task['archived'],
+
+                    'isTaskOwner' => $isOwner,
+                    'subtaskData' => $data,
+                ];
+
+                $getTareas[] = $newTask;
+            }
+
+            $tasks = ['tasks' => $getTareas,];
+        }
+
+        return view('Layouts/header', ['title' => 'Inicio',])
+            . view('Layouts/menu')
+            . view('Home/home', $tasks)
+            . view('Layouts/footer');
+    }
+
 
     public function getTasks($iduser)
     {
