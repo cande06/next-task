@@ -24,6 +24,7 @@ $routes->post('form/signup', 'Actions::signup');
 $routes->post('form/login', 'Actions::login');
 
 $routes->post('form/filter/(:any)', 'Views::filter/$1');
+$routes->get('form/filtered/(:any)', 'Views::showFilter');
 
 
 $routes->post('form/create', 'Actions::createTask');

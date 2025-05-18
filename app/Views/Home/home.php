@@ -1,5 +1,5 @@
-<!-- Contenido: Home -->
-<div class="col vw-100">
+<!-- Contenido: Home vw-100 -->
+<div class="col-9">
 
     <div class="row justify-content-center mt-4">
         <div class="col-7">

@@ -171,15 +171,36 @@ class Actions extends BaseController
                 ->with('errors', $errors);
         }
 
+        //format priority
+        switch ($this->request->getPost('taskPriority')) {
+            case 'Baja':
+                $pr = -1;
+                break;
+            case 'Normal':
+                $pr = 0;
+                break;
+            case 'Alta':
+                $pr = 1;
+                break;
+        }
+        //format dates
+        $expdate = $this->request->getPost('taskDate');
+        if (empty($expdate)) {     
+            $expdate = null;
+        }
+        $rdate = $this->request->getPost('taskReminder');
+        if (empty($rdate)) {
+            $rdate = null;
+        }
 
         $session = session();
         $data = array(
             'title' => $this->request->getPost('taskTitle'),
             'idUser' => $session->get('idUser'),
             'description' => $this->request->getPost('taskDesc'),
-            'priority' => $this->request->getPost('taskPriority'),
-            'exp_date' => $this->request->getPost('taskDate'),
-            'reminder' => $this->request->getPost('taskReminder'),
+            'priority' => $pr,
+            'exp_date'=> $expdate,
+            'reminder' => $rdate,
             'color' => $this->request->getPost('taskColor'),
         );
 

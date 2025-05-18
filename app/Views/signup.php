@@ -2,7 +2,7 @@
 <nav class="navbar navbar-fixed-top navColor">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
-            <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Bootstrap" width="30" height="24">
+            <img src="<?= base_url('/assets/img/sublogo-black.png') ?>" alt="Bootstrap" width="38" height="26">
         </a>
     </div>
 </nav>
@@ -11,7 +11,8 @@
 
     <div class="col-lg-7 col-md d-flex flex-column align-items-center justify-content-center">
         <a class="navbar-brand" href="#">
-            <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Bootstrap" width="30" height="24">
+            <img src="<?= base_url('/assets/img/logo-black.png') ?>" alt="Bootstrap" width="180" height="62">
+
         </a>
 
         <?= form_open('form/signup', ['class' => 'mb-5']) ?>
@@ -86,7 +87,7 @@
         <?= form_close() ?>
 
         <div class="form-text">
-                ¿Ya tienes una cuenta? <a href="<?= url_to('Views::getLogin') ?>"> Iniciar sesión</a>
+            ¿Ya tienes una cuenta? <a href="<?= url_to('Views::getLogin') ?>"> Iniciar sesión</a>
         </div>
 
     </div>

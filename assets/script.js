@@ -6,6 +6,24 @@ document.querySelectorAll('input[name="taskColor"]').forEach((input) => {
 
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById("filtroPriority");
+    const select = document.getElementById("prioridad");
+
+    select.addEventListener("change", function() {
+        form.submit();
+    });
+  });
+
+  document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById("filtroDate");
+    const select = document.getElementById("date");
+
+    select.addEventListener("change", function() {
+        form.submit();
+    });
+  });
+
 // document.addEventListener("DOMContentLoaded", function () {
 //     const navLinks = document.querySelectorAll(".nav-link");
 
