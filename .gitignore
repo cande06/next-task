@@ -1,3 +1,4 @@
 # ignore text stuff
 # README.md
-/writable/
+/writable/debugbar
+/writable/logs

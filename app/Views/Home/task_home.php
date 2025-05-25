@@ -1,4 +1,4 @@
-<div class="card mb-3 rounded-1 <?= $taskColorID ?> ">
+<div class="card mb-3 rounded-1 <?= $taskColorID?> <?=($taskPriority == 'Alta') ? "taskBorder" : '' ?>" >
 
     <div class="card-body p-0">
         <div class="card-body p-3 pb-2" data-bs-toggle="modal" data-bs-target="#modalShowTask<?= $taskID ?>">
@@ -6,7 +6,7 @@
                 <!-- <div class="d-flex justify-content-between">
                 <div> -->
                 <p style="transform: rotate(0);" class="card-title fs-6 text-truncate mb-0
-                    <?= ($taskPriority == 'Alta') ? "fw-bold text-decoration-underline link-offset-2 taskBorder" : "fw-semibold" ?>">
+                    <?= ($taskPriority == 'Alta') ? "fw-bold text-decoration-underline link-offset-2" : "fw-semibold" ?>">
                     <a class="text-decoration-none stretched-link" href="<?= base_url('/tarea/' . $taskID) ?>">
                         <?= $taskTitle ?>
                     </a>

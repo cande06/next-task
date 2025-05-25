@@ -99,7 +99,7 @@ class Actions extends BaseController
         }
     }
 
-    public function signOut()
+    public function logout()
     {
         $session = session();
         $session->destroy();
@@ -238,6 +238,34 @@ class Actions extends BaseController
                 ->withInput()
                 ->with('modalTarget', $target)
                 ->with('errors', $validation->getErrors());
+        }
+
+        $fechaVencimiento = $this->request->getPost('taskDate');
+        $fechaRecordatorio = $this->request->getPost('taskReminder');
+        $errors = [];
+
+        // Convertir fechas a objetos DateTime
+        $fv = $fechaVencimiento ? new \DateTime($fechaVencimiento) : null;
+        $fr = $fechaRecordatorio ? new \DateTime($fechaRecordatorio) : null;
+        $hoy = new \DateTime('today');
+
+        // Validar que recordatorio no sea después del vencimiento
+        if ($fv && $fr && $fr > $fv) {
+            $errors['taskReminder'] = 'El recordatorio no puede ser posterior al vencimiento.';
+        }
+        // Validar que ninguna fecha sea anterior a hoy
+        if ($fv && $fv < $hoy) {
+            $errors['taskDate'] = 'La fecha de vencimiento no puede ser anterior a hoy.';
+        }
+        if ($fr && $fr < $hoy) {
+            $errors['taskReminder'] = 'La fecha de recordatorio no puede ser anterior a hoy.';
+        }
+
+        if (!empty($errors)) {
+            return redirect()->back()
+                ->withInput()
+                ->with('modalTarget', 'modalNewTask')
+                ->with('errors', $errors);
         }
 
         //format priority

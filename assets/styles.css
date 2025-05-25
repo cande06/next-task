@@ -37,7 +37,7 @@ a {
 }
 
 .menuColor,
-#offcanvasNavbar {
+#offcanvasNavbar, .lightcolor {
   background-color: #f1eeeb;
 }
 
@@ -94,8 +94,8 @@ a {
 }
 
 .taskBorder{
-  /* border: 1px solid #4E222E; */
-  color: #4E222E;
+  border: 1px solid #4E222E;
+  /* color: #4E222E; */
 }
 
 /* .highlight {

@@ -20,7 +20,7 @@
                 <p>
                     <!-- prioridad -->
                     <span class="badge bdg text-body-secondary ms-1 pe-1">
-                        <i class="bi bi-exclamation-lg"></i>
+                        <i class="bi bi-flag"></i>
                         <?= $task['taskPriority'] ?>
                     </span>
 

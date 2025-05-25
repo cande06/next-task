@@ -43,6 +43,26 @@ class Views extends BaseController
         return view('Layouts/header', $data) . view('signup') . view('Layouts/footer');
     }
 
+    public function getProfile($id){
+
+        $model = new \App\Models\UserModel();
+        $u = $model->where('id', $id)->first();
+
+        $user = [
+            'idUser' => $u['id'],
+            'userNick' => $u['nickname'],
+            'userEmail' => $u['email'],
+            'userPassword' => $u['password'],
+        ];
+
+        $title = ['title' => 'Perfil',];
+
+        return view('Layouts/header', $title)
+            . view('Layouts/menu')
+            . view('Profile/profile', $user)
+            . view('Layouts/footer');
+    }
+
 
     public function filter($opt)
     {

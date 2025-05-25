@@ -2,9 +2,9 @@
 <div class="col-9">
 
     <div class="row justify-content-center mt-4">
-        <div class="col-7">
+        <div class="col-7 ps-0">
             <!--     <div class="d-flex justify-content-between mb-2"> -->
-            <p class="fs-4 fw-thin">Tareas</p>
+            <p class="fs-4 fw-thin mb-0">Hola, <span class="fw-medium"><?= session('nick') ?></span>!</p>
 
             <div class="row mb-3">
                 <!-- filtro -->
