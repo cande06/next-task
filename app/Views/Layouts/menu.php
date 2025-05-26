@@ -67,7 +67,7 @@
 
                 <div id="logoh">
                     <a href="<?= base_url() ?>" class="ps-2 mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-                        <img src="<?= base_url('assets/img/logo-black.png') ?>" alt="next task logo" height="45">
+                        <img src="<?= base_url('assets/img/logo.png') ?>" alt="next task logo" height="45">
                     </a>
                 </div>
             </div>
